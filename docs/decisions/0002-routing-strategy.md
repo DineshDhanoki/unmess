@@ -20,3 +20,12 @@ behavior with tests.
 
 Routing adds orchestration and observability but avoids unnecessary heavy inference. Evaluation
 must report both quality and cheap-parser share so efficiency cannot hide quality regressions.
+
+## Phase 2 clarification (2026-10-10)
+
+The router evaluates page features before parsing and records every attempt. On a failed or
+below-gate cheap parse, it makes at most one escalation to local vision. A failed vision parse
+remains a failed page for review and evaluation. Optional Docling absence is explicit. Dev-only
+tuning raised the layout-complexity threshold to 0.90 after repeated invoice fields were
+incorrectly classified as complex pages; test thresholds are frozen in a separate committed
+file. The vision cache key includes raster page hash, model tag, and prompt version.

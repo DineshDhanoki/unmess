@@ -4,6 +4,7 @@
 .pytest_cache/
 .ruff_cache/
 .venv/
+.cache/
 __pycache__/
 *.egg-info/
 *.py[cod]
@@ -14,3 +15,4 @@ htmlcov/
 eval/datasets/.font-cache/
 eval/results/*
 !eval/results/baseline-phase1.md
+!eval/results/phase2-parsing.md

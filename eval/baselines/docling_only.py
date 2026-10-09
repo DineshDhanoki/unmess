@@ -11,6 +11,7 @@ import pymupdf
 
 from eval.baselines.base import ParsedDocument
 from unmess.models import BBox, Cell, Chunk, Table
+from unmess.parsing.base import ParsedPage
 
 
 class DoclingOnly:
@@ -80,9 +81,19 @@ class DoclingOnly:
             )
         elapsed = perf_counter() - start
         return ParsedDocument(
-            page_texts,
-            chunks,
-            tables,
-            [elapsed / page_count] * page_count,
-            ["docling"] * page_count,
+            page_texts=page_texts,
+            chunks=chunks,
+            tables=tables,
+            page_durations_s=[elapsed / page_count] * page_count,
+            parsers=["docling"] * page_count,
+            page_results=[
+                ParsedPage(
+                    page_number=index,
+                    parser_name="docling",
+                    text=text,
+                    success=bool(text.strip()),
+                    error=None if text.strip() else "no extracted text",
+                )
+                for index, text in enumerate(page_texts, 1)
+            ],
         )

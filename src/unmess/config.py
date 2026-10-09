@@ -1,5 +1,7 @@
 """Environment-backed configuration for all pipeline services and thresholds."""
 
+from pathlib import Path
+
 from pydantic import Field, HttpUrl, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -22,8 +24,15 @@ class Settings(BaseSettings):
     parser_text_density_threshold: float = Field(default=0.12, ge=0, le=1)
     parser_image_coverage_threshold: float = Field(default=0.70, ge=0, le=1)
     parser_table_likelihood_threshold: float = Field(default=0.55, ge=0, le=1)
+    parser_scan_likelihood_threshold: float = Field(default=0.60, ge=0, le=1)
+    parser_complex_layout_threshold: float = Field(default=0.90, ge=0, le=1)
+    parser_garbled_ratio_threshold: float = Field(default=0.10, ge=0, le=1)
     parser_max_skew_degrees: float = Field(default=3.0, ge=0, le=90)
     quality_review_threshold: float = Field(default=0.70, ge=0, le=1)
+    vision_timeout_s: float = Field(default=3.0, gt=0, le=120)
+    vision_retries: int = Field(default=1, ge=0, le=5)
+    vision_raster_dpi: int = Field(default=110, ge=50, le=300)
+    vision_cache_dir: Path = Path(".cache/unmess/vlm")
     chunk_target_tokens: int = Field(default=600, gt=0)
     chunk_overlap_tokens: int = Field(default=80, ge=0)
 
@@ -52,4 +61,11 @@ class Settings(BaseSettings):
     def valid_log_level(cls, value: str) -> str:
         if value not in {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}:
             raise ValueError("unsupported log level")
+        return value
+
+    @field_validator("ollama_url")
+    @classmethod
+    def local_ollama_only(cls, value: HttpUrl) -> HttpUrl:
+        if value.host not in {"localhost", "127.0.0.1", "::1", "host.docker.internal", "ollama"}:
+            raise ValueError("Ollama must be on the local host or Compose network")
         return value

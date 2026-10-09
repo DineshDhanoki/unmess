@@ -51,7 +51,9 @@ def test_all_pdf_hashes_and_baseline_run() -> None:
     )
     result = run(DATASET)
     baseline = result["systems"]["pymupdf_fixed"]
-    assert baseline["status"] == "ok"
+    assert baseline["dev"]["status"] == "partial_failure"
+    assert baseline["dev"]["summary"]["overall"]["failed_pages"] > 0
     assert baseline["dev"]["summary"]["overall"]["documents"] == 28
-    assert baseline["test"]["summary"]["overall"]["documents"] == 28
-    assert result["systems"]["unmess"]["test"] is None
+    assert baseline["test"] is None
+    assert result["systems"]["unmess_parsing"]["dev"]["summary"]["overall"]["documents"] == 28
+    assert result["systems"]["unmess_parsing"]["test"] is None

@@ -35,6 +35,13 @@ with the origin at the top left. A box must have positive area.
 - `unmess`: a registered `PipelineAdapter` placeholder. Phase 1 reports `not implemented yet`
   and `n/a` values. The full pipeline belongs to later phases.
 
+Phase 2 replaces the placeholder in new runs with `unmess_parsing`: routing, page parsing, and
+quality scoring only. The committed Phase 1 baseline report remains unchanged. The new parsing
+report compares PyMuPDF, Docling, and Unmess on table F1, OCR CER, cheap-parser share, latency,
+and failed-page rate. Retrieval metrics are `n/a` for all Phase 2 systems until Phase 3.
+Unavailable Docling and unreachable Ollama are counted as failed pages and listed by document
+and page, including attempted parser errors.
+
 Retrieval uses an in-memory BM25 index for every available parser, with the same question set
 and split-specific corpus. It does not use Qdrant or Ollama in Phase 1.
 
@@ -84,6 +91,21 @@ implicitly. `make eval` verifies every PDF hash against the manifest and writes
 `eval/results/latest.json` and `latest.md` (both ignored by Git). The committed
 `eval/results/baseline-phase1.md` is an actual run, including date, source commit, dirty-tree
 flag, library versions, environment, model status, and separate dev/test tables.
+
+For Phase 2, `make eval` runs **dev only**. The runner refuses `make eval-test` unless
+`eval/config/phase2_frozen.toml` has its own Git commit and the working tree is clean. The
+test report records that freeze commit hash, frozen values, vision model tag, and prompt version.
+Test is run once after the freeze. The report includes dev and test parsing results separately,
+with category, language, and scan-difficulty breakdowns. It reports dev-only calibration as
+Spearman rank correlation between page score and reference page accuracy, plus average accuracy
+in score buckets `[0,.25)`, `[.25,.5)`, `[.5,.75)`, `[.75,1]`. Page accuracy is clipped
+normalized-text similarity, averaged with page-level table F1 when a table is present. A
+strong correlation caused mainly by backend failures must not be presented as parser quality.
+
+The Phase 2 vision parser calls only local Ollama. Successful responses are cached under
+`.cache/unmess/vlm` by raster-page SHA-256, model tag, and prompt version. No live service is
+required for unit tests; the live Ollama smoke test is opt-in with
+`uv run pytest -m integration`.
 
 ## Limits
 

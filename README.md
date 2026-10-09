@@ -16,14 +16,18 @@ local environment.
 
 ## Status
 
-Phase 1 provides the repository contract, synthetic corpus, evaluation metrics, and a measured
-PyMuPDF baseline. Docling is optional and the complete Unmess pipeline arrives in later phases
+Phase 2 adds page routing, parser adapters, quality scoring, and parsing evaluation. Docling is
+optional and the complete Unmess retrieval pipeline arrives in later phases
 described in [ROADMAP.md](ROADMAP.md).
 
 The Phase 1 synthetic corpus and baseline harness are available. Its measured baseline report
 is in [eval/results/baseline-phase1.md](eval/results/baseline-phase1.md). It contains no Unmess
 pipeline score; that pipeline is not implemented yet. Future performance claims must link to a
 dated harness report and identify the models used.
+
+The [Phase 2 parsing report](eval/results/phase2-parsing.md) records measured page-level
+results, including failed pages when optional backends are unavailable. Retrieval remains a
+later phase.
 
 ## Quick start
 

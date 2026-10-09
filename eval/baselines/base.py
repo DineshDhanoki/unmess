@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Protocol
 
 from unmess.models import Chunk, Table
+from unmess.parsing.base import ParsedPage
 
 
 @dataclass
@@ -14,6 +15,7 @@ class ParsedDocument:
     tables: list[Table] = field(default_factory=list)
     page_durations_s: list[float] = field(default_factory=list)
     parsers: list[str] = field(default_factory=list)
+    page_results: list[ParsedPage] = field(default_factory=list)
 
 
 class PipelineAdapter(Protocol):

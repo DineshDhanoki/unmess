@@ -43,3 +43,31 @@ hardcoded. Qdrant and Redis are the only active Phase 0 Compose services; applic
 are defined under the `app` profile for later phases.
 
 See the accepted records in `docs/decisions/` for architectural rationale.
+
+## Phase 2 page routing and quality
+
+`Parser.parse_page(pdf, page_number)` returns a `ParsedPage` with source boxes, text, structured
+tables, parser name, elapsed time, and an explicit success or failure. The router computes
+embedded-text density, image coverage, scan and table likelihood, skew, garbling, dominant
+script, and layout complexity. It sends a scan or low-text page to local Ollama vision, a
+table-likely or complex page to Docling, and a clean digital page to PyMuPDF. A failed or
+below-gate cheap parse gets one vision escalation. Each attempt and the final route reason are
+retained. Unavailable parsers become failed attempts and failed pages, not missing records.
+
+The page score is a weighted mean of applicable signals; absent signals are omitted and the
+remaining weights renormalized:
+
+| Signal | Weight | Interpretation |
+|---|---:|---|
+| Text coverage | 0.35 | Parsed non-space characters versus embedded source text, or a small scan-page floor. It never uses evaluation ground truth. |
+| Character integrity | 0.25 | One minus the parsed garbled-character ratio. |
+| Table consistency | 0.20 | Nonempty, nonoverlapping structured cells when page features predict a table. |
+| Parser confidence | 0.10 | Parser-provided value, when available. |
+| Parser agreement | 0.10 | Word-set overlap with embedded text only when a cheap second opinion has enough text. |
+
+Failure scores zero. Review reasons include `parser_failed`, `below_quality_threshold`,
+`empty_text`, `table_not_recovered`, and `garbled_text`. Thresholds are environment settings;
+the evaluation's dev-tuned copy is frozen in `eval/config/phase2_frozen.toml` before the test
+split runs. Vision requests use a strict JSON envelope with Markdown text and structured
+blocks/tables. Successful responses are cached by page-image hash, model tag, and prompt
+version under the ignored local cache directory. Only local Ollama hosts are accepted.
