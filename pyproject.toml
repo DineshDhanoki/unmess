@@ -1,0 +1,60 @@
+[project]
+name = "unmess"
+version = "0.1.0"
+description = "Local-first ingestion for structured, citable, retrieval-ready documents"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Unmess contributors" }]
+dependencies = [
+  "arq>=0.26,<1",
+  "fastapi>=0.115,<1",
+  "httpx>=0.27,<1",
+  "mcp>=1.0,<2",
+  "pydantic>=2.9,<3",
+  "pydantic-settings>=2.5,<3",
+  "qdrant-client>=1.12,<2",
+  "structlog>=24.4,<26",
+  "uvicorn[standard]>=0.32,<1",
+]
+
+[project.optional-dependencies]
+parsers = [
+  "docling>=2.15,<3",
+  "pymupdf>=1.24,<2",
+  "torch>=2.4,<3",
+]
+ui = ["streamlit>=1.40,<2"]
+rerank = ["sentence-transformers>=3.3,<4"]
+
+[dependency-groups]
+dev = [
+  "mypy>=1.13,<2",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.24,<1",
+  "ruff>=0.8,<1",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/unmess"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["eval/results"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
