@@ -1,0 +1,494 @@
+{
+  "document_id": "synthetic-spanning_table-03",
+  "source_file": "pdf/synthetic-spanning_table-03.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "en",
+      "expected_text": "SYNTHETIC DOCUMENT - SPANNING TABLE\nDocument code: FAKE-SPA-03\nFictional seller: Demo Vendor 03\nIssue date: 2026-02-04\nTotal INR: 64,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375",
+      "is_ocr_page": false,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    },
+    {
+      "page_number": 2,
+      "language": "en",
+      "expected_text": "synthetic-spanning_table-03 - table continuation\nItem\nQty\nAmount\nFake item 4\n4\n500\nFake item 5\n5\n625\nFake item 6\n6\n750",
+      "is_ocr_page": false,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [
+    {
+      "table_id": "line-items",
+      "page_numbers": [
+        1,
+        2
+      ],
+      "cells": [
+        {
+          "row": 0,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Item",
+          "bbox": {
+            "page": 1,
+            "x0": 0.08986928104575163,
+            "y0": 0.44823232323232326,
+            "x1": 0.26143790849673204,
+            "y1": 0.47474747474747475
+          }
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Qty",
+          "bbox": {
+            "page": 1,
+            "x0": 0.3349673202614379,
+            "y0": 0.44823232323232326,
+            "x1": 0.5065359477124183,
+            "y1": 0.47474747474747475
+          }
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Amount",
+          "bbox": {
+            "page": 1,
+            "x0": 0.5800653594771242,
+            "y0": 0.44823232323232326,
+            "x1": 0.7516339869281046,
+            "y1": 0.47474747474747475
+          }
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Fake item 1",
+          "bbox": {
+            "page": 1,
+            "x0": 0.08986928104575163,
+            "y0": 0.4861111111111111,
+            "x1": 0.26143790849673204,
+            "y1": 0.5126262626262627
+          }
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "1",
+          "bbox": {
+            "page": 1,
+            "x0": 0.3349673202614379,
+            "y0": 0.4861111111111111,
+            "x1": 0.5065359477124183,
+            "y1": 0.5126262626262627
+          }
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "125",
+          "bbox": {
+            "page": 1,
+            "x0": 0.5800653594771242,
+            "y0": 0.4861111111111111,
+            "x1": 0.7516339869281046,
+            "y1": 0.5126262626262627
+          }
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Fake item 2",
+          "bbox": {
+            "page": 1,
+            "x0": 0.08986928104575163,
+            "y0": 0.523989898989899,
+            "x1": 0.26143790849673204,
+            "y1": 0.5505050505050505
+          }
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "2",
+          "bbox": {
+            "page": 1,
+            "x0": 0.3349673202614379,
+            "y0": 0.523989898989899,
+            "x1": 0.5065359477124183,
+            "y1": 0.5505050505050505
+          }
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "250",
+          "bbox": {
+            "page": 1,
+            "x0": 0.5800653594771242,
+            "y0": 0.523989898989899,
+            "x1": 0.7516339869281046,
+            "y1": 0.5505050505050505
+          }
+        },
+        {
+          "row": 3,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Fake item 3",
+          "bbox": {
+            "page": 1,
+            "x0": 0.08986928104575163,
+            "y0": 0.5618686868686869,
+            "x1": 0.26143790849673204,
+            "y1": 0.5883838383838383
+          }
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "3",
+          "bbox": {
+            "page": 1,
+            "x0": 0.3349673202614379,
+            "y0": 0.5618686868686869,
+            "x1": 0.5065359477124183,
+            "y1": 0.5883838383838383
+          }
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "375",
+          "bbox": {
+            "page": 1,
+            "x0": 0.5800653594771242,
+            "y0": 0.5618686868686869,
+            "x1": 0.7516339869281046,
+            "y1": 0.5883838383838383
+          }
+        },
+        {
+          "row": 0,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Item",
+          "bbox": {
+            "page": 2,
+            "x0": 0.08986928104575163,
+            "y0": 0.16414141414141414,
+            "x1": 0.26143790849673204,
+            "y1": 0.19065656565656566
+          }
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Qty",
+          "bbox": {
+            "page": 2,
+            "x0": 0.3349673202614379,
+            "y0": 0.16414141414141414,
+            "x1": 0.5065359477124183,
+            "y1": 0.19065656565656566
+          }
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Amount",
+          "bbox": {
+            "page": 2,
+            "x0": 0.5800653594771242,
+            "y0": 0.16414141414141414,
+            "x1": 0.7516339869281046,
+            "y1": 0.19065656565656566
+          }
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Fake item 4",
+          "bbox": {
+            "page": 2,
+            "x0": 0.08986928104575163,
+            "y0": 0.20202020202020202,
+            "x1": 0.26143790849673204,
+            "y1": 0.22853535353535354
+          }
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "4",
+          "bbox": {
+            "page": 2,
+            "x0": 0.3349673202614379,
+            "y0": 0.20202020202020202,
+            "x1": 0.5065359477124183,
+            "y1": 0.22853535353535354
+          }
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "500",
+          "bbox": {
+            "page": 2,
+            "x0": 0.5800653594771242,
+            "y0": 0.20202020202020202,
+            "x1": 0.7516339869281046,
+            "y1": 0.22853535353535354
+          }
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Fake item 5",
+          "bbox": {
+            "page": 2,
+            "x0": 0.08986928104575163,
+            "y0": 0.2398989898989899,
+            "x1": 0.26143790849673204,
+            "y1": 0.26641414141414144
+          }
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "5",
+          "bbox": {
+            "page": 2,
+            "x0": 0.3349673202614379,
+            "y0": 0.2398989898989899,
+            "x1": 0.5065359477124183,
+            "y1": 0.26641414141414144
+          }
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "625",
+          "bbox": {
+            "page": 2,
+            "x0": 0.5800653594771242,
+            "y0": 0.2398989898989899,
+            "x1": 0.7516339869281046,
+            "y1": 0.26641414141414144
+          }
+        },
+        {
+          "row": 6,
+          "col": 0,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "Fake item 6",
+          "bbox": {
+            "page": 2,
+            "x0": 0.08986928104575163,
+            "y0": 0.2777777777777778,
+            "x1": 0.26143790849673204,
+            "y1": 0.3042929292929293
+          }
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "6",
+          "bbox": {
+            "page": 2,
+            "x0": 0.3349673202614379,
+            "y0": 0.2777777777777778,
+            "x1": 0.5065359477124183,
+            "y1": 0.3042929292929293
+          }
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "row_span": 1,
+          "col_span": 1,
+          "text": "750",
+          "bbox": {
+            "page": 2,
+            "x0": 0.5800653594771242,
+            "y0": 0.2777777777777778,
+            "x1": 0.7516339869281046,
+            "y1": 0.3042929292929293
+          }
+        }
+      ],
+      "has_merged_cells": false,
+      "spans_pages": true
+    }
+  ],
+  "content_hash": "3339baa34eab0bfaa150a6e6deb0fffb05abb9365e4a113a5585ca4adab388e6",
+  "schema_version": "1",
+  "category": "spanning_table",
+  "split": "test",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 03 in this spanning_table record?",
+      "answer": "FAKE-SPA-03",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-SPA-03"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-SPA-03?",
+      "answer": "Demo Vendor 03",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 03"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-SPA-03?",
+      "answer": "2026-02-04",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-04",
+        "04/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "What is the total in INR on document FAKE-SPA-03?",
+      "answer": "64,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "64,000",
+        "64,000",
+        "INR 64,000"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    },
+    {
+      "id": "item_amount",
+      "question": "On document FAKE-SPA-03, what is the amount for Fake item 6?",
+      "answer": "750",
+      "answer_type": "number",
+      "answer_aliases": [
+        "750"
+      ],
+      "language": "en",
+      "answering_pages": [
+        2
+      ],
+      "answer_bboxes": [
+        {
+          "page": 2,
+          "x0": 0.5800653594771242,
+          "y0": 0.2777777777777778,
+          "x1": 0.7516339869281046,
+          "y1": 0.3042929292929293
+        }
+      ]
+    }
+  ],
+  "degradation": null
+}

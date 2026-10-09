@@ -11,6 +11,6 @@ build/
 dist/
 htmlcov/
 .coverage
-eval/datasets/generated/
+eval/datasets/.font-cache/
 eval/results/*
-!eval/results/sample.md
+!eval/results/baseline-phase1.md

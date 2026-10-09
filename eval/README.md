@@ -1,8 +1,11 @@
 # Evaluation workspace
 
-Phase 1 will add the deterministic generator, versioned ground truth, metrics, three comparable
-systems, and `eval/run_eval.py`. The intended command is `make eval`; reports will be written as
-`eval/results/latest.json` and `eval/results/latest.md`.
+`datasets/MANIFEST.json` lists 56 committed synthetic PDFs and their validated JSON ground
+truth. `metrics/` contains pure scoring functions; `baselines/` contains PyMuPDF, optional
+Docling, and the unimplemented Unmess adapter. `run_eval.py` verifies the manifest, evaluates
+dev and test separately, and writes `results/latest.md` and `latest.json`.
 
-Generated datasets and normal run outputs are ignored. A deliberately empty sample report is
-committed to document the required metadata and table shape without suggesting measured results.
+Run `bash scripts/pull_font.sh`, then `uv run python scripts/make_synthetic_docs.py` to
+regenerate the corpus byte-for-byte. Run `make eval` for a report. See `EVAL.md` for definitions,
+the relevance rule, and corpus limitations. `results/baseline-phase1.md` is the committed
+measured baseline report; Unmess has no measured values in Phase 1.

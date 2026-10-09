@@ -1,0 +1,347 @@
+{
+  "generator_version": "1.0.0",
+  "seed": 20261010,
+  "pdf_metadata": {
+    "creation_date": "2000-01-01T00:00:00Z",
+    "producer": "Unmess synthetic generator"
+  },
+  "font_sha256": "14ec4af41f27482216d1c2229f417ff9b1425e1babb014e57d1d40d03229853e",
+  "documents": [
+    {
+      "document_id": "synthetic-clean-00",
+      "pdf": "pdf/synthetic-clean-00.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-00.json",
+      "sha256": "df13ee49da0d1d3ac5f07185d89480eb656f0f6fb2af188e8912c3acf93b9cea"
+    },
+    {
+      "document_id": "synthetic-clean-01",
+      "pdf": "pdf/synthetic-clean-01.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-01.json",
+      "sha256": "e80fc8a55cf378cc8727091b01327331494be2d368cbb6fe1f0340fc213c5c7a"
+    },
+    {
+      "document_id": "synthetic-clean-02",
+      "pdf": "pdf/synthetic-clean-02.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-02.json",
+      "sha256": "c8f00a3e01de64203b20847bec4ef0c3f695ac736e56aef5b07a85029889add2"
+    },
+    {
+      "document_id": "synthetic-clean-03",
+      "pdf": "pdf/synthetic-clean-03.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-03.json",
+      "sha256": "53c1ce554cf7237a239a87f338443ef467aaba37bb4c26fdd9ec5ebee6700a9b"
+    },
+    {
+      "document_id": "synthetic-clean-04",
+      "pdf": "pdf/synthetic-clean-04.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-04.json",
+      "sha256": "747525ad950218a03a71228c324feb9cc95112f909acc1c8baaaa060ce1a50b5"
+    },
+    {
+      "document_id": "synthetic-clean-05",
+      "pdf": "pdf/synthetic-clean-05.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-05.json",
+      "sha256": "12d644c75e7990e4853f5728977b5969613f296778449e5099eaed93d0200f45"
+    },
+    {
+      "document_id": "synthetic-clean-06",
+      "pdf": "pdf/synthetic-clean-06.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-06.json",
+      "sha256": "fd26666e2018318486699bf3f1baad6a9a3636d0e5957ee00ed330885ce0e5c9"
+    },
+    {
+      "document_id": "synthetic-clean-07",
+      "pdf": "pdf/synthetic-clean-07.pdf",
+      "ground_truth": "ground_truth/synthetic-clean-07.json",
+      "sha256": "60f14bf8ec7e09b1f405f876e39d494dee9ff5c37bf44c2324bda809808f8f0f"
+    },
+    {
+      "document_id": "synthetic-scan-00",
+      "pdf": "pdf/synthetic-scan-00.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-00.json",
+      "sha256": "e068d0cf5942887bb6828a8a64adb353a3d591337ffcb23a678dace70dd854de"
+    },
+    {
+      "document_id": "synthetic-scan-01",
+      "pdf": "pdf/synthetic-scan-01.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-01.json",
+      "sha256": "d1cc573621d0eadfed32299ef4a43d9f08ef05f27a820143b9d4ca15af38cfde"
+    },
+    {
+      "document_id": "synthetic-scan-02",
+      "pdf": "pdf/synthetic-scan-02.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-02.json",
+      "sha256": "f700dd83cc9055ae8a42f91bd5f56688e0fd7952d09878d43fa709aadb05efb1"
+    },
+    {
+      "document_id": "synthetic-scan-03",
+      "pdf": "pdf/synthetic-scan-03.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-03.json",
+      "sha256": "f6de142a68dbdffb2d4145cba59d10a0257f413bb20467b5b576e77c87cd2bbd"
+    },
+    {
+      "document_id": "synthetic-scan-04",
+      "pdf": "pdf/synthetic-scan-04.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-04.json",
+      "sha256": "66c3fa3ba788c900edc5ad318fb4a51c17e96be94fa29eafaa1018c58650e423"
+    },
+    {
+      "document_id": "synthetic-scan-05",
+      "pdf": "pdf/synthetic-scan-05.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-05.json",
+      "sha256": "e8f9a02e745e06241d91cdc8e9abf27a9ee673a41414b2f070959ff2dd7d8c13"
+    },
+    {
+      "document_id": "synthetic-scan-06",
+      "pdf": "pdf/synthetic-scan-06.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-06.json",
+      "sha256": "98aec9d9e2adf8b5fa4a2c0f957d360176db1bc8022015df92fdbd53168c01b7"
+    },
+    {
+      "document_id": "synthetic-scan-07",
+      "pdf": "pdf/synthetic-scan-07.pdf",
+      "ground_truth": "ground_truth/synthetic-scan-07.json",
+      "sha256": "02ad6e81b7ea9714eed86b6c870fd2496bb862c2a0ada42fb104725c60ee8609"
+    },
+    {
+      "document_id": "synthetic-receipt-00",
+      "pdf": "pdf/synthetic-receipt-00.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-00.json",
+      "sha256": "c09acc328e639fb79d59673eae075ac6c9b9c48f46120fb65467429d6b8ba398"
+    },
+    {
+      "document_id": "synthetic-receipt-01",
+      "pdf": "pdf/synthetic-receipt-01.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-01.json",
+      "sha256": "cfbcf91b13900eee494ca6757770945ea4682f79de6cedb96d4b05ca33b97a97"
+    },
+    {
+      "document_id": "synthetic-receipt-02",
+      "pdf": "pdf/synthetic-receipt-02.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-02.json",
+      "sha256": "702a1282ac349fd4498faea60e9a1b822dfc0146ab889b6149a51bee93ca1722"
+    },
+    {
+      "document_id": "synthetic-receipt-03",
+      "pdf": "pdf/synthetic-receipt-03.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-03.json",
+      "sha256": "156af0103d6e94e25e145a65c4c20a750643335a9cf4bf9a6f6ffb58fbfd7c15"
+    },
+    {
+      "document_id": "synthetic-receipt-04",
+      "pdf": "pdf/synthetic-receipt-04.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-04.json",
+      "sha256": "0366387d490a3768c5121036fd436b2e1731268b03cf24948d3f1f0942553eb5"
+    },
+    {
+      "document_id": "synthetic-receipt-05",
+      "pdf": "pdf/synthetic-receipt-05.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-05.json",
+      "sha256": "cbbf8a895a42a8fdc01a3cdec75936bcd741884e28717d2459c72670c855b15c"
+    },
+    {
+      "document_id": "synthetic-receipt-06",
+      "pdf": "pdf/synthetic-receipt-06.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-06.json",
+      "sha256": "abe2a17f2417a93ecf09fc297820d7bd3e55b2a27f7ecd6bca9e9ba140825516"
+    },
+    {
+      "document_id": "synthetic-receipt-07",
+      "pdf": "pdf/synthetic-receipt-07.pdf",
+      "ground_truth": "ground_truth/synthetic-receipt-07.json",
+      "sha256": "71ca4af89b220d891a7012d267170a7a1cb91e1565e7291d02bfc5b2c4d8767b"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-00",
+      "pdf": "pdf/synthetic-gst_invoice-00.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-00.json",
+      "sha256": "f9e0e6349aee69c91f26c7d50ade68fb9ef247ccb4efc8e7cdb61c285810421e"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-01",
+      "pdf": "pdf/synthetic-gst_invoice-01.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-01.json",
+      "sha256": "02271913eeea262dc986e2a31c5d5e768c466f3fee26b52b19ece33a04bf2ffc"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-02",
+      "pdf": "pdf/synthetic-gst_invoice-02.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-02.json",
+      "sha256": "b3a45cb917ab1d385aa18bb18d8a570ed8f8602cf59700fb42929557ff3707f2"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-03",
+      "pdf": "pdf/synthetic-gst_invoice-03.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-03.json",
+      "sha256": "daf489ee958c4c074c9bbe9e775032710c1ed260a5c74a5b123d523984d8136c"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-04",
+      "pdf": "pdf/synthetic-gst_invoice-04.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-04.json",
+      "sha256": "3138e53990a2d283d316d1898477a9907caac0bf1a141213100114fafc3bc4db"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-05",
+      "pdf": "pdf/synthetic-gst_invoice-05.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-05.json",
+      "sha256": "46a90b4e28f7a49eb1d0c22b8a0318a00d7b7650a8f24b8c957d968069f91f3c"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-06",
+      "pdf": "pdf/synthetic-gst_invoice-06.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-06.json",
+      "sha256": "b4644416045fac365d9c2604019ff2b52e220590d0dc7adc76b13b5d43474232"
+    },
+    {
+      "document_id": "synthetic-gst_invoice-07",
+      "pdf": "pdf/synthetic-gst_invoice-07.pdf",
+      "ground_truth": "ground_truth/synthetic-gst_invoice-07.json",
+      "sha256": "c6b57d8e4870b1525e145abbf173b7d96b564884bf0bae4a82f470b2caee859f"
+    },
+    {
+      "document_id": "synthetic-merged_table-00",
+      "pdf": "pdf/synthetic-merged_table-00.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-00.json",
+      "sha256": "243046c42792a767548657b66b623d1bb8ef6491d1da1e8bd96245671ebd1db6"
+    },
+    {
+      "document_id": "synthetic-merged_table-01",
+      "pdf": "pdf/synthetic-merged_table-01.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-01.json",
+      "sha256": "1ead3ba2c2f6a35096b40636af2f26bddd960c77f2245ab6ef8c233bed284264"
+    },
+    {
+      "document_id": "synthetic-merged_table-02",
+      "pdf": "pdf/synthetic-merged_table-02.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-02.json",
+      "sha256": "bcf7bafc4e75763b0189e223de4a987be1796d92953287f15710b10d2663f4e8"
+    },
+    {
+      "document_id": "synthetic-merged_table-03",
+      "pdf": "pdf/synthetic-merged_table-03.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-03.json",
+      "sha256": "002819705588777511ba1375545255dd4a4addc02746498e8adb1b38794e2215"
+    },
+    {
+      "document_id": "synthetic-merged_table-04",
+      "pdf": "pdf/synthetic-merged_table-04.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-04.json",
+      "sha256": "52da3cfe1325b2fb80837caf3bd770b74676bf04ef99da057aa4392ffc62db73"
+    },
+    {
+      "document_id": "synthetic-merged_table-05",
+      "pdf": "pdf/synthetic-merged_table-05.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-05.json",
+      "sha256": "f9f1edec1f1387a4eda8460be4a04b72126a0fa06520412c818005831a39e818"
+    },
+    {
+      "document_id": "synthetic-merged_table-06",
+      "pdf": "pdf/synthetic-merged_table-06.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-06.json",
+      "sha256": "2efc9bf4aba0971ac0d523caa2d1a161a47a175b71b3bd211c84d2347630b73c"
+    },
+    {
+      "document_id": "synthetic-merged_table-07",
+      "pdf": "pdf/synthetic-merged_table-07.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-07.json",
+      "sha256": "58cbd60d406a24031822f664bf6f3fbe31d7d558c8a2f8ddc867a4d2ba0ad718"
+    },
+    {
+      "document_id": "synthetic-spanning_table-00",
+      "pdf": "pdf/synthetic-spanning_table-00.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-00.json",
+      "sha256": "07bb01f56bf1d5d6d11b424789d50f09ea5a07eb088f6d33cb83aa5fc386238b"
+    },
+    {
+      "document_id": "synthetic-spanning_table-01",
+      "pdf": "pdf/synthetic-spanning_table-01.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-01.json",
+      "sha256": "d416419f556f9379fd72cdeb3192fa14bd22fdcdf674db4cd686af5e283888a4"
+    },
+    {
+      "document_id": "synthetic-spanning_table-02",
+      "pdf": "pdf/synthetic-spanning_table-02.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-02.json",
+      "sha256": "b9a3d8a6db603ae7a6dd6852e2f3fe5647ccba0ef703647a018e9dfa40c064ad"
+    },
+    {
+      "document_id": "synthetic-spanning_table-03",
+      "pdf": "pdf/synthetic-spanning_table-03.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-03.json",
+      "sha256": "3339baa34eab0bfaa150a6e6deb0fffb05abb9365e4a113a5585ca4adab388e6"
+    },
+    {
+      "document_id": "synthetic-spanning_table-04",
+      "pdf": "pdf/synthetic-spanning_table-04.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-04.json",
+      "sha256": "8bb80a196a219a2edc709ecbfd44b74a10ed8dc90679e5323a6ca829384287fc"
+    },
+    {
+      "document_id": "synthetic-spanning_table-05",
+      "pdf": "pdf/synthetic-spanning_table-05.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-05.json",
+      "sha256": "769b102a83946f5d3495d74dcd166079f8fb9e7ce6fb565d7b85e9264091fa78"
+    },
+    {
+      "document_id": "synthetic-spanning_table-06",
+      "pdf": "pdf/synthetic-spanning_table-06.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-06.json",
+      "sha256": "476df97ff59fa183dc5b188fc2a25a0c78ee9312394cdbe633afe8059eb1ec94"
+    },
+    {
+      "document_id": "synthetic-spanning_table-07",
+      "pdf": "pdf/synthetic-spanning_table-07.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-07.json",
+      "sha256": "83b5fc0de38ec9ac3f773f40fada8045ccb16cb4f03286c6e48c002cfcfc6afd"
+    },
+    {
+      "document_id": "synthetic-bilingual-00",
+      "pdf": "pdf/synthetic-bilingual-00.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-00.json",
+      "sha256": "9890fcbdab07e60884781a1081c3485b2d076d5fd76badc5e210fc8b192336f3"
+    },
+    {
+      "document_id": "synthetic-bilingual-01",
+      "pdf": "pdf/synthetic-bilingual-01.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-01.json",
+      "sha256": "7ceb8bbdc77d6d77aa72531b99b90f1516c8bff6ce6ca671cbf721d59fc6aa23"
+    },
+    {
+      "document_id": "synthetic-bilingual-02",
+      "pdf": "pdf/synthetic-bilingual-02.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-02.json",
+      "sha256": "d47e84489deb6a6a4942f4986f5c2ee0977f539438ce2a49a67f991cfd161438"
+    },
+    {
+      "document_id": "synthetic-bilingual-03",
+      "pdf": "pdf/synthetic-bilingual-03.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-03.json",
+      "sha256": "1f83f80a15123b0e19b571213cb02b91ea6f714ecf114333b15f063fb2431f36"
+    },
+    {
+      "document_id": "synthetic-bilingual-04",
+      "pdf": "pdf/synthetic-bilingual-04.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-04.json",
+      "sha256": "37cd854af5a080ac37710bc0ff74a15d03b3af014cdcf395bb9159fcd4673f6e"
+    },
+    {
+      "document_id": "synthetic-bilingual-05",
+      "pdf": "pdf/synthetic-bilingual-05.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-05.json",
+      "sha256": "67740dac402644fb2bb8cc2daddc36b7896556f31b8738e2fc579843cc0d851e"
+    },
+    {
+      "document_id": "synthetic-bilingual-06",
+      "pdf": "pdf/synthetic-bilingual-06.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-06.json",
+      "sha256": "fd0e98ef53c897b31edc4679c7cc20bc58da98aa3315de9d8cf7bfeb05d12b83"
+    },
+    {
+      "document_id": "synthetic-bilingual-07",
+      "pdf": "pdf/synthetic-bilingual-07.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-07.json",
+      "sha256": "321472a86eb8c12a880588910a6ff36ac151489132ab315676f12aef94cfd9bf"
+    }
+  ]
+}

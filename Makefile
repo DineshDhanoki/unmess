@@ -17,7 +17,7 @@ test:
 
 eval:
 	@test -f eval/run_eval.py || (echo "Evaluation runner arrives in Phase 1."; exit 1)
-	uv run python eval/run_eval.py
+	uv run python -m eval.run_eval
 
 run:
 	@test -f src/unmess/api/main.py || (echo "Application runtime arrives in Phase 4."; exit 1)

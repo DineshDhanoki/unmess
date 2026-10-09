@@ -1,0 +1,120 @@
+{
+  "document_id": "synthetic-scan-04",
+  "source_file": "pdf/synthetic-scan-04.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "en",
+      "expected_text": "SYNTHETIC DOCUMENT - SCAN\nDocument code: FAKE-SCA-04\nFictional seller: Demo Vendor 04\nIssue date: 2026-02-05\nTotal INR: 82,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
+      "is_ocr_page": true,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [],
+  "content_hash": "66c3fa3ba788c900edc5ad318fb4a51c17e96be94fa29eafaa1018c58650e423",
+  "schema_version": "1",
+  "category": "scan",
+  "split": "dev",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 04 in this scan record?",
+      "answer": "FAKE-SCA-04",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-SCA-04"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-SCA-04?",
+      "answer": "Demo Vendor 04",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 04"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-SCA-04?",
+      "answer": "2026-02-05",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-05",
+        "05/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "What is the total in INR on document FAKE-SCA-04?",
+      "answer": "82,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "82,000",
+        "82,000",
+        "INR 82,000"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    }
+  ],
+  "degradation": {
+    "rotation_deg": 3.0,
+    "noise_level": 0.5,
+    "dpi": 90,
+    "blur": 0.8
+  }
+}

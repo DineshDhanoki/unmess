@@ -1,0 +1,115 @@
+{
+  "document_id": "synthetic-bilingual-07",
+  "source_file": "pdf/synthetic-bilingual-07.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "hi",
+      "expected_text": "SYNTHETIC DOCUMENT - BILINGUAL\nDocument code: FAKE-BIL-07\nFictional seller: Demo Vendor 07\nIssue date: 2026-02-08\nTotal INR: 136,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID\nकुल राशि",
+      "is_ocr_page": false,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [],
+  "content_hash": "321472a86eb8c12a880588910a6ff36ac151489132ab315676f12aef94cfd9bf",
+  "schema_version": "1",
+  "category": "bilingual",
+  "split": "test",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 07 in this bilingual record?",
+      "answer": "FAKE-BIL-07",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-BIL-07"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-BIL-07?",
+      "answer": "Demo Vendor 07",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 07"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-BIL-07?",
+      "answer": "2026-02-08",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-08",
+        "08/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "दस्तावेज़ FAKE-BIL-07 की कुल राशि क्या है?",
+      "answer": "136,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "136,000",
+        "1,36,000",
+        "INR 1,36,000"
+      ],
+      "language": "hi",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    }
+  ],
+  "degradation": null
+}

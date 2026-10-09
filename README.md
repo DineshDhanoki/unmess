@@ -16,12 +16,14 @@ local environment.
 
 ## Status
 
-Phase 0 provides the repository contract, architecture decisions, development tooling, and
-local Qdrant/Redis infrastructure. Pipeline and benchmark implementations arrive in later
-phases described in [ROADMAP.md](ROADMAP.md).
+Phase 1 provides the repository contract, synthetic corpus, evaluation metrics, and a measured
+PyMuPDF baseline. Docling is optional and the complete Unmess pipeline arrives in later phases
+described in [ROADMAP.md](ROADMAP.md).
 
-No accuracy or performance claims are made yet. Future claims must link to a dated report
-created by the evaluation harness and identify the exact models used.
+The Phase 1 synthetic corpus and baseline harness are available. Its measured baseline report
+is in [eval/results/baseline-phase1.md](eval/results/baseline-phase1.md). It contains no Unmess
+pipeline score; that pipeline is not implemented yet. Future performance claims must link to a
+dated harness report and identify the models used.
 
 ## Quick start
 

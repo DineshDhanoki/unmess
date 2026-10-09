@@ -1,0 +1,115 @@
+{
+  "document_id": "synthetic-bilingual-05",
+  "source_file": "pdf/synthetic-bilingual-05.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "hi",
+      "expected_text": "SYNTHETIC DOCUMENT - BILINGUAL\nDocument code: FAKE-BIL-05\nFictional seller: Demo Vendor 05\nIssue date: 2026-02-06\nTotal INR: 100,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID\nकुल राशि",
+      "is_ocr_page": false,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [],
+  "content_hash": "67740dac402644fb2bb8cc2daddc36b7896556f31b8738e2fc579843cc0d851e",
+  "schema_version": "1",
+  "category": "bilingual",
+  "split": "test",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 05 in this bilingual record?",
+      "answer": "FAKE-BIL-05",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-BIL-05"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-BIL-05?",
+      "answer": "Demo Vendor 05",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 05"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-BIL-05?",
+      "answer": "2026-02-06",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-06",
+        "06/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "दस्तावेज़ FAKE-BIL-05 की कुल राशि क्या है?",
+      "answer": "100,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "100,000",
+        "1,00,000",
+        "INR 1,00,000"
+      ],
+      "language": "hi",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    }
+  ],
+  "degradation": null
+}
