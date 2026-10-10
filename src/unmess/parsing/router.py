@@ -30,7 +30,7 @@ class PageRouter:
         self.settings = settings
         self.parsers: dict[str, Parser] = {
             "pymupdf": pymupdf_parser or PyMuPDFParser(),
-            "docling": docling_parser or DoclingParser(),
+            "docling": docling_parser or DoclingParser(settings.docling_artifacts_path),
             "vlm": vlm_parser or VLMParser(settings),
         }
         self.feature_provider = feature_provider
@@ -62,6 +62,7 @@ class PageRouter:
             return result
         parser_name, reason = self._first_route(features)
         attempts: list[ParserAttempt] = []
+        previous_attempt: ParsedPage | None = None
         for step in range(2):
             try:
                 parsed = self.parsers[parser_name].parse_page(pdf, page_number)
@@ -76,6 +77,8 @@ class PageRouter:
                     succeeded=parsed.success,
                     quality_score=score.score,
                     error=parsed.error,
+                    duration_s=parsed.parse_time_s,
+                    cache_hit=parsed.cache_hit,
                 )
             )
             if (
@@ -83,12 +86,14 @@ class PageRouter:
                 and parser_name != "vlm"
                 and (not parsed.success or score.score < self.settings.quality_review_threshold)
             ):
+                previous_attempt = parsed
                 parser_name, reason = (
                     "vlm",
                     f"escalated_after_{attempts[-1].parser}_failure_or_low_score",
                 )
                 continue
             parsed.attempts = attempts
+            parsed.previous_attempt = previous_attempt
             parsed.route_reason = reason
             parsed.parse_time_s = perf_counter() - started
             report = review_gate(pdf.stem, parsed, features, self.settings)

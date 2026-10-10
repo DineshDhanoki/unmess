@@ -1,4 +1,4 @@
-.PHONY: setup lint format-check typecheck test eval eval-test run up down compose-check
+.PHONY: setup lint format-check typecheck test preflight eval eval-test run up down compose-check
 
 setup:
 	uv sync --dev
@@ -14,6 +14,9 @@ typecheck:
 
 test:
 	uv run pytest
+
+preflight:
+	uv run python -m eval.preflight
 
 eval:
 	@test -f eval/run_eval.py || (echo "Evaluation runner arrives in Phase 1."; exit 1)

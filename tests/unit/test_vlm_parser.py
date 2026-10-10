@@ -23,17 +23,15 @@ class FakeClient:
 def test_vlm_cache_uses_model_and_prompt_version(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    client = FakeClient(
-        json.dumps(
-            {"markdown": "Read text", "blocks": [], "tables": [], "reported_confidence": 0.9}
-        )
-    )
+    client = FakeClient(json.dumps({"markdown": "Read text"}))
     settings = Settings(vision_model="mock-vision", vision_cache_dir=tmp_path, vision_retries=0)
     parser = VLMParser(settings, client)
     monkeypatch.setattr(parser, "_image", lambda _pdf, _page: b"fake-png")
     first = parser.parse_page(Path("fake.pdf"), 1)
     second = parser.parse_page(Path("fake.pdf"), 1)
     assert first.success and second.success
+    assert not first.cache_hit and second.cache_hit
+    assert first.bboxes[0].x1 == 1
     assert client.calls == 1
     assert len(list(tmp_path.glob("*.json"))) == 1
     other_client = FakeClient(client.result, model="second-model")

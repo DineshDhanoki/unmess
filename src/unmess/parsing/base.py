@@ -14,6 +14,8 @@ class ParserAttempt:
     succeeded: bool
     quality_score: float
     error: str | None = None
+    duration_s: float = 0.0
+    cache_hit: bool = False
 
 
 @dataclass
@@ -32,6 +34,8 @@ class ParsedPage:
     review_reasons: list[str] = field(default_factory=list)
     route_reason: str = ""
     attempts: list[ParserAttempt] = field(default_factory=list)
+    previous_attempt: "ParsedPage | None" = None
+    cache_hit: bool = False
 
     @classmethod
     def failed(

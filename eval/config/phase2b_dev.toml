@@ -1,0 +1,10 @@
+# Phase 2b development-only tuning values. This is not a test freeze.
+parser_text_density_threshold = 0.12
+parser_image_coverage_threshold = 0.70
+parser_table_likelihood_threshold = 0.55
+parser_scan_likelihood_threshold = 0.60
+parser_complex_layout_threshold = 0.90
+parser_garbled_ratio_threshold = 0.10
+parser_max_skew_degrees = 3.0
+quality_review_threshold = 0.70
+vision_timeout_s = 120.0

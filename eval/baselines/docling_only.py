@@ -1,17 +1,17 @@
 """Optional Docling-only parser baseline."""
 
 import hashlib
-import importlib
 import importlib.util
-import os
 from pathlib import Path
 from time import perf_counter
 
 import pymupdf
 
 from eval.baselines.base import ParsedDocument
+from unmess.config import Settings
 from unmess.models import BBox, Cell, Chunk, Table
 from unmess.parsing.base import ParsedPage
+from unmess.parsing.docling_parser import make_docling_converter
 
 
 class DoclingOnly:
@@ -24,11 +24,10 @@ class DoclingOnly:
     def parse(self, path: Path, doc_id: str) -> ParsedDocument:
         if not self.available():
             raise RuntimeError("skipped: optional dependency not installed")
-        os.environ.setdefault("HF_HUB_OFFLINE", "1")
-        os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
-        converter_type = importlib.import_module("docling.document_converter").DocumentConverter
         start = perf_counter()
-        document = converter_type().convert(str(path)).document
+        document = (
+            make_docling_converter(Settings().docling_artifacts_path).convert(str(path)).document
+        )
         page_count = len(pymupdf.open(path))
         page_texts = ["" for _ in range(page_count)]
         for item, _level in document.iterate_items():

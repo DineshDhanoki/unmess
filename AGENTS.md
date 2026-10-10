@@ -26,6 +26,7 @@ Do not claim accuracy that the evaluation harness did not produce.
 - Typecheck: `make typecheck`
 - Test: `make test`
 - Evaluate: `make eval` (available from Phase 1)
+- Backend readiness: `make preflight` (Phase 2b; required before test evaluation)
 - Run API: `make run` (available from Phase 4)
 - Start infrastructure: `make up`
 

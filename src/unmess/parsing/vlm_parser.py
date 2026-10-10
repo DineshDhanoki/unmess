@@ -8,20 +8,17 @@ from typing import Protocol
 
 import httpx
 import pymupdf
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, ValidationError
 
 from unmess.config import Settings
-from unmess.models import Block, Table
+from unmess.models import BBox, Block
 from unmess.parsing.base import ParsedPage
 
-PROMPT_VERSION = "phase2-v1"
+PROMPT_VERSION = "phase2b-v2"
 PROMPT = (
-    "Transcribe this page. Return ONLY a JSON object with keys markdown, blocks, tables, "
-    "reported_confidence. markdown is the complete page text in Markdown. blocks is a list "
-    "of objects with block_id, kind, text, bbox; bbox has page, x0, y0, x1, y1 with "
-    "top-left normalized coordinates in [0,1]. tables is a list of objects with table_id, "
-    "page_numbers, cells, has_merged_cells, spans_pages. Each cell has row, col, row_span, "
-    "col_span, text, bbox. Use an empty list where none exist. Do not add prose or code fences."
+    "Transcribe every visible word on this document page. Preserve reading order and use "
+    "Markdown table syntax for tables. Return ONLY a JSON object with one key, markdown, "
+    "whose value is the complete transcription. Do not add commentary or code fences."
 )
 
 
@@ -29,9 +26,6 @@ class VisionResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     markdown: str
-    blocks: list[Block]
-    tables: list[Table]
-    reported_confidence: float | None = Field(default=None, ge=0, le=1)
 
 
 class VisionClient(Protocol):
@@ -50,7 +44,7 @@ class OllamaVisionClient:
                     "model": model,
                     "prompt": prompt,
                     "images": [image_b64],
-                    "format": "json",
+                    "format": VisionResponse.model_json_schema(),
                     "stream": False,
                 },
             )
@@ -90,7 +84,8 @@ class VLMParser:
         try:
             image = self._image(pdf, page_number)
             cache_path = self._cache_path(image)
-            if cache_path.is_file():
+            cache_hit = cache_path.is_file()
+            if cache_hit:
                 raw = cache_path.read_text(encoding="utf-8")
             else:
                 errors: list[str] = []
@@ -117,19 +112,22 @@ class VLMParser:
             parsed = VisionResponse.model_validate_json(raw)
             if not parsed.markdown.strip():
                 raise ValueError("empty markdown in cached vision response")
-            if any(block.bbox.page != page_number for block in parsed.blocks):
-                raise ValueError("vision block bbox page mismatch")
-            if any(page_number not in table.page_numbers for table in parsed.tables):
-                raise ValueError("vision table page mismatch")
+            whole_page = BBox(page=page_number, x0=0, y0=0, x1=1, y1=1)
+            block = Block(
+                block_id=f"{page_number}:vision-transcription",
+                kind="paragraph",
+                text=parsed.markdown,
+                bbox=whole_page,
+            )
             return ParsedPage(
                 page_number=page_number,
                 parser_name=self.name,
                 text=parsed.markdown,
-                blocks=parsed.blocks,
-                tables=parsed.tables,
-                bboxes=[block.bbox for block in parsed.blocks],
+                blocks=[block],
+                tables=[],
+                bboxes=[whole_page],
                 parse_time_s=perf_counter() - start,
-                reported_confidence=parsed.reported_confidence,
+                cache_hit=cache_hit,
             )
         except (OSError, ValueError, ValidationError, pymupdf.FileDataError) as exc:
             return ParsedPage.failed(

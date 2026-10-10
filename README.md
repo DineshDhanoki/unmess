@@ -25,7 +25,7 @@ is in [eval/results/baseline-phase1.md](eval/results/baseline-phase1.md). It con
 pipeline score; that pipeline is not implemented yet. Future performance claims must link to a
 dated harness report and identify the models used.
 
-The [Phase 2 parsing report](eval/results/phase2-parsing.md) records measured page-level
+The [Phase 2b dev report](eval/results/phase2b-dev.md) records measured page-level
 results, including failed pages when optional backends are unavailable. Retrieval remains a
 later phase.
 

@@ -74,6 +74,17 @@ difficulty. `n/a` means the measure has no applicable reference or the system di
 Scan difficulty is `low` for noise ≤ 0.2, `medium` for ≤ 0.5, and `high` otherwise; these
 groups also vary in DPI and blur. The report includes a `not_scan` group for other documents.
 
+## Superseded first Phase 2 test run
+
+The first Phase 2 test-split run, using freeze commit
+`caa7f35c2f46777eba1a690e0292dac1ea04fe39`, is **invalid as an assessment of the
+routing design**: Docling's optional package/model artifacts were missing and Ollama was
+unreachable. The run counted those pages as failures but could not measure the intended
+backends. No routing or gate threshold was changed after seeing its test results. Its
+report remains in `eval/results/phase2-parsing.md`, marked SUPERSEDED for audit. Phase 2b
+requires `make preflight` to pass, dev-only tuning, and approval of a new freeze before
+one replacement test run.
+
 ## Reproduce
 
 From a clean clone with Python 3.11 or 3.12 and `uv`:
@@ -92,20 +103,29 @@ implicitly. `make eval` verifies every PDF hash against the manifest and writes
 `eval/results/baseline-phase1.md` is an actual run, including date, source commit, dirty-tree
 flag, library versions, environment, model status, and separate dev/test tables.
 
-For Phase 2, `make eval` runs **dev only**. The runner refuses `make eval-test` unless
-`eval/config/phase2_frozen.toml` has its own Git commit and the working tree is clean. The
-test report records that freeze commit hash, frozen values, vision model tag, and prompt version.
-Test is run once after the freeze. The report includes dev and test parsing results separately,
+For Phase 2b, `make preflight` verifies PyMuPDF, a real Docling parse using prefetched local
+artifacts, localhost Ollama, the pulled `VISION_MODEL`, and a trivial model response.
+`make eval` runs **dev only** using `eval/config/phase2b_dev.toml`. The runner refuses
+`make eval-test` while the superseded freeze is active. After approval of a new freeze, it
+will still refuse unless the freeze file is committed, the working tree is clean, preflight
+passes, and no test page's initial route names an unavailable backend. The test report will
+record that freeze hash, frozen values, vision model tag, and prompt version. The report
+includes dev and test parsing results separately,
 with category, language, and scan-difficulty breakdowns. It reports dev-only calibration as
 Spearman rank correlation between page score and reference page accuracy, plus average accuracy
 in score buckets `[0,.25)`, `[.25,.5)`, `[.5,.75)`, `[.75,1]`. Page accuracy is clipped
 normalized-text similarity, averaged with page-level table F1 when a table is present. A
-strong correlation caused mainly by backend failures must not be presented as parser quality.
+Calibration uses successfully parsed pages only and reports failed pages separately. It also
+reports how many pages escalated and whether the reference page accuracy improved. Undefined
+Spearman when all scores tie is reported as `n/a`, not zero. The dev-only threshold trials and
+their measured effects are in `eval/TUNING_PHASE2B.md`.
 
 The Phase 2 vision parser calls only local Ollama. Successful responses are cached under
 `.cache/unmess/vlm` by raster-page SHA-256, model tag, and prompt version. No live service is
 required for unit tests; the live Ollama smoke test is opt-in with
 `uv run pytest -m integration`.
+VLM-only text currently has a full-page bbox; it is coarse provenance, not precise highlighting.
+The eval reports VLM attempts, cache hits, total VLM time, and pages per second.
 
 ## Limits
 

@@ -67,7 +67,10 @@ remaining weights renormalized:
 
 Failure scores zero. Review reasons include `parser_failed`, `below_quality_threshold`,
 `empty_text`, `table_not_recovered`, and `garbled_text`. Thresholds are environment settings;
-the evaluation's dev-tuned copy is frozen in `eval/config/phase2_frozen.toml` before the test
-split runs. Vision requests use a strict JSON envelope with Markdown text and structured
-blocks/tables. Successful responses are cached by page-image hash, model tag, and prompt
-version under the ignored local cache directory. Only local Ollama hosts are accepted.
+Phase 2b tunes only `eval/config/phase2b_dev.toml` until a new freeze is approved. Vision
+requests use a strict JSON envelope containing Markdown text. The fallback attaches a
+full-page bbox and does not claim cell geometry from the VLM; structured tables come from
+Docling when available. Successful vision responses are cached by page-image hash, model tag,
+and prompt version under the ignored local cache directory. Only local Ollama hosts are
+accepted. Preflight exercises all three parsers before test-split evaluation; the old freeze
+is superseded.

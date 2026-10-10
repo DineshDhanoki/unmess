@@ -1,5 +1,12 @@
 # Unmess Phase 2 parsing evaluation
 
+> **SUPERSEDED — invalid backend-availability run.** Docling's optional package/model
+> artifacts were unavailable and Ollama was unreachable. Failures were counted, but these
+> test metrics do not evaluate the routing design. The freeze commit was
+> `caa7f35c2f46777eba1a690e0292dac1ea04fe39`. No routing or gate threshold was
+> changed after inspecting this test run. This file is retained for audit only; a new
+> test run requires a successful preflight, dev-only tuning, and a new approved freeze.
+
 Run: 2026-10-09T22:55:11.125481+00:00 | source commit `9df4d5dde634f2d82fe70b846916d46af829ce1d` | freeze commit `caa7f35c2f46777eba1a690e0292dac1ea04fe39`
 Working tree dirty: False; dataset: 56 PDFs, 1374226 PDF bytes
 Vision model: `qwen2.5vl`; prompt: `phase2-v1`

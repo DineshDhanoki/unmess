@@ -16,3 +16,4 @@ eval/datasets/.font-cache/
 eval/results/*
 !eval/results/baseline-phase1.md
 !eval/results/phase2-parsing.md
+!eval/results/phase2b-dev.md

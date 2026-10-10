@@ -23,13 +23,18 @@ from eval.metrics.latency import latency_per_page
 from eval.metrics.ocr_cer import character_error_rate
 from eval.metrics.routing_efficiency import cheap_parser_share
 from eval.metrics.table_f1 import table_cell_f1
+from eval.preflight import run_preflight
 from unmess.config import Settings
 from unmess.models import Cell, GroundTruth, Table
 from unmess.parsing.base import ParsedPage
+from unmess.parsing.page_features import inspect_page
+from unmess.parsing.router import PageRouter
 from unmess.parsing.vlm_parser import PROMPT_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 FROZEN = ROOT / "eval/config/phase2_frozen.toml"
+DEV_CONFIG = ROOT / "eval/config/phase2b_dev.toml"
+SUPERSEDED_FREEZE = "caa7f35c2f46777eba1a690e0292dac1ea04fe39"
 METRICS = (
     "table_f1",
     "ocr_cer",
@@ -52,19 +57,49 @@ def _freeze_commit() -> str | None:
     return result.stdout.strip() or None
 
 
-def assert_test_ready() -> str:
+def assert_test_ready(dataset: Path = ROOT / "eval/datasets") -> str:
     """Refuse test evaluation until thresholds are committed and all tracked files are clean."""
     freeze_commit = _freeze_commit()
     if not freeze_commit:
         raise RuntimeError("test split locked: threshold freeze file is not committed")
+    if freeze_commit == SUPERSEDED_FREEZE:
+        raise RuntimeError("test split locked: old freeze was superseded; approve a new freeze")
     status = _git(["status", "--porcelain"])
     if status.returncode or status.stdout.strip():
         raise RuntimeError("test split locked: working tree must be clean")
+    try:
+        settings = _settings("test")
+        checks = run_preflight(settings)
+    except RuntimeError as exc:
+        raise RuntimeError(f"test split locked: backend preflight failed: {exc}") from exc
+    ready = {
+        parser
+        for parser, key in (
+            ("pymupdf", "pymupdf_parse"),
+            ("docling", "docling_parse"),
+            ("vlm", "vision_response"),
+        )
+        if checks.get(key)
+    }
+    truths, _manifest = _validate_manifest(dataset)
+    router = PageRouter(settings)
+    for truth in truths:
+        if truth.split != "test":
+            continue
+        pdf = dataset / truth.source_file
+        for page in truth.pages:
+            parser, _reason = router._first_route(inspect_page(pdf, page.page_number))
+            if parser not in ready:
+                raise RuntimeError(
+                    f"test split locked: {truth.document_id} page {page.page_number} "
+                    f"would route to unavailable {parser}"
+                )
     return freeze_commit
 
 
-def _settings() -> Settings:
-    values = tomllib.loads(FROZEN.read_text(encoding="utf-8"))
+def _settings(split: Literal["dev", "test"]) -> Settings:
+    config_path = DEV_CONFIG if split == "dev" else FROZEN
+    values = tomllib.loads(config_path.read_text(encoding="utf-8"))
     return Settings(**values)
 
 
@@ -95,11 +130,30 @@ def _mean(values: Sequence[float | None]) -> float | None:
 
 
 def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    counts = (
+        "escalated_pages",
+        "escalation_improved_pages",
+        "vlm_attempted_pages",
+        "vlm_uncached_pages",
+    )
+    totals = {key: sum(row[key] for row in rows) for key in counts}
+    vlm_time = sum(row["vlm_time_s"] for row in rows)
+    uncached_time = sum(row["vlm_uncached_time_s"] for row in rows)
     return {
         "documents": len(rows),
         "pages": sum(row["pages"] for row in rows),
         "failed_pages": sum(row["failed_pages"] for row in rows),
         **{key: _mean([row[key] for row in rows]) for key in METRICS},
+        **totals,
+        "vlm_time_s": vlm_time,
+        "vlm_pages_per_second": totals["vlm_attempted_pages"] / vlm_time if vlm_time else None,
+        "vlm_uncached_time_s": uncached_time,
+        "vlm_uncached_pages_per_second": (
+            totals["vlm_uncached_pages"] / uncached_time if uncached_time else None
+        ),
+        "mean_escalation_accuracy_delta": _mean(
+            [delta for row in rows for delta in row["escalation_accuracy_deltas"]]
+        ),
     }
 
 
@@ -149,21 +203,33 @@ def _page_cells(tables: list[Table], page_number: int) -> list[Table]:
     return result
 
 
-def _page_accuracy(truth: GroundTruth, parsed: ParsedDocument, page_index: int) -> float:
-    if parsed.page_results and not parsed.page_results[page_index].success:
+def _parsed_page_accuracy(truth: GroundTruth, page: ParsedPage) -> float:
+    if not page.success:
         return 0.0
+    page_index = page.page_number - 1
     reference = " ".join(truth.pages[page_index].expected_text.split())
-    prediction = " ".join(parsed.page_texts[page_index].split())
+    prediction = " ".join(page.text.split())
     text_accuracy = max(0.0, 1.0 - character_error_rate(reference, prediction))
     expected_tables = _page_cells(truth.tables, page_index + 1)
     if not expected_tables:
         return text_accuracy
-    predicted_tables = _page_cells(parsed.tables, page_index + 1)
+    predicted_tables = _page_cells(page.tables, page_index + 1)
     return (text_accuracy + table_cell_f1(expected_tables, predicted_tables)[2]) / 2
 
 
 def _document_scores(truth: GroundTruth, parsed: ParsedDocument) -> dict[str, Any]:
     failures = [page for page in parsed.page_results if not page.success]
+    escalation_deltas = [
+        _parsed_page_accuracy(truth, page) - _parsed_page_accuracy(truth, page.previous_attempt)
+        for page in parsed.page_results
+        if page.previous_attempt is not None
+    ]
+    vlm_attempts = [
+        attempt
+        for page in parsed.page_results
+        for attempt in page.attempts
+        if attempt.parser == "vlm"
+    ]
     cer_values = [
         character_error_rate(page.expected_text, parsed.page_texts[page.page_number - 1])
         for page in truth.pages
@@ -185,10 +251,18 @@ def _document_scores(truth: GroundTruth, parsed: ParsedDocument) -> dict[str, An
             else None
         ),
         "failed_page_rate": len(failures) / len(truth.pages),
-        "page_accuracy": [
-            _page_accuracy(truth, parsed, index) for index in range(len(truth.pages))
-        ],
+        "page_accuracy": [_parsed_page_accuracy(truth, page) for page in parsed.page_results],
+        "page_success": [page.success for page in parsed.page_results],
         "quality_scores": [page.quality_score for page in parsed.page_results],
+        "escalated_pages": len(escalation_deltas),
+        "escalation_improved_pages": sum(delta > 0 for delta in escalation_deltas),
+        "escalation_accuracy_deltas": escalation_deltas,
+        "vlm_attempted_pages": len(vlm_attempts),
+        "vlm_time_s": sum(attempt.duration_s for attempt in vlm_attempts),
+        "vlm_uncached_pages": sum(not attempt.cache_hit for attempt in vlm_attempts),
+        "vlm_uncached_time_s": sum(
+            attempt.duration_s for attempt in vlm_attempts if not attempt.cache_hit
+        ),
         "failures": [
             {
                 "page": page.page_number,
@@ -232,10 +306,19 @@ def _run_adapter(
 
 
 def _calibration(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    scores = [score for row in rows for score in row["quality_scores"]]
-    accuracy = [value for row in rows for value in row["page_accuracy"]]
+    successful = [
+        (score, value)
+        for row in rows
+        for score, value, success in zip(
+            row["quality_scores"], row["page_accuracy"], row["page_success"], strict=True
+        )
+        if success
+    ]
+    scores = [score for score, _ in successful]
+    accuracy = [value for _, value in successful]
     return {
         "pages": len(scores),
+        "failed_pages_excluded": sum(row["failed_pages"] for row in rows),
         "spearman_rho": spearman(scores, accuracy),
         "score_buckets": score_buckets(scores, accuracy),
         "accuracy_definition": (
@@ -245,8 +328,8 @@ def _calibration(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def run(dataset: Path, split: Literal["dev", "test"] = "dev") -> dict[str, Any]:
-    freeze_commit = assert_test_ready() if split == "test" else _freeze_commit()
-    settings = _settings()
+    freeze_commit = assert_test_ready(dataset) if split == "test" else None
+    settings = _settings(split)
     truths, manifest = _validate_manifest(dataset)
     dataset_bytes = sum((dataset / item["pdf"]).stat().st_size for item in manifest["documents"])
     result: dict[str, Any] = {
@@ -265,7 +348,10 @@ def run(dataset: Path, split: Literal["dev", "test"] = "dev") -> dict[str, Any]:
                 name: version(name) for name in ("pymupdf", "reportlab", "pillow", "pydantic")
             },
             "models": {"vision": settings.vision_model, "prompt_version": PROMPT_VERSION},
-            "frozen_thresholds": tomllib.loads(FROZEN.read_text(encoding="utf-8")),
+            "thresholds_file": str(DEV_CONFIG if split == "dev" else FROZEN),
+            "threshold_values": tomllib.loads(
+                (DEV_CONFIG if split == "dev" else FROZEN).read_text(encoding="utf-8")
+            ),
             "retrieval": "n/a: parsing stage only",
         },
         "systems": {},
@@ -302,7 +388,8 @@ def markdown(result: dict[str, Any]) -> str:
         "Retrieval metrics: n/a until Phase 3. Dev is for tuning; "
         "test is evaluated only after freeze.",
         "",
-        "Frozen threshold values: `" + json.dumps(meta["frozen_thresholds"], sort_keys=True) + "`",
+        f"Threshold source: `{meta['thresholds_file']}`",
+        "Threshold values: `" + json.dumps(meta["threshold_values"], sort_keys=True) + "`",
     ]
     columns = (*METRICS,)
     for split in ("test", "dev"):
@@ -341,7 +428,8 @@ def markdown(result: dict[str, Any]) -> str:
             "## Dev quality calibration",
             "",
             f"Spearman rho: {_format(calibration['spearman_rho'])} "
-            f"over {calibration['pages']} pages.",
+            f"over {calibration['pages']} successfully parsed pages; "
+            f"{calibration['failed_pages_excluded']} failed pages excluded.",
             f"Page accuracy: {calibration['accuracy_definition']}.",
             "",
             "| Score bucket | Pages | Mean page accuracy |",
@@ -351,6 +439,25 @@ def markdown(result: dict[str, Any]) -> str:
             lines.append(
                 f"| {bucket} | {values['pages']} | {_format(values['mean_page_accuracy'])} |"
             )
+    for selected in ("test", "dev"):
+        part = result["systems"]["unmess_parsing"][selected]
+        if part is None:
+            continue
+        overall = part["summary"]["overall"]
+        lines += [
+            "",
+            f"## {selected.title()} VLM cost and escalation",
+            "",
+            f"VLM attempts: {overall['vlm_attempted_pages']} pages in "
+            f"{_format(overall['vlm_time_s'])} s "
+            f"({_format(overall['vlm_pages_per_second'])} pages/s).",
+            f"Uncached VLM: {overall['vlm_uncached_pages']} pages in "
+            f"{_format(overall['vlm_uncached_time_s'])} s "
+            f"({_format(overall['vlm_uncached_pages_per_second'])} pages/s).",
+            f"Escalated: {overall['escalated_pages']} pages; "
+            f"accuracy improved on {overall['escalation_improved_pages']}; "
+            f"mean accuracy delta {_format(overall['mean_escalation_accuracy_delta'])}.",
+        ]
     test_unmess = result["systems"]["unmess_parsing"]["test"]
     test_fast = result["systems"]["pymupdf_fixed"]["test"]
     if test_unmess is not None and test_fast is not None:

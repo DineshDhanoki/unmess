@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     ollama_url: HttpUrl = HttpUrl("http://localhost:11434")
     text_model: str = "qwen3"
     vision_model: str = "qwen2.5vl"
+    docling_artifacts_path: Path = Path.home() / ".cache/docling/models"
     embed_model: str = "bge-m3"
     rerank_enabled: bool = False
     parser_text_density_threshold: float = Field(default=0.12, ge=0, le=1)
@@ -29,7 +30,7 @@ class Settings(BaseSettings):
     parser_garbled_ratio_threshold: float = Field(default=0.10, ge=0, le=1)
     parser_max_skew_degrees: float = Field(default=3.0, ge=0, le=90)
     quality_review_threshold: float = Field(default=0.70, ge=0, le=1)
-    vision_timeout_s: float = Field(default=3.0, gt=0, le=120)
+    vision_timeout_s: float = Field(default=120.0, gt=0, le=300)
     vision_retries: int = Field(default=1, ge=0, le=5)
     vision_raster_dpi: int = Field(default=110, ge=50, le=300)
     vision_cache_dir: Path = Path(".cache/unmess/vlm")

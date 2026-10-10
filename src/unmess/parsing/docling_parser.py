@@ -13,11 +13,28 @@ from unmess.models import BBox, Block, Cell, Table
 from unmess.parsing.base import ParsedPage, ParserUnavailable, normalized_bbox
 
 
+def make_docling_converter(artifacts_path: Path) -> Any:
+    """Build a Docling converter against prefetched local artifacts only."""
+    os.environ["HF_HUB_OFFLINE"] = "1"
+    os.environ["TRANSFORMERS_OFFLINE"] = "1"
+    converter_module = importlib.import_module("docling.document_converter")
+    pipeline_module = importlib.import_module("docling.datamodel.pipeline_options")
+    base_module = importlib.import_module("docling.datamodel.base_models")
+    options = pipeline_module.PdfPipelineOptions(artifacts_path=artifacts_path.expanduser())
+    return converter_module.DocumentConverter(
+        format_options={
+            base_module.InputFormat.PDF: converter_module.PdfFormatOption(pipeline_options=options)
+        }
+    )
+
+
 class DoclingParser:
     name = "docling"
 
-    def __init__(self) -> None:
+    def __init__(self, artifacts_path: Path | None = None) -> None:
         self._documents: dict[Path, Any] = {}
+        self.artifacts_path = artifacts_path or Path.home() / ".cache/docling/models"
+        self._converter: Any = None
 
     @staticmethod
     def available() -> bool:
@@ -27,10 +44,9 @@ class DoclingParser:
         if pdf not in self._documents:
             if not self.available():
                 raise ParserUnavailable("Docling unavailable: install the [parsers] extra")
-            os.environ.setdefault("HF_HUB_OFFLINE", "1")
-            os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
-            converter = importlib.import_module("docling.document_converter").DocumentConverter()
-            self._documents[pdf] = converter.convert(str(pdf)).document
+            if self._converter is None:
+                self._converter = make_docling_converter(self.artifacts_path)
+            self._documents[pdf] = self._converter.convert(str(pdf)).document
         return self._documents[pdf]
 
     def parse_page(self, pdf: Path, page_number: int) -> ParsedPage:
