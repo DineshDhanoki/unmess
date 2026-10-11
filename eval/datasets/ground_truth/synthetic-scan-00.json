@@ -7,13 +7,14 @@
       "language": "en",
       "expected_text": "SYNTHETIC DOCUMENT - SCAN\nDocument code: FAKE-SCA-00\nFictional seller: Demo Vendor 00\nIssue date: 2026-02-01\nTotal INR: 10,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
       "is_ocr_page": true,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
     }
   ],
   "tables": [],
-  "content_hash": "e068d0cf5942887bb6828a8a64adb353a3d591337ffcb23a678dace70dd854de",
+  "content_hash": "412a21ba241dbf4f354102a31e6342ef93dedd2ca73e107fc94f4f199b3f99c3",
   "schema_version": "1",
   "category": "scan",
   "split": "dev",

@@ -7,6 +7,7 @@
       "language": "en",
       "expected_text": "SYNTHETIC DOCUMENT - GST INVOICE\nDocument code: FAKE-GST-01\nFictional seller: Demo Vendor 01\nIssue date: 2026-02-02\nTotal INR: 28,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375\nFake item 4\n4\n500",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
@@ -234,7 +235,7 @@
       "spans_pages": false
     }
   ],
-  "content_hash": "02271913eeea262dc986e2a31c5d5e768c466f3fee26b52b19ece33a04bf2ffc",
+  "content_hash": "2913988b6c444edf3358ea70e134515d15a8c3ff584baa5bbc3a5d3ec79f3d0a",
   "schema_version": "1",
   "category": "gst_invoice",
   "split": "test",

@@ -7,13 +7,14 @@
       "language": "en",
       "expected_text": "SYNTHETIC DOCUMENT - RECEIPT\nDocument code: FAKE-REC-01\nFictional seller: Demo Vendor 01\nIssue date: 2026-02-02\nTotal INR: 28,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
     }
   ],
   "tables": [],
-  "content_hash": "cfbcf91b13900eee494ca6757770945ea4682f79de6cedb96d4b05ca33b97a97",
+  "content_hash": "e7107900b8600eb4f22d9eb28c3e63b274f2b5da9ee6f24de7417e07bf502a79",
   "schema_version": "1",
   "category": "receipt",
   "split": "test",

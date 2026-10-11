@@ -65,11 +65,19 @@ class Block(Record):
     parent_id: str | None = None
 
 
+class Degradation(Record):
+    rotation_deg: float
+    noise_level: float = Field(ge=0, le=1)
+    dpi: int = Field(gt=0)
+    blur: float = Field(ge=0)
+
+
 class Page(Record):
     page_number: int = Field(ge=1)
     language: Literal["en", "hi"]
     expected_text: str = ""
     is_ocr_page: bool = False
+    degradation: Degradation | None = None
     blocks: list[Block] = Field(default_factory=list)
     parser_used: str | None = None
     quality_score: float | None = Field(default=None, ge=0, le=1)
@@ -128,13 +136,6 @@ class Job(Record):
     error: str | None = None
 
 
-class Degradation(Record):
-    rotation_deg: float
-    noise_level: float = Field(ge=0, le=1)
-    dpi: int = Field(gt=0)
-    blur: float = Field(ge=0)
-
-
 class Answer(Record):
     id: str
     question: str
@@ -149,7 +150,16 @@ class Answer(Record):
 class GroundTruth(Document):
     schema_version: Literal["1"] = "1"
     category: Literal[
-        "clean", "scan", "receipt", "gst_invoice", "merged_table", "spanning_table", "bilingual"
+        "clean",
+        "scan",
+        "receipt",
+        "gst_invoice",
+        "merged_table",
+        "spanning_table",
+        "bilingual",
+        "broken_text_layer",
+        "fake_text_layer_scan",
+        "mixed_pages",
     ]
     split: Literal["dev", "test"]
     seed: int

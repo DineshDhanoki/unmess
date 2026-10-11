@@ -1,0 +1,126 @@
+{
+  "document_id": "synthetic-fake_text_layer_scan-02",
+  "source_file": "pdf/synthetic-fake_text_layer_scan-02.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "en",
+      "expected_text": "SYNTHETIC DOCUMENT - SCAN\nDocument code: FAKE-SCA-02\nFictional seller: Demo Vendor 02\nIssue date: 2026-02-03\nTotal INR: 46,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
+      "is_ocr_page": true,
+      "degradation": {
+        "rotation_deg": 0.0,
+        "noise_level": 0.3,
+        "dpi": 110,
+        "blur": 0.5
+      },
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [],
+  "content_hash": "ab696f0f8c9726c3158625c2ea9e359c3ec3929e3dfda8e55df6b7a55d64f3b4",
+  "schema_version": "1",
+  "category": "fake_text_layer_scan",
+  "split": "dev",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 02 in this scan record?",
+      "answer": "FAKE-SCA-02",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-SCA-02"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-SCA-02?",
+      "answer": "Demo Vendor 02",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 02"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-SCA-02?",
+      "answer": "2026-02-03",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-03",
+        "03/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "What is the total in INR on document FAKE-SCA-02?",
+      "answer": "46,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "46,000",
+        "46,000",
+        "INR 46,000"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    }
+  ],
+  "degradation": {
+    "rotation_deg": 0.0,
+    "noise_level": 0.3,
+    "dpi": 110,
+    "blur": 0.5
+  }
+}

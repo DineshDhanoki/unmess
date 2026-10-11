@@ -1,0 +1,136 @@
+{
+  "document_id": "synthetic-mixed_pages-07",
+  "source_file": "pdf/synthetic-mixed_pages-07.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "en",
+      "expected_text": "SYNTHETIC DOCUMENT - CLEAN\nDocument code: FAKE-CLE-07\nFictional seller: Demo Vendor 07\nIssue date: 2026-02-08\nTotal INR: 136,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
+      "is_ocr_page": false,
+      "degradation": null,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    },
+    {
+      "page_number": 2,
+      "language": "en",
+      "expected_text": "SYNTHETIC DOCUMENT - SCAN\nDocument code: FAKE-SCA-07\nFictional seller: Demo Vendor 07\nIssue date: 2026-02-08\nTotal INR: 136,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
+      "is_ocr_page": true,
+      "degradation": {
+        "rotation_deg": -2.0,
+        "noise_level": 0.1,
+        "dpi": 130,
+        "blur": 0.2
+      },
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [],
+  "content_hash": "f25416a7fee11abd3e7111408d984df7fb93bfc6cea271297917211dcbcec4b8",
+  "schema_version": "1",
+  "category": "mixed_pages",
+  "split": "test",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 07 in this clean record?",
+      "answer": "FAKE-CLE-07",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-CLE-07"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-CLE-07?",
+      "answer": "Demo Vendor 07",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 07"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-CLE-07?",
+      "answer": "2026-02-08",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-08",
+        "08/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "What is the total in INR on document FAKE-CLE-07?",
+      "answer": "136,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "136,000",
+        "1,36,000",
+        "INR 1,36,000"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    }
+  ],
+  "degradation": {
+    "rotation_deg": -2.0,
+    "noise_level": 0.1,
+    "dpi": 130,
+    "blur": 0.2
+  }
+}

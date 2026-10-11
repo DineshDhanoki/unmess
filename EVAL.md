@@ -2,13 +2,25 @@
 
 ## Corpus and splits
 
-`scripts/make_synthetic_docs.py` generates 56 wholly fictional PDFs: eight each of clean
+`scripts/make_synthetic_docs.py` originally generated 56 wholly fictional PDFs: eight each of clean
 digital pages, degraded scans, receipts, GST-style invoices, merged-cell tables, tables spanning
-two pages, and bilingual English/Hindi pages. Every category has four `dev` and four `test`
-documents. The fixed seed is `20261010`. The generator records PDF SHA-256 hashes, version,
+two pages, and bilingual English/Hindi pages. Phase 2c expanded the corpus to 86 PDFs: ten
+each for merged-cell, spanning-table, and bilingual cases, and eight each of three new
+categories: `broken_text_layer`, `fake_text_layer_scan`, and `mixed_pages`. These new categories
+are **synthetic approximations** of real-world failures, not samples from actual documents.
+Every category remains approximately 50/50 `dev`/`test`. The fixed seed is `20261010`.
+The generator records PDF SHA-256 hashes, version,
 seed, fixed metadata, and font hash in `eval/datasets/MANIFEST.json`. The committed PDFs total
-1,374,226 bytes in generator version 1.0.0. The font is downloaded separately under the SIL
+5,438,587 bytes; the whole committed dataset is 5,925,923 bytes in generator version 1.2.0.
+The font is downloaded separately under the SIL
 Open Font License and is not committed.
+
+The corpus was expanded **after** the invalid first Phase 2 test run and **before any valid
+test run**. The initial 28 DEV documents and the 15 newly added DEV documents are reported
+as separate cohorts as well as together; the combined numbers must not be compared directly
+with Phase 2b's 28-document results. New test PDFs are generated and hashed, but their ground
+truth is not read by the DEV evaluation path. The old freeze remains superseded and test
+evaluation is prohibited pending user approval of a new freeze.
 
 Use `dev` to tune routing thresholds, chunk sizes, or other choices. **Never tune on `test`.**
 The report presents test first and labels it as the headline split. Dev and test are evaluated
@@ -32,13 +44,17 @@ with the origin at the top left. A box must have positive area.
 - `docling_only`: optional Docling extraction. If `[parsers]` is not installed, the report says
   `skipped: optional dependency not installed`. When installed, model downloads are disabled
   during evaluation; required local artifacts must already be present.
+- `vlm_every_page`: local Ollama vision extraction on every DEV page. It uses the same
+  page-content/model-tag/prompt-version cache as routed Unmess, so a warm run is not a
+  cold-run cost estimate. Failures remain in all denominators.
 - `unmess`: a registered `PipelineAdapter` placeholder. Phase 1 reports `not implemented yet`
   and `n/a` values. The full pipeline belongs to later phases.
 
 Phase 2 replaces the placeholder in new runs with `unmess_parsing`: routing, page parsing, and
 quality scoring only. The committed Phase 1 baseline report remains unchanged. The new parsing
 report compares PyMuPDF, Docling, and Unmess on table F1, OCR CER, cheap-parser share, latency,
-and failed-page rate. Retrieval metrics are `n/a` for all Phase 2 systems until Phase 3.
+and failed-page rate. Phase 2c adds VLM-every-page and all-page text CER/WER. Retrieval metrics
+are `n/a` for all Phase 2 systems until Phase 3.
 Unavailable Docling and unreachable Ollama are counted as failed pages and listed by document
 and page, including attempted parser errors.
 
@@ -50,11 +66,19 @@ and split-specific corpus. It does not use Qdrant or Ollama in Phase 1.
 The runner reports document-macro averages overall and by category, language, and scan
 difficulty. `n/a` means the measure has no applicable reference or the system did not run.
 
-- **Table cell F1:** exact multiset matching of table ID, row, column, row span, column span,
-  and stripped cell text. Precision and recall determine F1. Only documents with reference
+- **Table cell F1:** multiset matching of table ID, column, row span, column span,
+  and stripped cell text after a single whole-table row-origin shift chosen to maximize
+  matching cells. Missing rows and wrong spans still reduce precision/recall. This fixes the
+  false zero caused when a parser omitted one merged heading and numbered all later rows
+  from zero. Only documents with reference
   tables enter this average.
 - **OCR CER:** Levenshtein character edits divided by reference characters on pages marked
   `is_ocr_page`. No extracted text therefore scores 1.0 on nonempty reference text.
+- **All-page text CER/WER:** Levenshtein edits on characters or whitespace-delimited words,
+  divided by the corresponding reference length, for **every** page. These apply to clean,
+  receipt, table, mixed, and bilingual pages too. Hindi is additionally shown in the `hi`
+  language group. Insertions can make either error rate exceed 1. Each report cell includes
+  its own document and page denominator.
 - **Recall@1/3 and MRR:** each question is a query. A retrieved chunk is relevant only when
   its document ID matches, it overlaps an answering page, and, if answer boxes exist, one of
   its boxes intersects an answer box. Recall@k is a binary hit per question. MRR is reciprocal
@@ -136,3 +160,22 @@ the cheap parser cannot extract it; its rendering depends on the pinned font and
 version. Exact text and cell matching are strict. Bounding-box relevance rewards any geometric
 intersection, not whether a reader would find the result useful. Reported numbers apply only
 to this corpus, code revision, and environment.
+
+## Phase 2c DEV-only audit trail
+
+Visual inspection of `synthetic-merged_table-00` (DEV) found that the claimed merged heading
+was drawn above the table border, while Docling and Unmess extracted all subsequent table
+cells and numbered them from zero. The generator now boxes the merged heading as a real cell;
+the metric aligns whole-table row origins without forgiving missing cells. The corrected
+original 28-document DEV rerun changed merged-table F1 from 0.0000 to 1.0000 for both Docling
+and Unmess. Overall table F1 changed from 0.5000 to 0.8333 for Docling and from 0.5417 to
+0.8750 for Unmess. These are DEV-only, document-macro numbers from the corrected original
+corpus, with unchanged routing thresholds. The pre-correction Phase 2b report is retained.
+
+The new scorer uses general character/script plausibility and rendered-ink/text-layer
+alignment. It does not check for the generator's particular corruption strings. Score
+calibration and every threshold trial must be evaluated on DEV only. The Phase 2c tuning log
+is `eval/TUNING_PHASE2C.md`. The observed Spearman score/accuracy correlation is slightly
+negative on the expanded DEV set, so these scores should be treated as review heuristics,
+not calibrated probabilities. Cost figures disclose cache state; the routed and VLM-only
+passes were not run under identical cold-cache conditions.

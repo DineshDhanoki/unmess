@@ -16,7 +16,7 @@ from reportlab.pdfgen import canvas
 from unmess.models import Answer, BBox, Cell, Degradation, GroundTruth, Page, Table
 
 SEED = 20261010
-GENERATOR_VERSION = "1.0.0"
+GENERATOR_VERSION = "1.2.0"
 CATEGORIES = (
     "clean",
     "scan",
@@ -25,7 +25,11 @@ CATEGORIES = (
     "merged_table",
     "spanning_table",
     "bilingual",
+    "broken_text_layer",
+    "fake_text_layer_scan",
+    "mixed_pages",
 )
+EXPANDED_COUNTS = {"merged_table": 10, "spanning_table": 10, "bilingual": 10}
 PAGE_W, PAGE_H = 612, 792
 HINDI = "कुल राशि"
 
@@ -104,6 +108,8 @@ def _pdf_bytes(
             start_top = 355 if page_no == 1 else 130
             if category == "merged_table" and page_no == 1:
                 label = "Merged line item heading"
+                pdf.setStrokeColorRGB(0.45, 0.45, 0.45)
+                pdf.rect(50, PAGE_H - (start_top + 25), 455, 45, stroke=1, fill=0)
                 _draw_line(pdf, label, 55, start_top)
                 current.append(label)
                 cells.append(
@@ -112,7 +118,7 @@ def _pdf_bytes(
                         col=0,
                         col_span=3,
                         text=label,
-                        bbox=_bbox(1, 50, start_top, 450, start_top + 21),
+                        bbox=_bbox(1, 50, start_top - 20, 505, start_top + 25),
                     )
                 )
                 start_top += 30
@@ -271,17 +277,82 @@ def _pdf_bytes(
     return raw, pages, tables, answers
 
 
+def _degradation(index: int) -> Degradation:
+    level = (index // 2 + index % 2) % 4
+    return Degradation(
+        rotation_deg=(-2.0, 0.0, 3.0, 6.0)[level],
+        noise_level=(0.1, 0.3, 0.5, 0.7)[level],
+        dpi=(130, 110, 90, 75)[level],
+        blur=(0.2, 0.5, 0.8, 1.1)[level],
+    )
+
+
+def _invisible_wrong_layer(pdf: canvas.Canvas, index: int) -> None:
+    """A dense but visually absent OCR/text layer, spatially away from visible ink."""
+    rng = random.Random(SEED + 1000 + index)
+    for line in range(9):
+        wrong = "".join(rng.choice("qxzvbfkpm") for _ in range(48))
+        layer = pdf.beginText(65, PAGE_H - 395 - 22 * line)
+        layer.setFont("Helvetica", 8)
+        layer.setTextRenderMode(3)
+        layer.textLine(wrong)
+        pdf.drawText(layer)
+
+
+def _special_pdf(
+    category: str, index: int, font_path: Path | None, degradation: Degradation
+) -> tuple[bytes, list[Page], list[Table], list[Answer]]:
+    clean_raw, clean_pages, _, answers = _pdf_bytes("clean", index, font_path, None)
+    document_id = f"synthetic-{category}-{index:02d}"
+    source = pymupdf.open(stream=clean_raw, filetype="pdf")
+    pix = source[0].get_pixmap(dpi=144, alpha=False)
+    image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+    pdf_buffer = io.BytesIO()
+    pdf = canvas.Canvas(pdf_buffer, pagesize=(PAGE_W, PAGE_H), invariant=1)
+    pdf.setTitle(document_id)
+    pdf.setAuthor("Unmess contributors")
+    pdf.setCreator(f"Unmess synthetic generator {GENERATOR_VERSION}")
+    pdf.setProducer("Unmess synthetic generator")
+    if category == "mixed_pages":
+        # Keep the first page truly digital; the second is visibly rasterized.
+        for line_no, line in enumerate(clean_pages[0].expected_text.splitlines()):
+            _draw_line(pdf, line, 48, 65 + 28 * line_no)
+        pdf.showPage()
+        scan_raw, scan_pages, _, _ = _pdf_bytes("scan", index, font_path, degradation)
+        scan_doc = pymupdf.open(stream=scan_raw, filetype="pdf")
+        scan_pix = scan_doc[0].get_pixmap(dpi=72, alpha=False)
+        scan_image = Image.frombytes("RGB", (scan_pix.width, scan_pix.height), scan_pix.samples)
+        pdf.drawImage(ImageReader(scan_image), 0, 0, PAGE_W, PAGE_H)
+        pdf.showPage()
+        scan_pages[0].page_number = 2
+        scan_pages[0].degradation = degradation
+        pdf.save()
+        return pdf_buffer.getvalue(), [clean_pages[0], scan_pages[0]], [], answers
+    if category == "broken_text_layer":
+        cropped = image.crop((80, 110, 1020, 560))
+        pdf.drawImage(ImageReader(cropped), 40, PAGE_H - 280, 470, 225)
+    else:
+        scan_raw, scan_pages, _, scan_answers = _pdf_bytes("scan", index, font_path, degradation)
+        scan_doc = pymupdf.open(stream=scan_raw, filetype="pdf")
+        scan_pix = scan_doc[0].get_pixmap(dpi=72, alpha=False)
+        scan_image = Image.frombytes("RGB", (scan_pix.width, scan_pix.height), scan_pix.samples)
+        pdf.drawImage(ImageReader(scan_image), 0, 0, PAGE_W, PAGE_H)
+        clean_pages = scan_pages
+        answers = scan_answers
+        clean_pages[0].degradation = degradation
+    _invisible_wrong_layer(pdf, index)
+    pdf.save()
+    return pdf_buffer.getvalue(), clean_pages, [], answers
+
+
 def build_document(category: str, index: int, font_path: Path | None) -> tuple[bytes, GroundTruth]:
     degradation = None
-    if category == "scan":
-        level = (index // 2 + index % 2) % 4
-        degradation = Degradation(
-            rotation_deg=(-2.0, 0.0, 3.0, 6.0)[level],
-            noise_level=(0.1, 0.3, 0.5, 0.7)[level],
-            dpi=(130, 110, 90, 75)[level],
-            blur=(0.2, 0.5, 0.8, 1.1)[level],
-        )
-    raw, pages, tables, answers = _pdf_bytes(category, index, font_path, degradation)
+    if category in {"scan", "fake_text_layer_scan", "mixed_pages"}:
+        degradation = _degradation(index)
+    if category in {"broken_text_layer", "fake_text_layer_scan", "mixed_pages"}:
+        raw, pages, tables, answers = _special_pdf(category, index, font_path, _degradation(index))
+    else:
+        raw, pages, tables, answers = _pdf_bytes(category, index, font_path, degradation)
     document_id = f"synthetic-{category}-{index:02d}"
     truth = GroundTruth(
         document_id=document_id,
@@ -305,7 +376,7 @@ def generate(output_dir: Path, font_path: Path | None) -> dict[str, Any]:
     truth_dir.mkdir(parents=True, exist_ok=True)
     entries: list[dict[str, str]] = []
     for category in CATEGORIES:
-        for index in range(8):
+        for index in range(EXPANDED_COUNTS.get(category, 8)):
             raw, truth = build_document(category, index, font_path)
             pdf_path = output_dir / truth.source_file
             pdf_path.write_bytes(raw)
@@ -316,6 +387,10 @@ def generate(output_dir: Path, font_path: Path | None) -> dict[str, Any]:
                     "document_id": truth.document_id,
                     "pdf": truth.source_file,
                     "ground_truth": str(truth_path.relative_to(output_dir)),
+                    "split": truth.split,
+                    "cohort": "original"
+                    if category in CATEGORIES[:7] and index < 8
+                    else "expanded",
                     "sha256": hashlib.sha256(raw).hexdigest(),
                 }
             )

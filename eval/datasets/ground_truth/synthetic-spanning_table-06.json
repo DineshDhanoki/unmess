@@ -7,6 +7,7 @@
       "language": "en",
       "expected_text": "SYNTHETIC DOCUMENT - SPANNING TABLE\nDocument code: FAKE-SPA-06\nFictional seller: Demo Vendor 06\nIssue date: 2026-02-07\nTotal INR: 118,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
@@ -16,6 +17,7 @@
       "language": "en",
       "expected_text": "synthetic-spanning_table-06 - table continuation\nItem\nQty\nAmount\nFake item 4\n4\n500\nFake item 5\n5\n625\nFake item 6\n6\n750",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
@@ -370,7 +372,7 @@
       "spans_pages": true
     }
   ],
-  "content_hash": "476df97ff59fa183dc5b188fc2a25a0c78ee9312394cdbe633afe8059eb1ec94",
+  "content_hash": "073235eeca21e22d21faaeb2e43a432ed20946259e6399fc7c75d87138467c8b",
   "schema_version": "1",
   "category": "spanning_table",
   "split": "dev",

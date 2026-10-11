@@ -1,5 +1,5 @@
 {
-  "generator_version": "1.0.0",
+  "generator_version": "1.2.0",
   "seed": 20261010,
   "pdf_metadata": {
     "creation_date": "2000-01-01T00:00:00Z",
@@ -11,337 +11,689 @@
       "document_id": "synthetic-clean-00",
       "pdf": "pdf/synthetic-clean-00.pdf",
       "ground_truth": "ground_truth/synthetic-clean-00.json",
-      "sha256": "df13ee49da0d1d3ac5f07185d89480eb656f0f6fb2af188e8912c3acf93b9cea"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "f02c1f786c64fd8ceff3e0def82297a28c46b7838cfc70c4f14c92b70e66dbde"
     },
     {
       "document_id": "synthetic-clean-01",
       "pdf": "pdf/synthetic-clean-01.pdf",
       "ground_truth": "ground_truth/synthetic-clean-01.json",
-      "sha256": "e80fc8a55cf378cc8727091b01327331494be2d368cbb6fe1f0340fc213c5c7a"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "1311a39602a9c31a2cfa5b8e93b7a2c92de68dde900bacf98ac389d6629942e1"
     },
     {
       "document_id": "synthetic-clean-02",
       "pdf": "pdf/synthetic-clean-02.pdf",
       "ground_truth": "ground_truth/synthetic-clean-02.json",
-      "sha256": "c8f00a3e01de64203b20847bec4ef0c3f695ac736e56aef5b07a85029889add2"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "ba89985c5caf4263f4b40879c745d089be27c620d8e49884739380d3f18f3f77"
     },
     {
       "document_id": "synthetic-clean-03",
       "pdf": "pdf/synthetic-clean-03.pdf",
       "ground_truth": "ground_truth/synthetic-clean-03.json",
-      "sha256": "53c1ce554cf7237a239a87f338443ef467aaba37bb4c26fdd9ec5ebee6700a9b"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "f3f7c62d1bd8f0ddfdf24bab6ffb48329c29306baa451d47e920559d25b4054f"
     },
     {
       "document_id": "synthetic-clean-04",
       "pdf": "pdf/synthetic-clean-04.pdf",
       "ground_truth": "ground_truth/synthetic-clean-04.json",
-      "sha256": "747525ad950218a03a71228c324feb9cc95112f909acc1c8baaaa060ce1a50b5"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "27f68b77f4a66c1eb16b5d235e032b99bf2d31b76a72fb4f914e873bc8bddb55"
     },
     {
       "document_id": "synthetic-clean-05",
       "pdf": "pdf/synthetic-clean-05.pdf",
       "ground_truth": "ground_truth/synthetic-clean-05.json",
-      "sha256": "12d644c75e7990e4853f5728977b5969613f296778449e5099eaed93d0200f45"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "833800cb0fb0f2f10de2dbdf6f6c2948b617b76fa62b0c5f19cf504539dd52d2"
     },
     {
       "document_id": "synthetic-clean-06",
       "pdf": "pdf/synthetic-clean-06.pdf",
       "ground_truth": "ground_truth/synthetic-clean-06.json",
-      "sha256": "fd26666e2018318486699bf3f1baad6a9a3636d0e5957ee00ed330885ce0e5c9"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "5c437b163e46317405cda3e715136b642b6471fe164ed467bf7f968f2c1465aa"
     },
     {
       "document_id": "synthetic-clean-07",
       "pdf": "pdf/synthetic-clean-07.pdf",
       "ground_truth": "ground_truth/synthetic-clean-07.json",
-      "sha256": "60f14bf8ec7e09b1f405f876e39d494dee9ff5c37bf44c2324bda809808f8f0f"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "23dd5d6de50effde394c7b08851cf95f5af1cc229dc97ca2be0a4466245a2bf4"
     },
     {
       "document_id": "synthetic-scan-00",
       "pdf": "pdf/synthetic-scan-00.pdf",
       "ground_truth": "ground_truth/synthetic-scan-00.json",
-      "sha256": "e068d0cf5942887bb6828a8a64adb353a3d591337ffcb23a678dace70dd854de"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "412a21ba241dbf4f354102a31e6342ef93dedd2ca73e107fc94f4f199b3f99c3"
     },
     {
       "document_id": "synthetic-scan-01",
       "pdf": "pdf/synthetic-scan-01.pdf",
       "ground_truth": "ground_truth/synthetic-scan-01.json",
-      "sha256": "d1cc573621d0eadfed32299ef4a43d9f08ef05f27a820143b9d4ca15af38cfde"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "3117799b666ab88a3d03b341042ef7c9c98d14c3ddd8ab58e96f5fa8bfdd2af5"
     },
     {
       "document_id": "synthetic-scan-02",
       "pdf": "pdf/synthetic-scan-02.pdf",
       "ground_truth": "ground_truth/synthetic-scan-02.json",
-      "sha256": "f700dd83cc9055ae8a42f91bd5f56688e0fd7952d09878d43fa709aadb05efb1"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "962d20a9b714f60799950838698ade09be94f514a1fd8f5a7428d8107e4b1876"
     },
     {
       "document_id": "synthetic-scan-03",
       "pdf": "pdf/synthetic-scan-03.pdf",
       "ground_truth": "ground_truth/synthetic-scan-03.json",
-      "sha256": "f6de142a68dbdffb2d4145cba59d10a0257f413bb20467b5b576e77c87cd2bbd"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "ff743c10c6edf771d9139f64b122a0a4e2c968c7702d3cc3bff77f8731c0fb6d"
     },
     {
       "document_id": "synthetic-scan-04",
       "pdf": "pdf/synthetic-scan-04.pdf",
       "ground_truth": "ground_truth/synthetic-scan-04.json",
-      "sha256": "66c3fa3ba788c900edc5ad318fb4a51c17e96be94fa29eafaa1018c58650e423"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "27fe1a10e9220920edd911fbb340b671afa7b570c68dadc657d5698e7c2374f1"
     },
     {
       "document_id": "synthetic-scan-05",
       "pdf": "pdf/synthetic-scan-05.pdf",
       "ground_truth": "ground_truth/synthetic-scan-05.json",
-      "sha256": "e8f9a02e745e06241d91cdc8e9abf27a9ee673a41414b2f070959ff2dd7d8c13"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "3f0f64c6afd4a2593fb61fb8c311b4aa0c1df3fd71de958d0a3910b07829e152"
     },
     {
       "document_id": "synthetic-scan-06",
       "pdf": "pdf/synthetic-scan-06.pdf",
       "ground_truth": "ground_truth/synthetic-scan-06.json",
-      "sha256": "98aec9d9e2adf8b5fa4a2c0f957d360176db1bc8022015df92fdbd53168c01b7"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "e7d02cf2aa2a95ade5a7d6af633648626737eece8e790d525dba4c17fbdc7220"
     },
     {
       "document_id": "synthetic-scan-07",
       "pdf": "pdf/synthetic-scan-07.pdf",
       "ground_truth": "ground_truth/synthetic-scan-07.json",
-      "sha256": "02ad6e81b7ea9714eed86b6c870fd2496bb862c2a0ada42fb104725c60ee8609"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "a0fd1ea85e9d2a2909fb9d2095f216a10577acc9d6c823529338add3a6e6bd9a"
     },
     {
       "document_id": "synthetic-receipt-00",
       "pdf": "pdf/synthetic-receipt-00.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-00.json",
-      "sha256": "c09acc328e639fb79d59673eae075ac6c9b9c48f46120fb65467429d6b8ba398"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "29ba8189f78882262043df6a971dc3c55d040055d668bdc82e46bd2bfcd76696"
     },
     {
       "document_id": "synthetic-receipt-01",
       "pdf": "pdf/synthetic-receipt-01.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-01.json",
-      "sha256": "cfbcf91b13900eee494ca6757770945ea4682f79de6cedb96d4b05ca33b97a97"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "e7107900b8600eb4f22d9eb28c3e63b274f2b5da9ee6f24de7417e07bf502a79"
     },
     {
       "document_id": "synthetic-receipt-02",
       "pdf": "pdf/synthetic-receipt-02.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-02.json",
-      "sha256": "702a1282ac349fd4498faea60e9a1b822dfc0146ab889b6149a51bee93ca1722"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "7ee1ed42375b0e9b3a23df3a9bb547de4aaa9dd17f5bff903e972aa6213d4e9e"
     },
     {
       "document_id": "synthetic-receipt-03",
       "pdf": "pdf/synthetic-receipt-03.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-03.json",
-      "sha256": "156af0103d6e94e25e145a65c4c20a750643335a9cf4bf9a6f6ffb58fbfd7c15"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "5608476520b9e10a1d39ebf22be81e2b85cf28af11ab9bcb66b2d0b671503c9d"
     },
     {
       "document_id": "synthetic-receipt-04",
       "pdf": "pdf/synthetic-receipt-04.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-04.json",
-      "sha256": "0366387d490a3768c5121036fd436b2e1731268b03cf24948d3f1f0942553eb5"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "adf55ae24d9ef8f0b49ae08d0e82cff200bc26e888fa50c683079aa3826838f3"
     },
     {
       "document_id": "synthetic-receipt-05",
       "pdf": "pdf/synthetic-receipt-05.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-05.json",
-      "sha256": "cbbf8a895a42a8fdc01a3cdec75936bcd741884e28717d2459c72670c855b15c"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "562e56225cead046e9650cd78a2467d30c853349c1f52f5218ff3ba2f7ac7634"
     },
     {
       "document_id": "synthetic-receipt-06",
       "pdf": "pdf/synthetic-receipt-06.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-06.json",
-      "sha256": "abe2a17f2417a93ecf09fc297820d7bd3e55b2a27f7ecd6bca9e9ba140825516"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "a1d5e22e5de4789937ed6fee4a1f657a067bb3a6a8ed5c2298e502f9777d42a3"
     },
     {
       "document_id": "synthetic-receipt-07",
       "pdf": "pdf/synthetic-receipt-07.pdf",
       "ground_truth": "ground_truth/synthetic-receipt-07.json",
-      "sha256": "71ca4af89b220d891a7012d267170a7a1cb91e1565e7291d02bfc5b2c4d8767b"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "0930e8944099ead6e8dbfd93117521b467b98b64871bd8a0c9c8e5255a29e31e"
     },
     {
       "document_id": "synthetic-gst_invoice-00",
       "pdf": "pdf/synthetic-gst_invoice-00.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-00.json",
-      "sha256": "f9e0e6349aee69c91f26c7d50ade68fb9ef247ccb4efc8e7cdb61c285810421e"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "feecf19409ae7bc7875b94240e29d8103c0a7389a2b1232722d9000b9649d16b"
     },
     {
       "document_id": "synthetic-gst_invoice-01",
       "pdf": "pdf/synthetic-gst_invoice-01.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-01.json",
-      "sha256": "02271913eeea262dc986e2a31c5d5e768c466f3fee26b52b19ece33a04bf2ffc"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "2913988b6c444edf3358ea70e134515d15a8c3ff584baa5bbc3a5d3ec79f3d0a"
     },
     {
       "document_id": "synthetic-gst_invoice-02",
       "pdf": "pdf/synthetic-gst_invoice-02.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-02.json",
-      "sha256": "b3a45cb917ab1d385aa18bb18d8a570ed8f8602cf59700fb42929557ff3707f2"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "fe455013026bfa237d61d8189ca46df2f056bc53e8aa7ee62eaa8f92fbd9f67d"
     },
     {
       "document_id": "synthetic-gst_invoice-03",
       "pdf": "pdf/synthetic-gst_invoice-03.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-03.json",
-      "sha256": "daf489ee958c4c074c9bbe9e775032710c1ed260a5c74a5b123d523984d8136c"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "2a09ec6abf21745156499d62841bd0437227266a80e8bad3b5756d6a65e1d298"
     },
     {
       "document_id": "synthetic-gst_invoice-04",
       "pdf": "pdf/synthetic-gst_invoice-04.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-04.json",
-      "sha256": "3138e53990a2d283d316d1898477a9907caac0bf1a141213100114fafc3bc4db"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "1ddc95f0b2b2ff22fafd87124b0e2c200e09c64cdc005fc0537d2be99158a86f"
     },
     {
       "document_id": "synthetic-gst_invoice-05",
       "pdf": "pdf/synthetic-gst_invoice-05.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-05.json",
-      "sha256": "46a90b4e28f7a49eb1d0c22b8a0318a00d7b7650a8f24b8c957d968069f91f3c"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "0bab05b29caa62d0121f356e2fb7102ce716de9a60114f05b8b742dc7fef619d"
     },
     {
       "document_id": "synthetic-gst_invoice-06",
       "pdf": "pdf/synthetic-gst_invoice-06.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-06.json",
-      "sha256": "b4644416045fac365d9c2604019ff2b52e220590d0dc7adc76b13b5d43474232"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "c3a524c46249f6d278694dc5c5f33b2694fff6d0635afaeaf78d03b4e73266f7"
     },
     {
       "document_id": "synthetic-gst_invoice-07",
       "pdf": "pdf/synthetic-gst_invoice-07.pdf",
       "ground_truth": "ground_truth/synthetic-gst_invoice-07.json",
-      "sha256": "c6b57d8e4870b1525e145abbf173b7d96b564884bf0bae4a82f470b2caee859f"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "8cd62dc5a29d3e73f1fa2836b0f42877684ff7b05a76eb0daf96ac8af5004ade"
     },
     {
       "document_id": "synthetic-merged_table-00",
       "pdf": "pdf/synthetic-merged_table-00.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-00.json",
-      "sha256": "243046c42792a767548657b66b623d1bb8ef6491d1da1e8bd96245671ebd1db6"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "b80083de747182df215148799b8d3795043e89cc224f4786d29eda89f8db7b4f"
     },
     {
       "document_id": "synthetic-merged_table-01",
       "pdf": "pdf/synthetic-merged_table-01.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-01.json",
-      "sha256": "1ead3ba2c2f6a35096b40636af2f26bddd960c77f2245ab6ef8c233bed284264"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "3b752a329d10acab6e027d2bab665f117fcb91d5b82118b9be0cd8f235dbb837"
     },
     {
       "document_id": "synthetic-merged_table-02",
       "pdf": "pdf/synthetic-merged_table-02.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-02.json",
-      "sha256": "bcf7bafc4e75763b0189e223de4a987be1796d92953287f15710b10d2663f4e8"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "9f7303cf79f293e906cb32611b2e55ce3a49d8471360f6dae10706a4905c5f3e"
     },
     {
       "document_id": "synthetic-merged_table-03",
       "pdf": "pdf/synthetic-merged_table-03.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-03.json",
-      "sha256": "002819705588777511ba1375545255dd4a4addc02746498e8adb1b38794e2215"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "8eee6987f711acecdffd1de855cbd3234dea6395ed9af8550f1a46ccf3f45a08"
     },
     {
       "document_id": "synthetic-merged_table-04",
       "pdf": "pdf/synthetic-merged_table-04.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-04.json",
-      "sha256": "52da3cfe1325b2fb80837caf3bd770b74676bf04ef99da057aa4392ffc62db73"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "e4b4d5a3c55553e4af33331f9343a48e9141cf795d072024c9b9a7378f091097"
     },
     {
       "document_id": "synthetic-merged_table-05",
       "pdf": "pdf/synthetic-merged_table-05.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-05.json",
-      "sha256": "f9f1edec1f1387a4eda8460be4a04b72126a0fa06520412c818005831a39e818"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "be33b7e43a46d0740fb46ff5db92aeaf1e4e815fb0f14bad13afc4dbdd75ca24"
     },
     {
       "document_id": "synthetic-merged_table-06",
       "pdf": "pdf/synthetic-merged_table-06.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-06.json",
-      "sha256": "2efc9bf4aba0971ac0d523caa2d1a161a47a175b71b3bd211c84d2347630b73c"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "b10e0f675212a1cb3ed347dacbbcdf8e043540e6baae5ac4ea42d7b84591493e"
     },
     {
       "document_id": "synthetic-merged_table-07",
       "pdf": "pdf/synthetic-merged_table-07.pdf",
       "ground_truth": "ground_truth/synthetic-merged_table-07.json",
-      "sha256": "58cbd60d406a24031822f664bf6f3fbe31d7d558c8a2f8ddc867a4d2ba0ad718"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "4412439a8336e638c7ba2bc76457c30cf0e66daee1624a817ed6359b1b19f65f"
+    },
+    {
+      "document_id": "synthetic-merged_table-08",
+      "pdf": "pdf/synthetic-merged_table-08.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-08.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "40bf3e0d40ff20fc2438dcb001e0e741242693fe43f33d424390ddfa5e71a415"
+    },
+    {
+      "document_id": "synthetic-merged_table-09",
+      "pdf": "pdf/synthetic-merged_table-09.pdf",
+      "ground_truth": "ground_truth/synthetic-merged_table-09.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "e4cd56a26b95ab5b280d56168bd8b45f86cdda2d96a49f22205b53f72327896f"
     },
     {
       "document_id": "synthetic-spanning_table-00",
       "pdf": "pdf/synthetic-spanning_table-00.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-00.json",
-      "sha256": "07bb01f56bf1d5d6d11b424789d50f09ea5a07eb088f6d33cb83aa5fc386238b"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "b553d46311b097759c22725ea296d65fc36d40519c44650532a83642a36ae57c"
     },
     {
       "document_id": "synthetic-spanning_table-01",
       "pdf": "pdf/synthetic-spanning_table-01.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-01.json",
-      "sha256": "d416419f556f9379fd72cdeb3192fa14bd22fdcdf674db4cd686af5e283888a4"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "1517ed25af856cbec566adae013f8ca146daddd6517c214e94471c15f5d05ebe"
     },
     {
       "document_id": "synthetic-spanning_table-02",
       "pdf": "pdf/synthetic-spanning_table-02.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-02.json",
-      "sha256": "b9a3d8a6db603ae7a6dd6852e2f3fe5647ccba0ef703647a018e9dfa40c064ad"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "c4a488fa2c00c4385fc85ecf60cc1893630b54d02a9ae019f90cd0d68c30e4aa"
     },
     {
       "document_id": "synthetic-spanning_table-03",
       "pdf": "pdf/synthetic-spanning_table-03.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-03.json",
-      "sha256": "3339baa34eab0bfaa150a6e6deb0fffb05abb9365e4a113a5585ca4adab388e6"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "6aca4315bd6817b8119aaeaf1cc22e62603fa08c4c89d0c0249cd35ead68ef65"
     },
     {
       "document_id": "synthetic-spanning_table-04",
       "pdf": "pdf/synthetic-spanning_table-04.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-04.json",
-      "sha256": "8bb80a196a219a2edc709ecbfd44b74a10ed8dc90679e5323a6ca829384287fc"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "622cfa020b8b2624d1ac465ba303f2ab6e1df0e67afe22a699c943068188a25c"
     },
     {
       "document_id": "synthetic-spanning_table-05",
       "pdf": "pdf/synthetic-spanning_table-05.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-05.json",
-      "sha256": "769b102a83946f5d3495d74dcd166079f8fb9e7ce6fb565d7b85e9264091fa78"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "806def8ae3c1876cc164e9a449bb69b569b7900a349233e43d23b941a2847561"
     },
     {
       "document_id": "synthetic-spanning_table-06",
       "pdf": "pdf/synthetic-spanning_table-06.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-06.json",
-      "sha256": "476df97ff59fa183dc5b188fc2a25a0c78ee9312394cdbe633afe8059eb1ec94"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "073235eeca21e22d21faaeb2e43a432ed20946259e6399fc7c75d87138467c8b"
     },
     {
       "document_id": "synthetic-spanning_table-07",
       "pdf": "pdf/synthetic-spanning_table-07.pdf",
       "ground_truth": "ground_truth/synthetic-spanning_table-07.json",
-      "sha256": "83b5fc0de38ec9ac3f773f40fada8045ccb16cb4f03286c6e48c002cfcfc6afd"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "3a41634a4e508d1f841553e764ebef17bec204bc5e8f202c2fe6eb455f9eb6ab"
+    },
+    {
+      "document_id": "synthetic-spanning_table-08",
+      "pdf": "pdf/synthetic-spanning_table-08.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-08.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "b08fd13ae5a42057670934528d7201830228d7d4e3f8030c4e62149cffd8527b"
+    },
+    {
+      "document_id": "synthetic-spanning_table-09",
+      "pdf": "pdf/synthetic-spanning_table-09.pdf",
+      "ground_truth": "ground_truth/synthetic-spanning_table-09.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "b73e91548fc97ea4d15776e03c6a64280e6c0b9b5eea68ec3346951eaa96247d"
     },
     {
       "document_id": "synthetic-bilingual-00",
       "pdf": "pdf/synthetic-bilingual-00.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-00.json",
-      "sha256": "9890fcbdab07e60884781a1081c3485b2d076d5fd76badc5e210fc8b192336f3"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "cb1f68b95829b56aabb3d86e3911c6fd8ff1b1ff6ce4f99fcdb5d7205be5f150"
     },
     {
       "document_id": "synthetic-bilingual-01",
       "pdf": "pdf/synthetic-bilingual-01.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-01.json",
-      "sha256": "7ceb8bbdc77d6d77aa72531b99b90f1516c8bff6ce6ca671cbf721d59fc6aa23"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "e7d358deb9118515f3577749e58a1185298b4dd60cf58ff7941c7560f61e4c42"
     },
     {
       "document_id": "synthetic-bilingual-02",
       "pdf": "pdf/synthetic-bilingual-02.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-02.json",
-      "sha256": "d47e84489deb6a6a4942f4986f5c2ee0977f539438ce2a49a67f991cfd161438"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "354791ac1cb6d580e0d8f06cba48e99b7431bce8cb8ea0d7ef2c39d0532de54d"
     },
     {
       "document_id": "synthetic-bilingual-03",
       "pdf": "pdf/synthetic-bilingual-03.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-03.json",
-      "sha256": "1f83f80a15123b0e19b571213cb02b91ea6f714ecf114333b15f063fb2431f36"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "44948f4ca17eb07cb76351c154f867767c8b072af10100ca045b4c83e5fd7dea"
     },
     {
       "document_id": "synthetic-bilingual-04",
       "pdf": "pdf/synthetic-bilingual-04.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-04.json",
-      "sha256": "37cd854af5a080ac37710bc0ff74a15d03b3af014cdcf395bb9159fcd4673f6e"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "f504cb11d9518f7ffa7739cb93cef5c534f8fc64e186ef6b6d8a6644765e6238"
     },
     {
       "document_id": "synthetic-bilingual-05",
       "pdf": "pdf/synthetic-bilingual-05.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-05.json",
-      "sha256": "67740dac402644fb2bb8cc2daddc36b7896556f31b8738e2fc579843cc0d851e"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "2c6be76323e19455e5d2cc7ac2ce438c131217762ec8cde5f914c93aad0222fd"
     },
     {
       "document_id": "synthetic-bilingual-06",
       "pdf": "pdf/synthetic-bilingual-06.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-06.json",
-      "sha256": "fd0e98ef53c897b31edc4679c7cc20bc58da98aa3315de9d8cf7bfeb05d12b83"
+      "split": "dev",
+      "cohort": "original",
+      "sha256": "98bbddca635d48984ecd71797b4808b5bd9e06e82c61d758987cfceb84776aca"
     },
     {
       "document_id": "synthetic-bilingual-07",
       "pdf": "pdf/synthetic-bilingual-07.pdf",
       "ground_truth": "ground_truth/synthetic-bilingual-07.json",
-      "sha256": "321472a86eb8c12a880588910a6ff36ac151489132ab315676f12aef94cfd9bf"
+      "split": "test",
+      "cohort": "original",
+      "sha256": "60846f183321f9b632fab9fb1e03653a8ddd6c154df1fdb57430489ba1bad53e"
+    },
+    {
+      "document_id": "synthetic-bilingual-08",
+      "pdf": "pdf/synthetic-bilingual-08.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-08.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "38f5d0bb9bd97353c4e4c6a4f2f3de49f4983d110e7e5b6893f169533dde8ded"
+    },
+    {
+      "document_id": "synthetic-bilingual-09",
+      "pdf": "pdf/synthetic-bilingual-09.pdf",
+      "ground_truth": "ground_truth/synthetic-bilingual-09.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "a0a895a3267d44036900fba343362ef3711ea4dbb04800d938c60185fb5968b8"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-00",
+      "pdf": "pdf/synthetic-broken_text_layer-00.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-00.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "37917855d4e2f5ae8257fe19aff62bb3ad432b36b6e14d6571eb1af899ba4acd"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-01",
+      "pdf": "pdf/synthetic-broken_text_layer-01.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-01.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "586f0780d966acd6391b9361f8ba6aca52e37e0f444162dd753ab6e33452cbca"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-02",
+      "pdf": "pdf/synthetic-broken_text_layer-02.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-02.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "6178c7b7060a52d9cdefa2ef5eea2e5b3c1d604f01fa4a20fb24a5bd11157b22"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-03",
+      "pdf": "pdf/synthetic-broken_text_layer-03.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-03.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "7e69f1d2947eba9552b63a640ffe2ab7cdae38dae63aedb43b0c4f349fda4227"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-04",
+      "pdf": "pdf/synthetic-broken_text_layer-04.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-04.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "662b556dc1424a96afb58abbb7e0695ccb6003293a58a989d3d5d15cdc620f43"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-05",
+      "pdf": "pdf/synthetic-broken_text_layer-05.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-05.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "c1edc88b0a96836e9b64a0e149bcba89a528c8abc21eb08daaa7bdea34b31074"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-06",
+      "pdf": "pdf/synthetic-broken_text_layer-06.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-06.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "6b3413f10920b329e2992a92a6410addc57ca02b0cb89ed12c81dea6ab7761e6"
+    },
+    {
+      "document_id": "synthetic-broken_text_layer-07",
+      "pdf": "pdf/synthetic-broken_text_layer-07.pdf",
+      "ground_truth": "ground_truth/synthetic-broken_text_layer-07.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "5360e81bc914b3fc9af3f9687c114fb1037b11b7227d18952b6781a173f0a9b8"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-00",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-00.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-00.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "c1af016bccde673325702424467d1cc10dce8bc9332925f3211b05e33a99b758"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-01",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-01.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-01.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "cbb3a7cba9eb4919bbff9379d11e1e07990053ba86ce77b9de05cabec11f56f6"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-02",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-02.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-02.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "ab696f0f8c9726c3158625c2ea9e359c3ec3929e3dfda8e55df6b7a55d64f3b4"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-03",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-03.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-03.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "cd85a826d33fe619dda96489909761f2fc4fa161c42c301cfc59ffb424381dcf"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-04",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-04.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-04.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "e2826807e6230e3bde1d9e3320a20465bd46b000d11f24663d0218eef2290318"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-05",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-05.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-05.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "06836ed9769fd653c0a2753083290d7a0c2a213975ace0d3642d05186223330a"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-06",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-06.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-06.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "f3a1f9d8ecaf98eae734f4dd3ab76ee385f04f29a20d44e45fd368a616c99cb3"
+    },
+    {
+      "document_id": "synthetic-fake_text_layer_scan-07",
+      "pdf": "pdf/synthetic-fake_text_layer_scan-07.pdf",
+      "ground_truth": "ground_truth/synthetic-fake_text_layer_scan-07.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "e035d246bb0068ccdc6409f6f50b93e8ad792d0cabafb3293df4e68a84fb8203"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-00",
+      "pdf": "pdf/synthetic-mixed_pages-00.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-00.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "aa4ee6f4396a60a5977f7823d097574ab64fa5ca7d33ff0e94a5142520a114ce"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-01",
+      "pdf": "pdf/synthetic-mixed_pages-01.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-01.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "38f1e56976cedc05f5544fe291bccf64cf70c1696c7fe5d13e15d210beca692a"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-02",
+      "pdf": "pdf/synthetic-mixed_pages-02.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-02.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "9039dd63cf40b04777cf0ef104b618d8e080ed83d351a5032850d6fb5a511af1"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-03",
+      "pdf": "pdf/synthetic-mixed_pages-03.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-03.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "23211c6c264861cc56542717f7de37aa8a314825f548cc7b4021761b55cb7e12"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-04",
+      "pdf": "pdf/synthetic-mixed_pages-04.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-04.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "3f9d2722e1fc9937e7bbd4aab232fe6b6a7a9b1f72c967f24f3e7edcf5a5fe8b"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-05",
+      "pdf": "pdf/synthetic-mixed_pages-05.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-05.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "a939e3ec7072f9c7e67d4a9d8a9583a7513377c1c8174add2c64011aeb76d6c4"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-06",
+      "pdf": "pdf/synthetic-mixed_pages-06.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-06.json",
+      "split": "dev",
+      "cohort": "expanded",
+      "sha256": "862db9ef8df905ffa7b665e0c9375abacc54a3058580d25c39eee77b3b8b1050"
+    },
+    {
+      "document_id": "synthetic-mixed_pages-07",
+      "pdf": "pdf/synthetic-mixed_pages-07.pdf",
+      "ground_truth": "ground_truth/synthetic-mixed_pages-07.json",
+      "split": "test",
+      "cohort": "expanded",
+      "sha256": "f25416a7fee11abd3e7111408d984df7fb93bfc6cea271297917211dcbcec4b8"
     }
   ]
 }

@@ -5,14 +5,22 @@ from dataclasses import dataclass
 
 from unmess.config import Settings
 from unmess.parsing.base import ParsedPage
-from unmess.parsing.page_features import PageFeatures, garbled_ratio
+from unmess.parsing.page_features import (
+    PageFeatures,
+    character_plausibility,
+    garbled_ratio,
+    script_plausibility,
+)
 
 WEIGHTS = {
-    "text_coverage": 0.35,
-    "character_integrity": 0.25,
-    "table_consistency": 0.20,
-    "parser_confidence": 0.10,
-    "parser_agreement": 0.10,
+    "text_coverage": 0.25,
+    "character_integrity": 0.10,
+    "character_plausibility": 0.20,
+    "script_plausibility": 0.05,
+    "text_ink_alignment": 0.15,
+    "table_consistency": 0.15,
+    "parser_confidence": 0.05,
+    "parser_agreement": 0.05,
 }
 
 
@@ -55,12 +63,21 @@ def score_page(page: ParsedPage, features: PageFeatures, settings: Settings) -> 
     signals: dict[str, float] = {
         "text_coverage": min(1.0, parsed_chars / expected_chars),
         "character_integrity": 1.0 - garbled_ratio(page.text),
+        "character_plausibility": character_plausibility(page.text),
+        "script_plausibility": script_plausibility(page.text),
     }
+    if page.parser_name == "pymupdf":
+        signals["text_ink_alignment"] = features.text_ink_alignment
     if features.table_likelihood >= settings.parser_table_likelihood_threshold:
         signals["table_consistency"] = _table_consistency(page)
     if page.reported_confidence is not None:
         signals["parser_confidence"] = page.reported_confidence
-    if page.parser_name != "pymupdf" and source_chars >= 20:
+    if (
+        page.parser_name != "pymupdf"
+        and source_chars >= 20
+        and features.text_ink_alignment >= 0.5
+        and character_plausibility(features.embedded_text) >= 0.5
+    ):
         source_words, parsed_words = _words(features.embedded_text), _words(page.text)
         signals["parser_agreement"] = (
             len(source_words & parsed_words) / len(source_words | parsed_words)

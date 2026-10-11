@@ -59,11 +59,14 @@ remaining weights renormalized:
 
 | Signal | Weight | Interpretation |
 |---|---:|---|
-| Text coverage | 0.35 | Parsed non-space characters versus embedded source text, or a small scan-page floor. It never uses evaluation ground truth. |
-| Character integrity | 0.25 | One minus the parsed garbled-character ratio. |
-| Table consistency | 0.20 | Nonempty, nonoverlapping structured cells when page features predict a table. |
-| Parser confidence | 0.10 | Parser-provided value, when available. |
-| Parser agreement | 0.10 | Word-set overlap with embedded text only when a cheap second opinion has enough text. |
+| Text coverage | 0.25 | Parsed non-space characters versus embedded source text, or a small scan-page floor. It never uses evaluation ground truth. |
+| Character integrity | 0.10 | One minus the parsed garbled-character ratio. |
+| Character plausibility | 0.20 | Share of long alphabetic tokens with plausible vowels or Devanagari script; no task-specific corruption tokens. |
+| Script plausibility | 0.05 | Share of letters in Latin or Devanagari script. |
+| Text–ink alignment | 0.15 | Share of embedded word boxes containing rendered ink; PyMuPDF text-layer output only. |
+| Table consistency | 0.15 | Nonempty, nonoverlapping structured cells when page features predict a table. |
+| Parser confidence | 0.05 | Parser-provided value, when available. |
+| Parser agreement | 0.05 | Word-set overlap with embedded text only when that text passes plausibility and ink checks. |
 
 Failure scores zero. Review reasons include `parser_failed`, `below_quality_threshold`,
 `empty_text`, `table_not_recovered`, and `garbled_text`. Thresholds are environment settings;

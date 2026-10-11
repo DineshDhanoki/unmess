@@ -7,13 +7,14 @@
       "language": "en",
       "expected_text": "SYNTHETIC DOCUMENT - CLEAN\nDocument code: FAKE-CLE-03\nFictional seller: Demo Vendor 03\nIssue date: 2026-02-04\nTotal INR: 64,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
     }
   ],
   "tables": [],
-  "content_hash": "53c1ce554cf7237a239a87f338443ef467aaba37bb4c26fdd9ec5ebee6700a9b",
+  "content_hash": "f3f7c62d1bd8f0ddfdf24bab6ffb48329c29306baa451d47e920559d25b4054f",
   "schema_version": "1",
   "category": "clean",
   "split": "test",

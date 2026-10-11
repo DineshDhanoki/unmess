@@ -22,6 +22,7 @@ class PageFeatures:
     garbled_character_ratio: float
     dominant_script: str
     layout_complexity: float
+    text_ink_alignment: float = 1.0
 
 
 def text_density(text: str, width: float, height: float) -> float:
@@ -54,6 +55,54 @@ def garbled_ratio(text: str) -> float:
     )
     visible = sum(not char.isspace() for char in text)
     return bad / visible if visible else 0.0
+
+
+def character_plausibility(text: str) -> float:
+    """Penalize implausibly vowelless long Latin tokens, not specific corruption strings."""
+    tokens = [word for word in text.casefold().split() if len(word) >= 6 and word.isalpha()]
+    if not tokens:
+        return 1.0
+    plausible = sum(
+        any(letter in word for letter in "aeiou") or any("\u0900" <= c <= "\u097f" for c in word)
+        for word in tokens
+    )
+    return plausible / len(tokens)
+
+
+def script_plausibility(text: str) -> float:
+    """Most letters should belong to a known text script, independent of language labels."""
+    letters = [char for char in text if char.isalpha()]
+    if not letters:
+        return 0.0
+    expected = sum(
+        "a" <= char.casefold() <= "z" or "\u0900" <= char <= "\u097f" for char in letters
+    )
+    return expected / len(letters)
+
+
+def text_ink_alignment(
+    gray: Image.Image,
+    word_boxes: Sequence[tuple[float, float, float, float]],
+    width: float,
+    height: float,
+) -> float:
+    """Fraction of text-layer word boxes with rendered dark pixels nearby."""
+    if not word_boxes:
+        return 1.0
+    image = gray.convert("L")
+    pixels = image.load()
+    assert pixels is not None
+    occupied = 0
+    for x0, y0, x1, y1 in word_boxes:
+        left = max(0, int(x0 * image.width / width))
+        right = min(image.width, max(left + 1, int(x1 * image.width / width)))
+        top = max(0, int(y0 * image.height / height))
+        bottom = min(image.height, max(top + 1, int(y1 * image.height / height)))
+        samples = [
+            cast(int, pixels[x, y]) for y in range(top, bottom, 2) for x in range(left, right, 2)
+        ]
+        occupied += bool(samples and sum(value < 170 for value in samples) / len(samples) > 0.012)
+    return occupied / len(word_boxes)
 
 
 def dominant_script(text: str) -> str:
@@ -106,6 +155,7 @@ def from_observations(
     aligned_columns: int,
     block_count: int,
     skew_degrees: float,
+    ink_alignment: float = 1.0,
 ) -> PageFeatures:
     density = text_density(text, width, height)
     coverage = area_coverage(image_rectangles, width, height)
@@ -120,6 +170,7 @@ def from_observations(
         garbled_character_ratio=garbled_ratio(text),
         dominant_script=dominant_script(text),
         layout_complexity=layout_complexity(block_count, aligned_columns, table_score),
+        text_ink_alignment=ink_alignment,
     )
 
 
@@ -147,9 +198,18 @@ def inspect_page(pdf: Path, page_number: int) -> PageFeatures:
             buckets[column] = buckets.get(column, 0) + 1
         columns = sum(count >= 3 for count in buckets.values())
         skew = 0.0
-        if image_rects:
+        ink_alignment = 1.0
+        if image_rects or words:
             pix = page.get_pixmap(matrix=pymupdf.Matrix(0.3, 0.3), colorspace=pymupdf.csGRAY)
-            skew = estimate_skew(Image.frombytes("L", (pix.width, pix.height), pix.samples))
+            gray = Image.frombytes("L", (pix.width, pix.height), pix.samples)
+            if image_rects:
+                skew = estimate_skew(gray)
+            ink_alignment = text_ink_alignment(
+                gray,
+                [(float(w[0]), float(w[1]), float(w[2]), float(w[3])) for w in words],
+                page.rect.width,
+                page.rect.height,
+            )
         return from_observations(
             text,
             page.rect.width,
@@ -159,4 +219,5 @@ def inspect_page(pdf: Path, page_number: int) -> PageFeatures:
             columns,
             len(blocks),
             skew,
+            ink_alignment,
         )

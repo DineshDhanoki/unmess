@@ -7,6 +7,7 @@
       "language": "en",
       "expected_text": "SYNTHETIC DOCUMENT - MERGED TABLE\nDocument code: FAKE-MER-02\nFictional seller: Demo Vendor 02\nIssue date: 2026-02-03\nTotal INR: 46,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nMerged line item heading\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375\nFake item 4\n4\n500",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
@@ -28,9 +29,9 @@
           "bbox": {
             "page": 1,
             "x0": 0.08169934640522876,
-            "y0": 0.44823232323232326,
-            "x1": 0.7352941176470589,
-            "y1": 0.47474747474747475
+            "y0": 0.42297979797979796,
+            "x1": 0.8251633986928104,
+            "y1": 0.4797979797979798
           }
         },
         {
@@ -248,7 +249,7 @@
       "spans_pages": false
     }
   ],
-  "content_hash": "bcf7bafc4e75763b0189e223de4a987be1796d92953287f15710b10d2663f4e8",
+  "content_hash": "9f7303cf79f293e906cb32611b2e55ce3a49d8471360f6dae10706a4905c5f3e",
   "schema_version": "1",
   "category": "merged_table",
   "split": "dev",

@@ -29,3 +29,11 @@ remains a failed page for review and evaluation. Optional Docling absence is exp
 tuning raised the layout-complexity threshold to 0.90 after repeated invoice fields were
 incorrectly classified as complex pages; test thresholds are frozen in a separate committed
 file. The vision cache key includes raster page hash, model tag, and prompt version.
+
+## Phase 2c DEV-only refinement (2026-10-11)
+
+The route order and thresholds remain unchanged. The quality gate now also considers generic
+character/script plausibility and whether extracted word boxes overlap rendered ink. A dense
+but spatially inconsistent text layer can therefore fall through to the local vision parser.
+These signals inspect the document itself, never evaluation ground truth or generator-specific
+corruption tokens. The superseded test freeze remains locked; no Phase 2c test split was run.

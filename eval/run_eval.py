@@ -10,7 +10,7 @@ import tomllib
 from collections import defaultdict
 from collections.abc import Sequence
 from datetime import UTC, datetime
-from importlib.metadata import version
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any, Literal
 
@@ -18,9 +18,10 @@ from eval.baselines.base import ParsedDocument, PipelineAdapter
 from eval.baselines.docling_only import DoclingOnly
 from eval.baselines.plain_pymupdf import PlainPyMuPDF
 from eval.baselines.unmess_parsing import UnmessParsing
+from eval.baselines.vlm_every_page import VLMEveryPage
 from eval.metrics.calibration import score_buckets, spearman
 from eval.metrics.latency import latency_per_page
-from eval.metrics.ocr_cer import character_error_rate
+from eval.metrics.ocr_cer import character_error_rate, word_error_rate
 from eval.metrics.routing_efficiency import cheap_parser_share
 from eval.metrics.table_f1 import table_cell_f1
 from eval.preflight import run_preflight
@@ -38,6 +39,8 @@ SUPERSEDED_FREEZE = "caa7f35c2f46777eba1a690e0292dac1ea04fe39"
 METRICS = (
     "table_f1",
     "ocr_cer",
+    "text_cer",
+    "text_wer",
     "cheap_parser_share",
     "latency_per_page_s",
     "failed_page_rate",
@@ -46,6 +49,16 @@ METRICS = (
 
 def _git(args: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(["git", *args], cwd=ROOT, check=False, capture_output=True, text=True)
+
+
+def _library_versions() -> dict[str, str]:
+    versions: dict[str, str] = {}
+    for name in ("pymupdf", "reportlab", "pillow", "pydantic", "docling", "torch"):
+        try:
+            versions[name] = version(name)
+        except PackageNotFoundError:
+            versions[name] = "not installed"
+    return versions
 
 
 def _freeze_commit() -> str | None:
@@ -81,7 +94,7 @@ def assert_test_ready(dataset: Path = ROOT / "eval/datasets") -> str:
         )
         if checks.get(key)
     }
-    truths, _manifest = _validate_manifest(dataset)
+    truths, _manifest = _validate_manifest(dataset, "test")
     router = PageRouter(settings)
     for truth in truths:
         if truth.split != "test":
@@ -103,15 +116,23 @@ def _settings(split: Literal["dev", "test"]) -> Settings:
     return Settings(**values)
 
 
-def _validate_manifest(dataset: Path) -> tuple[list[GroundTruth], dict[str, Any]]:
+def _validate_manifest(
+    dataset: Path, split: Literal["dev", "test"]
+) -> tuple[list[GroundTruth], dict[str, Any]]:
     manifest: dict[str, Any] = json.loads((dataset / "MANIFEST.json").read_text())
     truths: list[GroundTruth] = []
     for item in manifest["documents"]:
+        if item["split"] != split:
+            continue
         pdf = dataset / item["pdf"]
         if hashlib.sha256(pdf.read_bytes()).hexdigest() != item["sha256"]:
             raise ValueError(f"PDF hash mismatch: {pdf}")
         truth = GroundTruth.model_validate_json((dataset / item["ground_truth"]).read_text())
-        if truth.source_file != item["pdf"] or truth.content_hash != item["sha256"]:
+        if (
+            truth.source_file != item["pdf"]
+            or truth.content_hash != item["sha256"]
+            or truth.split != item["split"]
+        ):
             raise ValueError(f"ground truth/manifest mismatch: {truth.document_id}")
         truths.append(truth)
     return truths, manifest
@@ -139,11 +160,29 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     totals = {key: sum(row[key] for row in rows) for key in counts}
     vlm_time = sum(row["vlm_time_s"] for row in rows)
     uncached_time = sum(row["vlm_uncached_time_s"] for row in rows)
+    metric_counts = {
+        key: {
+            "documents": sum(row[key] is not None for row in rows),
+            "pages": sum(
+                row["table_pages"]
+                if key == "table_f1"
+                else row["ocr_pages"]
+                if key == "ocr_cer"
+                else row["pages"]
+                for row in rows
+                if row[key] is not None
+            ),
+        }
+        for key in METRICS
+    }
     return {
         "documents": len(rows),
         "pages": sum(row["pages"] for row in rows),
         "failed_pages": sum(row["failed_pages"] for row in rows),
         **{key: _mean([row[key] for row in rows]) for key in METRICS},
+        "metric_counts": metric_counts,
+        "total_time_s": sum(sum(row["page_durations_s"]) for row in rows),
+        "mean_page_accuracy": _mean([score for row in rows for score in row["page_accuracy"]]),
         **totals,
         "vlm_time_s": vlm_time,
         "vlm_pages_per_second": totals["vlm_attempted_pages"] / vlm_time if vlm_time else None,
@@ -159,11 +198,13 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 def _summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     groups: dict[str, dict[str, list[dict[str, Any]]]] = {
+        "by_cohort": defaultdict(list),
         "by_category": defaultdict(list),
         "by_language": defaultdict(list),
         "by_scan_difficulty": defaultdict(list),
     }
     for row in rows:
+        groups["by_cohort"][row["cohort"]].append(row)
         groups["by_category"][row["category"]].append(row)
         groups["by_language"][row["language"]].append(row)
         groups["by_scan_difficulty"][row["scan_difficulty"]].append(row)
@@ -235,15 +276,43 @@ def _document_scores(truth: GroundTruth, parsed: ParsedDocument) -> dict[str, An
         for page in truth.pages
         if page.is_ocr_page
     ]
+    text_cer = [
+        character_error_rate(page.expected_text, parsed.page_texts[page.page_number - 1])
+        for page in truth.pages
+    ]
+    text_wer = [
+        word_error_rate(page.expected_text, parsed.page_texts[page.page_number - 1])
+        for page in truth.pages
+    ]
     return {
         "document_id": truth.document_id,
         "category": truth.category,
+        "cohort": (
+            "original"
+            if truth.category
+            in {
+                "clean",
+                "scan",
+                "receipt",
+                "gst_invoice",
+                "merged_table",
+                "spanning_table",
+                "bilingual",
+            }
+            and int(truth.document_id[-2:]) < 8
+            else "expanded"
+        ),
         "language": "hi" if any(page.language == "hi" for page in truth.pages) else "en",
         "scan_difficulty": _difficulty(truth),
         "pages": len(truth.pages),
+        "table_pages": len({page for table in truth.tables for page in table.page_numbers}),
+        "ocr_pages": sum(page.is_ocr_page for page in truth.pages),
+        "page_durations_s": parsed.page_durations_s,
         "failed_pages": len(failures),
         "table_f1": table_cell_f1(truth.tables, parsed.tables)[2] if truth.tables else None,
         "ocr_cer": _mean(cer_values),
+        "text_cer": _mean(text_cer),
+        "text_wer": _mean(text_wer),
         "cheap_parser_share": cheap_parser_share(parsed.parsers),
         "latency_per_page_s": (
             latency_per_page(parsed.page_durations_s)
@@ -327,11 +396,17 @@ def _calibration(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def run(dataset: Path, split: Literal["dev", "test"] = "dev") -> dict[str, Any]:
+def run(
+    dataset: Path, split: Literal["dev", "test"] = "dev", *, include_vlm_baseline: bool = True
+) -> dict[str, Any]:
     freeze_commit = assert_test_ready(dataset) if split == "test" else None
     settings = _settings(split)
-    truths, manifest = _validate_manifest(dataset)
-    dataset_bytes = sum((dataset / item["pdf"]).stat().st_size for item in manifest["documents"])
+    truths, manifest = _validate_manifest(dataset, split)
+    dataset_bytes = sum(
+        (dataset / item["pdf"]).stat().st_size
+        for item in manifest["documents"]
+        if item["split"] == split
+    )
     result: dict[str, Any] = {
         "metadata": {
             "run_date_utc": datetime.now(UTC).isoformat(),
@@ -344,9 +419,7 @@ def run(dataset: Path, split: Literal["dev", "test"] = "dev") -> dict[str, Any]:
             "dataset_pdf_bytes": dataset_bytes,
             "python": platform.python_version(),
             "platform": platform.platform(),
-            "libraries": {
-                name: version(name) for name in ("pymupdf", "reportlab", "pillow", "pydantic")
-            },
+            "libraries": _library_versions(),
             "models": {"vision": settings.vision_model, "prompt_version": PROMPT_VERSION},
             "thresholds_file": str(DEV_CONFIG if split == "dev" else FROZEN),
             "threshold_values": tomllib.loads(
@@ -359,6 +432,8 @@ def run(dataset: Path, split: Literal["dev", "test"] = "dev") -> dict[str, Any]:
     }
     splits = ("dev", "test") if split == "test" else ("dev",)
     adapters: list[PipelineAdapter] = [PlainPyMuPDF(), DoclingOnly(), UnmessParsing(settings)]
+    if include_vlm_baseline:
+        adapters.append(VLMEveryPage(settings))
     for adapter in adapters:
         result["systems"][adapter.name] = {selected: None for selected in ("dev", "test")}
         for selected in splits:
@@ -376,7 +451,7 @@ def _format(value: Any) -> str:
 def markdown(result: dict[str, Any]) -> str:
     meta = result["metadata"]
     lines = [
-        "# Unmess Phase 2 parsing evaluation",
+        "# Unmess Phase 2c DEV-only parsing evaluation",
         "",
         f"Run: {meta['run_date_utc']} | source commit `{meta['git_commit']}` | "
         f"freeze commit `{meta['freeze_commit'] or 'not yet committed'}`",
@@ -409,6 +484,7 @@ def markdown(result: dict[str, Any]) -> str:
             summary = part["summary"]
             groups = (
                 ("overall", {"overall": summary["overall"]}),
+                ("cohort", summary["by_cohort"]),
                 ("category", summary["by_category"]),
                 ("language", summary["by_language"]),
                 ("scan", summary["by_scan_difficulty"]),
@@ -418,7 +494,12 @@ def markdown(result: dict[str, Any]) -> str:
                     lines.append(
                         f"| {name} | {group_type}:{group} | {row['documents']} | "
                         f"{row['pages']} | {row['failed_pages']} | "
-                        + " | ".join(_format(row[column]) for column in columns)
+                        + " | ".join(
+                            f"{_format(row[column])} "
+                            f"(d={row['metric_counts'][column]['documents']},"
+                            f"p={row['metric_counts'][column]['pages']})"
+                            for column in columns
+                        )
                         + " |"
                     )
     calibration = result["calibration_dev"]
@@ -458,6 +539,78 @@ def markdown(result: dict[str, Any]) -> str:
             f"accuracy improved on {overall['escalation_improved_pages']}; "
             f"mean accuracy delta {_format(overall['mean_escalation_accuracy_delta'])}.",
         ]
+    lines += ["", "## Accuracy versus cost", ""]
+    lines += [
+        "| System | DEV documents | DEV pages | Mean page accuracy | Text CER | Table F1 | "
+        "Total parser time (s) | s/page |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for name, system in result["systems"].items():
+        part = system["dev"]
+        if part is None:
+            continue
+        overall = part["summary"]["overall"]
+        lines.append(
+            f"| {name} | {overall['documents']} | {overall['pages']} | "
+            f"{_format(overall['mean_page_accuracy'])} | {_format(overall['text_cer'])} | "
+            f"{_format(overall['table_f1'])} | {_format(overall['total_time_s'])} | "
+            f"{_format(overall['total_time_s'] / overall['pages'])} |"
+        )
+    ours_part = result["systems"]["unmess_parsing"]["dev"]
+    if ours_part is not None:
+        lines += [
+            "",
+            "## Where Unmess loses on DEV",
+            "",
+            "Lower CER is better; higher table F1 and page accuracy are better. "
+            "Latency and accuracy must be judged together; cache-warmed VLM time "
+            "is not a cold-run cost estimate.",
+            "",
+        ]
+        any_loss = False
+        for category, ours in ours_part["summary"]["by_category"].items():
+            for name, system in result["systems"].items():
+                if name == "unmess_parsing" or system["dev"] is None:
+                    continue
+                baseline = system["dev"]["summary"]["by_category"].get(category)
+                if baseline is None:
+                    continue
+                losses = [
+                    metric
+                    for metric, higher_is_better in (
+                        ("table_f1", True),
+                        ("text_cer", False),
+                        ("text_wer", False),
+                        ("mean_page_accuracy", True),
+                    )
+                    if ours[metric] is not None
+                    and baseline[metric] is not None
+                    and (
+                        ours[metric] < baseline[metric] - 1e-6
+                        if higher_is_better
+                        else ours[metric] > baseline[metric] + 1e-6
+                    )
+                ]
+                if losses:
+                    any_loss = True
+                    lines.append(f"- {category} vs {name}: {', '.join(losses)}.")
+        if not any_loss:
+            lines.append("No measured accuracy loss by category on this DEV corpus.")
+        if "vlm_every_page" in result["systems"]:
+            vlm_part = result["systems"]["vlm_every_page"]["dev"]
+            if vlm_part is not None:
+                ours = ours_part["summary"]["overall"]
+                vlm = vlm_part["summary"]["overall"]
+                if ours["mean_page_accuracy"] < vlm["mean_page_accuracy"]:
+                    lines.append(
+                        "Unmess is faster than VLM-every-page but less accurate overall on "
+                        "this DEV set; this is a cost/accuracy tradeoff, not a clear win."
+                    )
+                elif ours["total_time_s"] > vlm["total_time_s"]:
+                    lines.append(
+                        "Unmess is not faster than VLM-every-page on this run; "
+                        "no clear cost/accuracy win is established."
+                    )
     test_unmess = result["systems"]["unmess_parsing"]["test"]
     test_fast = result["systems"]["pymupdf_fixed"]["test"]
     if test_unmess is not None and test_fast is not None:
@@ -509,7 +662,16 @@ def markdown(result: dict[str, Any]) -> str:
                 )
     if not failures_found:
         lines.append("None.")
-    lines += ["", "See EVAL.md for metric definitions and dataset limits.", ""]
+    lines += [
+        "",
+        "Metric cells show their own document and page denominators. "
+        "Means are document-weighted; time is measured end-to-end in each adapter. "
+        "The VLM cache was warm for the routed Unmess pass and partly cold for the "
+        "VLM-every-page pass. These timings are not an apples-to-apples cold-cost "
+        "comparison; no general speed advantage is claimed.",
+        "See EVAL.md for metric definitions and dataset limits.",
+        "",
+    ]
     return "\n".join(lines)
 
 
@@ -518,8 +680,23 @@ def main() -> None:
     parser.add_argument("--split", choices=("dev", "test"), default="dev")
     parser.add_argument("--dataset", type=Path, default=ROOT / "eval/datasets")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "eval/results")
+    parser.add_argument("--skip-vlm-baseline", action="store_true")
+    parser.add_argument("--render-only", action="store_true")
+    parser.add_argument("--archive-dev", action="store_true")
     args = parser.parse_args()
-    result = run(args.dataset, args.split)
+    if args.render_only:
+        result = json.loads((args.output_dir / "latest.json").read_text())
+        result["metadata"]["libraries"] = _library_versions()
+        (args.output_dir / "latest.json").write_text(json.dumps(result, indent=2) + "\n")
+        report = markdown(result)
+        (args.output_dir / "latest.md").write_text(report)
+        if args.archive_dev:
+            if result["systems"]["unmess_parsing"]["test"] is not None:
+                raise RuntimeError("cannot archive test results as a DEV report")
+            (args.output_dir / "phase2c-dev.md").write_text(report)
+            (args.output_dir / "phase2c-dev.json").write_text(json.dumps(result, indent=2) + "\n")
+        return
+    result = run(args.dataset, args.split, include_vlm_baseline=not args.skip_vlm_baseline)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     (args.output_dir / "latest.json").write_text(json.dumps(result, indent=2) + "\n")
     (args.output_dir / "latest.md").write_text(markdown(result))

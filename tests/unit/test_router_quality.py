@@ -99,3 +99,17 @@ def test_text_density_threshold_changes_route() -> None:
     )
     assert router.parse_page(Path("sample.pdf"), 1).parser_name == "vlm"
     assert fast.calls == 0 and vision.calls == 1
+
+
+def test_dense_but_ink_misaligned_text_escalates() -> None:
+    bad = "qxzvbfkpm " * 25
+    observations = features(bad)
+    observations = PageFeatures(**{**observations.__dict__, "text_ink_alignment": 0.0})
+    fast = StubParser("pymupdf", bad)
+    vision = StubParser("vlm", "Readable visual content from the rendered page")
+    router = PageRouter(
+        Settings(), fast, StubParser("docling", bad), vision, lambda _pdf, _page: observations
+    )
+    parsed = router.parse_page(Path("broken.pdf"), 1)
+    assert [attempt.parser for attempt in parsed.attempts] == ["pymupdf", "vlm"]
+    assert parsed.attempts[0].quality_score < Settings().quality_review_threshold

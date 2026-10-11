@@ -7,13 +7,14 @@
       "language": "hi",
       "expected_text": "SYNTHETIC DOCUMENT - BILINGUAL\nDocument code: FAKE-BIL-02\nFictional seller: Demo Vendor 02\nIssue date: 2026-02-03\nTotal INR: 46,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID\nकुल राशि",
       "is_ocr_page": false,
+      "degradation": null,
       "blocks": [],
       "parser_used": null,
       "quality_score": null
     }
   ],
   "tables": [],
-  "content_hash": "d47e84489deb6a6a4942f4986f5c2ee0977f539438ce2a49a67f991cfd161438",
+  "content_hash": "354791ac1cb6d580e0d8f06cba48e99b7431bce8cb8ea0d7ef2c39d0532de54d",
   "schema_version": "1",
   "category": "bilingual",
   "split": "dev",

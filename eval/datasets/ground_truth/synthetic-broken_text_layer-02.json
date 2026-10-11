@@ -1,0 +1,116 @@
+{
+  "document_id": "synthetic-broken_text_layer-02",
+  "source_file": "pdf/synthetic-broken_text_layer-02.pdf",
+  "pages": [
+    {
+      "page_number": 1,
+      "language": "en",
+      "expected_text": "SYNTHETIC DOCUMENT - CLEAN\nDocument code: FAKE-CLE-02\nFictional seller: Demo Vendor 02\nIssue date: 2026-02-03\nTotal INR: 46,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID",
+      "is_ocr_page": false,
+      "degradation": null,
+      "blocks": [],
+      "parser_used": null,
+      "quality_score": null
+    }
+  ],
+  "tables": [],
+  "content_hash": "6178c7b7060a52d9cdefa2ef5eea2e5b3c1d604f01fa4a20fb24a5bd11157b22",
+  "schema_version": "1",
+  "category": "broken_text_layer",
+  "split": "dev",
+  "seed": 20261010,
+  "questions": [
+    {
+      "id": "code",
+      "question": "What is the document code for Demo Vendor 02 in this clean record?",
+      "answer": "FAKE-CLE-02",
+      "answer_type": "text",
+      "answer_aliases": [
+        "FAKE-CLE-02"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.11742424242424243,
+          "x1": 0.6862745098039216,
+          "y1": 0.1452020202020202
+        }
+      ]
+    },
+    {
+      "id": "seller",
+      "question": "Who is the fictional seller on document FAKE-CLE-02?",
+      "answer": "Demo Vendor 02",
+      "answer_type": "text",
+      "answer_aliases": [
+        "Demo Vendor 02"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.1527777777777778,
+          "x1": 0.6862745098039216,
+          "y1": 0.18055555555555555
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "question": "What is the issue date on document FAKE-CLE-02?",
+      "answer": "2026-02-03",
+      "answer_type": "date",
+      "answer_aliases": [
+        "2026-02-03",
+        "03/02/2026"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.18813131313131312,
+          "x1": 0.6862745098039216,
+          "y1": 0.2159090909090909
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "question": "What is the total in INR on document FAKE-CLE-02?",
+      "answer": "46,000",
+      "answer_type": "currency",
+      "answer_aliases": [
+        "46,000",
+        "46,000",
+        "INR 46,000"
+      ],
+      "language": "en",
+      "answering_pages": [
+        1
+      ],
+      "answer_bboxes": [
+        {
+          "page": 1,
+          "x0": 0.0784313725490196,
+          "y0": 0.22348484848484848,
+          "x1": 0.6862745098039216,
+          "y1": 0.25126262626262624
+        }
+      ]
+    }
+  ],
+  "degradation": null
+}

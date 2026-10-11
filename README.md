@@ -29,6 +29,11 @@ The [Phase 2b dev report](eval/results/phase2b-dev.md) records measured page-lev
 results, including failed pages when optional backends are unavailable. Retrieval remains a
 later phase.
 
+The [Phase 2c DEV-only report](eval/results/phase2c-dev.md) expands the synthetic corpus,
+corrects a merged-table scoring artifact, and compares routed parsing with Docling-only and
+VLM-on-every-page. Its numbers are DEV measurements, not test-set claims; the expanded test
+split remains locked pending a new threshold freeze.
+
 ## Quick start
 
 Install Python 3.11 or 3.12, Docker, and
