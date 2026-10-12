@@ -25,6 +25,7 @@ def test_calibration_excludes_failed_pages() -> None:
                 "quality_scores": [0.2, 0.5, 0.9],
                 "page_accuracy": [0.0, 0.4, 0.8],
                 "page_success": [False, True, True],
+                "review_flags": [True, True, False],
                 "failed_pages": 1,
             }
         ]
@@ -33,6 +34,8 @@ def test_calibration_excludes_failed_pages() -> None:
     assert result["failed_pages_excluded"] == 1
     assert result["spearman_rho"] == pytest.approx(1.0)
     assert result["score_buckets"]["0.00-0.25"]["pages"] == 0
+    assert result["review_gate"]["bad_pages"] == 3
+    assert result["review_gate"]["true_positive"] == 2
 
 
 def test_test_split_refuses_superseded_freeze(monkeypatch: pytest.MonkeyPatch) -> None:

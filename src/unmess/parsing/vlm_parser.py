@@ -11,7 +11,7 @@ import pymupdf
 from pydantic import BaseModel, ConfigDict, ValidationError
 
 from unmess.config import Settings
-from unmess.models import BBox, Block
+from unmess.models import BBox, Block, Cell, Table
 from unmess.parsing.base import ParsedPage
 
 PROMPT_VERSION = "phase2b-v2"
@@ -20,6 +20,55 @@ PROMPT = (
     "Markdown table syntax for tables. Return ONLY a JSON object with one key, markdown, "
     "whose value is the complete transcription. Do not add commentary or code fences."
 )
+
+
+def markdown_tables(markdown: str, page_number: int) -> list[Table]:
+    """Convert ordinary pipe-table Markdown into parser-independent table grids."""
+    lines = markdown.splitlines()
+    tables: list[Table] = []
+    index = 0
+    while index + 1 < len(lines):
+        header = lines[index].strip()
+        separator = lines[index + 1].strip()
+        if not (header.startswith("|") and header.endswith("|")):
+            index += 1
+            continue
+        separator_cells = [cell.strip() for cell in separator.strip("|").split("|")]
+        if not separator_cells or not all(
+            cell and set(cell.replace(":", "")) <= {"-"} for cell in separator_cells
+        ):
+            index += 1
+            continue
+        rows = [[cell.strip() for cell in header.strip("|").split("|")]]
+        index += 2
+        while index < len(lines):
+            candidate = lines[index].strip()
+            if not (candidate.startswith("|") and candidate.endswith("|")):
+                break
+            rows.append([cell.strip() for cell in candidate.strip("|").split("|")])
+            index += 1
+        width = len(rows[0])
+        if width == len(separator_cells) and all(len(row) == width for row in rows):
+            whole_page = BBox(page=page_number, x0=0, y0=0, x1=1, y1=1)
+            cells = [
+                Cell(row=row, col=col, text=value, bbox=whole_page)
+                for row, values in enumerate(rows)
+                for col, value in enumerate(values)
+                if value
+            ]
+            if cells:
+                table_index = len(tables)
+                tables.append(
+                    Table(
+                        table_id=(
+                            "line-items" if table_index == 0 else f"table-{table_index}"
+                        ),
+                        page_numbers=[page_number],
+                        cells=cells,
+                    )
+                )
+        continue
+    return tables
 
 
 class VisionResponse(BaseModel):
@@ -59,9 +108,16 @@ class OllamaVisionClient:
 class VLMParser:
     name = "vlm"
 
-    def __init__(self, settings: Settings, client: VisionClient | None = None) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        client: VisionClient | None = None,
+        *,
+        allow_model_calls: bool = True,
+    ) -> None:
         self.settings = settings
         self.client = client or OllamaVisionClient(str(settings.ollama_url))
+        self.allow_model_calls = allow_model_calls
 
     def _image(self, pdf: Path, page_number: int) -> bytes:
         with pymupdf.open(pdf) as document:
@@ -88,6 +144,13 @@ class VLMParser:
             if cache_hit:
                 raw = cache_path.read_text(encoding="utf-8")
             else:
+                if not self.allow_model_calls:
+                    return ParsedPage.failed(
+                        page_number,
+                        self.name,
+                        "cache miss: VLM baseline model calls disabled",
+                        perf_counter() - start,
+                    )
                 errors: list[str] = []
                 for _attempt in range(self.settings.vision_retries + 1):
                     try:
@@ -124,7 +187,7 @@ class VLMParser:
                 parser_name=self.name,
                 text=parsed.markdown,
                 blocks=[block],
-                tables=[],
+                tables=markdown_tables(parsed.markdown, page_number),
                 bboxes=[whole_page],
                 parse_time_s=perf_counter() - start,
                 cache_hit=cache_hit,

@@ -2,6 +2,8 @@
 
 import pytest
 
+from eval.metrics.bootstrap import document_bootstrap_ci
+from eval.metrics.calibration import binary_auroc, review_metrics
 from eval.metrics.chunk_integrity import table_split_rate
 from eval.metrics.citation_accuracy import citation_accuracy, is_relevant
 from eval.metrics.latency import latency_per_page
@@ -112,3 +114,24 @@ def test_chunk_integrity_citations_routing_and_latency() -> None:
     assert citation_accuracy(answer, [2], [box(2)]) == 0
     assert cheap_parser_share(["pymupdf", "docling"]) == 0.5
     assert latency_per_page([0.1, 0.3]) == pytest.approx(0.2)
+
+
+def test_review_gate_metrics_and_bootstrap_are_deterministic() -> None:
+    gate = review_metrics(
+        quality_scores=[0.2, 0.8, 0.7, 0.9],
+        accuracies=[0.4, 0.95, 0.5, 1.0],
+        review_flags=[True, False, False, False],
+        bad_page_cutoff=0.9,
+    )
+    assert gate["bad_pages"] == 2
+    assert gate["true_positive"] == 1
+    assert gate["false_negative"] == 1
+    assert gate["precision"] == 1
+    assert gate["recall"] == 0.5
+    assert gate["unstable"] is True
+    assert binary_auroc([0.9, 0.8, 0.2], [True, True, False]) == 1
+    rows = [{"text_cer": 0.0}, {"text_cer": 0.5}, {"text_cer": 1.0}]
+    first = document_bootstrap_ci(rows, "text_cer", seed=42, samples=100)
+    second = document_bootstrap_ci(rows, "text_cer", seed=42, samples=100)
+    assert first == second
+    assert first["lower"] is not None and first["upper"] is not None

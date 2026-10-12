@@ -39,14 +39,20 @@ with the origin at the top left. A box must have positive area.
 
 ## Systems
 
-- `pymupdf_fixed`: plain PyMuPDF text extraction and fixed 16-word windows with 3-word
-  overlap. It does not perform OCR or structured table extraction.
-- `docling_only`: optional Docling extraction. If `[parsers]` is not installed, the report says
-  `skipped: optional dependency not installed`. When installed, model downloads are disabled
-  during evaluation; required local artifacts must already be present.
-- `vlm_every_page`: local Ollama vision extraction on every DEV page. It uses the same
-  page-content/model-tag/prompt-version cache as routed Unmess, so a warm run is not a
-  cold-run cost estimate. Failures remain in all denominators.
+- `pymupdf_fixed`: `page.get_text("text", sort=True)`, PyMuPDF's default
+  `page.find_tables()` strategies converted to `Table`, and fixed 16-word windows with
+  3-word overlap. It performs no OCR. A reference table with no detected table is a measured
+  extraction failure, not an unsupported capability.
+- `docling_only`: Docling with accurate TableFormer cell matching and forced full-page
+  EasyOCR using `en` and `hi`, scale 3, and confidence threshold 0.5. Model downloads are
+  disabled during evaluation, so local artifacts must already be present. This replaces the
+  Phase 2c default RapidOCR configuration, which did not provide the requested explicit
+  English/Hindi baseline.
+- `vlm_every_page`: local Ollama vision extraction on every DEV page. Its cached Markdown
+  pipe tables are converted into `Table` cell grids using the same response contract as the
+  routed VLM parser; merged spans cannot be inferred from ordinary Markdown. Phase 2d reads
+  the cache only: a cache miss is a page failure and no model request is made. Failures remain
+  in all denominators.
 - `unmess`: a registered `PipelineAdapter` placeholder. Phase 1 reports `not implemented yet`
   and `n/a` values. The full pipeline belongs to later phases.
 
@@ -65,6 +71,19 @@ and split-specific corpus. It does not use Qdrant or Ollama in Phase 1.
 
 The runner reports document-macro averages overall and by category, language, and scan
 difficulty. `n/a` means the measure has no applicable reference or the system did not run.
+
+The Phase 2d review-gate target is locked before evaluation. For each page, collapse all
+whitespace in expected and parsed text, compute `text_accuracy = max(0, 1 - CER)`, and compute
+page composite accuracy as follows:
+
+- without a reference table: `composite = 1.0 * text_accuracy`;
+- with a reference table: `composite = 0.5 * text_accuracy + 0.5 * table_cell_F1`.
+
+A **bad page** is one whose composite accuracy is strictly below **0.90**. This cutoff and the
+component weights must not be changed after inspecting gate results. Gate evaluation reports
+the bad-page count, quality-score histogram, AUROC using `1 - quality_score` as badness,
+review-flag precision/recall, and all confusion-matrix counts. If fewer than ten bad pages are
+present, AUROC, precision, and recall are explicitly labeled unstable.
 
 - **Table cell F1:** multiset matching of table ID, column, row span, column span,
   and stripped cell text after a single whole-table row-origin shift chosen to maximize
@@ -151,6 +170,12 @@ required for unit tests; the live Ollama smoke test is opt-in with
 VLM-only text currently has a full-page bbox; it is coarse provenance, not precise highlighting.
 The eval reports VLM attempts, cache hits, total VLM time, and pages per second.
 
+Phase 2d additionally reports fixed-seed (`20261011`) percentile bootstrap 95% confidence
+intervals from 2,000 whole-document resamples for all-page CER, WER, and table F1. Timing rows
+label response-cache state. Only genuinely cold or cache-independent measurements support
+cost comparisons; warm-cache measurements are retained as operational observations rather
+than presented as cold latency.
+
 ## Limits
 
 The documents deliberately use a small set of templates and fictional values. They are not a
@@ -171,6 +196,10 @@ original 28-document DEV rerun changed merged-table F1 from 0.0000 to 1.0000 for
 and Unmess. Overall table F1 changed from 0.5000 to 0.8333 for Docling and from 0.5417 to
 0.8750 for Unmess. These are DEV-only, document-macro numbers from the corrected original
 corpus, with unchanged routing thresholds. The pre-correction Phase 2b report is retained.
+The fix lives in `scripts/make_synthetic_docs.py`; both splits' PDFs were regenerated. An
+integration test rebuilds one DEV and one test document directly from the generator, compares
+their bytes and MANIFEST hashes, and checks identical merged-heading box logic. It does not
+read or score test outcomes.
 
 The new scorer uses general character/script plausibility and rendered-ink/text-layer
 alignment. It does not check for the generator's particular corruption strings. Score
@@ -179,3 +208,9 @@ is `eval/TUNING_PHASE2C.md`. The observed Spearman score/accuracy correlation is
 negative on the expanded DEV set, so these scores should be treated as review heuristics,
 not calibrated probabilities. Cost figures disclose cache state; the routed and VLM-only
 passes were not run under identical cold-cache conditions.
+
+For the Phase 2d fairness audit, Docling's actual baseline configuration is forced full-page
+EasyOCR with explicit `en` and `hi`, while the VLM prompt is script-neutral and requests every
+visible word. The routed system still chooses PyMuPDF for the synthetic bilingual digital
+pages and consequently omits the rasterized Hindi line; this is a routing limitation, not a
+missing language setting in either heavy parser.

@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 from pathlib import Path
 from time import perf_counter
+from typing import Any
 
 import pymupdf
 
@@ -17,6 +18,26 @@ from unmess.parsing.docling_parser import make_docling_converter
 class DoclingOnly:
     name = "docling_only"
 
+    def __init__(self) -> None:
+        self._converter: Any = None
+
+    @staticmethod
+    def configuration() -> dict[str, object]:
+        return {
+            "do_ocr": True,
+            "ocr_engine": "EasyOCR",
+            "ocr_languages": ["en", "hi"],
+            "ocr_mode": "full_page",
+            "force_full_page_ocr": True,
+            "ocr_scale": 3.0,
+            "ocr_confidence_threshold": 0.5,
+            "ocr_model_downloads": False,
+            "do_table_structure": True,
+            "table_structure_mode": "accurate",
+            "do_cell_matching": True,
+            "artifacts": "local only; downloads disabled",
+        }
+
     @staticmethod
     def available() -> bool:
         return importlib.util.find_spec("docling") is not None
@@ -25,9 +46,13 @@ class DoclingOnly:
         if not self.available():
             raise RuntimeError("skipped: optional dependency not installed")
         start = perf_counter()
-        document = (
-            make_docling_converter(Settings().docling_artifacts_path).convert(str(path)).document
-        )
+        if self._converter is None:
+            self._converter = make_docling_converter(
+                Settings().docling_artifacts_path,
+                ocr_languages=["en", "hi"],
+                force_full_page_ocr=True,
+            )
+        document = self._converter.convert(str(path)).document
         page_count = len(pymupdf.open(path))
         page_texts = ["" for _ in range(page_count)]
         for item, _level in document.iterate_items():
@@ -90,6 +115,7 @@ class DoclingOnly:
                     page_number=index,
                     parser_name="docling",
                     text=text,
+                    tables=[table for table in tables if index in table.page_numbers],
                     success=bool(text.strip()),
                     error=None if text.strip() else "no extracted text",
                 )

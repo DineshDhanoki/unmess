@@ -57,3 +57,59 @@ def score_buckets(
         }
         for key, values in buckets.items()
     }
+
+
+def binary_auroc(scores: Sequence[float], labels: Sequence[bool]) -> float | None:
+    """Pairwise AUROC where a larger score predicts the positive class."""
+    if len(scores) != len(labels):
+        raise ValueError("score and label counts differ")
+    positive = [score for score, label in zip(scores, labels, strict=True) if label]
+    negative = [score for score, label in zip(scores, labels, strict=True) if not label]
+    if not positive or not negative:
+        return None
+    wins = sum(
+        1.0 if left > right else 0.5 if left == right else 0.0
+        for left in positive
+        for right in negative
+    )
+    return wins / (len(positive) * len(negative))
+
+
+def review_metrics(
+    quality_scores: Sequence[float],
+    accuracies: Sequence[float],
+    review_flags: Sequence[bool],
+    bad_page_cutoff: float,
+) -> dict[str, float | int | bool | None]:
+    if not (len(quality_scores) == len(accuracies) == len(review_flags)):
+        raise ValueError("review metric inputs differ in length")
+    bad = [accuracy < bad_page_cutoff for accuracy in accuracies]
+    true_positive = sum(flag and label for flag, label in zip(review_flags, bad, strict=True))
+    false_positive = sum(flag and not label for flag, label in zip(review_flags, bad, strict=True))
+    false_negative = sum(not flag and label for flag, label in zip(review_flags, bad, strict=True))
+    true_negative = sum(
+        not flag and not label for flag, label in zip(review_flags, bad, strict=True)
+    )
+    bad_pages = sum(bad)
+    return {
+        "pages": len(bad),
+        "bad_pages": bad_pages,
+        "good_pages": len(bad) - bad_pages,
+        "true_positive": true_positive,
+        "false_positive": false_positive,
+        "false_negative": false_negative,
+        "true_negative": true_negative,
+        "precision": (
+            true_positive / (true_positive + false_positive)
+            if true_positive + false_positive
+            else None
+        ),
+        "recall": (
+            true_positive / (true_positive + false_negative)
+            if true_positive + false_negative
+            else None
+        ),
+        "auroc": binary_auroc([1 - score for score in quality_scores], bad),
+        "unstable": bad_pages < 10,
+        "bad_page_cutoff": bad_page_cutoff,
+    }

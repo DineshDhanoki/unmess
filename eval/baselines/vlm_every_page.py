@@ -6,14 +6,25 @@ import pymupdf
 
 from eval.baselines.base import ParsedDocument
 from unmess.config import Settings
-from unmess.parsing.vlm_parser import VLMParser
+from unmess.parsing.vlm_parser import PROMPT_VERSION, VLMParser
 
 
 class VLMEveryPage:
     name = "vlm_every_page"
 
     def __init__(self, settings: Settings) -> None:
-        self.parser = VLMParser(settings)
+        self.settings = settings
+        self.parser = VLMParser(settings, allow_model_calls=False)
+
+    def configuration(self) -> dict[str, object]:
+        return {
+            "model": self.settings.vision_model,
+            "raster_dpi": self.settings.vision_raster_dpi,
+            "prompt_version": PROMPT_VERSION,
+            "response_contract": "strict JSON object with Markdown transcription",
+            "table_contract": "pipe-table Markdown parsed into Table cells; spans unavailable",
+            "cache": "read-only; cache misses are failures; no model rerun",
+        }
 
     def parse(self, path: Path, doc_id: str) -> ParsedDocument:
         del doc_id

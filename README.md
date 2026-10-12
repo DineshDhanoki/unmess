@@ -34,6 +34,10 @@ corrects a merged-table scoring artifact, and compares routed parsing with Docli
 VLM-on-every-page. Its numbers are DEV measurements, not test-set claims; the expanded test
 split remains locked pending a new threshold freeze.
 
+The [Phase 2d DEV-only fairness report](eval/results/phase2d-dev.md) records audited baseline
+configurations, review-gate evaluation, uncertainty intervals, failures, and cache-state-aware
+timing. It remains a development-set report, not a test-set claim.
+
 ## Quick start
 
 Install Python 3.11 or 3.12, Docker, and

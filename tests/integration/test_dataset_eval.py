@@ -73,3 +73,24 @@ def test_dev_manifest_validation_never_reads_test_truth(monkeypatch: pytest.Monk
     monkeypatch.setattr(Path, "read_text", checked_read)
     truths, _ = _validate_manifest(DATASET, "dev")
     assert len(truths) == 43
+
+
+def test_merged_heading_geometry_is_generator_owned_and_split_invariant() -> None:
+    font = DATASET / ".font-cache/NotoSansDevanagari.ttf"
+    manifest = json.loads((DATASET / "MANIFEST.json").read_text())
+    entries = {item["document_id"]: item for item in manifest["documents"]}
+    boxes = []
+    for index, expected_split in ((0, "dev"), (1, "test")):
+        raw, truth = build_document("merged_table", index, font)
+        assert truth.split == expected_split
+        assert raw == (DATASET / truth.source_file).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == entries[truth.document_id]["sha256"]
+        heading = truth.tables[0].cells[0]
+        assert (heading.row, heading.col, heading.col_span, heading.text) == (
+            0,
+            0,
+            3,
+            "Merged line item heading",
+        )
+        boxes.append(heading.bbox.model_dump())
+    assert boxes[0] == boxes[1]

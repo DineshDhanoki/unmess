@@ -1,6 +1,7 @@
 """Parsing-stage evaluation with a committed test threshold freeze gate."""
 
 import argparse
+import difflib
 import hashlib
 import json
 import platform
@@ -19,7 +20,8 @@ from eval.baselines.docling_only import DoclingOnly
 from eval.baselines.plain_pymupdf import PlainPyMuPDF
 from eval.baselines.unmess_parsing import UnmessParsing
 from eval.baselines.vlm_every_page import VLMEveryPage
-from eval.metrics.calibration import score_buckets, spearman
+from eval.metrics.bootstrap import document_bootstrap_ci
+from eval.metrics.calibration import review_metrics, score_buckets, spearman
 from eval.metrics.latency import latency_per_page
 from eval.metrics.ocr_cer import character_error_rate, word_error_rate
 from eval.metrics.routing_efficiency import cheap_parser_share
@@ -36,6 +38,10 @@ ROOT = Path(__file__).resolve().parents[1]
 FROZEN = ROOT / "eval/config/phase2_frozen.toml"
 DEV_CONFIG = ROOT / "eval/config/phase2b_dev.toml"
 SUPERSEDED_FREEZE = "caa7f35c2f46777eba1a690e0292dac1ea04fe39"
+BAD_PAGE_ACCURACY_CUTOFF = 0.90
+BOOTSTRAP_SEED = 20261011
+BOOTSTRAP_SAMPLES = 2000
+PHASE2C_REPORT = ROOT / "eval/results/phase2c-dev.json"
 METRICS = (
     "table_f1",
     "ocr_cer",
@@ -265,11 +271,16 @@ def _document_scores(truth: GroundTruth, parsed: ParsedDocument) -> dict[str, An
         for page in parsed.page_results
         if page.previous_attempt is not None
     ]
-    vlm_attempts = [
+    routed_vlm_attempts = [
         attempt
         for page in parsed.page_results
         for attempt in page.attempts
         if attempt.parser == "vlm"
+    ]
+    direct_vlm_pages = [
+        page
+        for page in parsed.page_results
+        if page.parser_name == "vlm" and not page.attempts
     ]
     cer_values = [
         character_error_rate(page.expected_text, parsed.page_texts[page.page_number - 1])
@@ -284,6 +295,17 @@ def _document_scores(truth: GroundTruth, parsed: ParsedDocument) -> dict[str, An
         word_error_rate(page.expected_text, parsed.page_texts[page.page_number - 1])
         for page in truth.pages
     ]
+    table_failures = []
+    for page in parsed.page_results:
+        expected_tables = _page_cells(truth.tables, page.page_number)
+        if expected_tables and not _page_cells(page.tables, page.page_number):
+            table_failures.append(
+                {
+                    "page": page.page_number,
+                    "parser": page.parser_name,
+                    "reason": "reference table present but no structured Table emitted",
+                }
+            )
     return {
         "document_id": truth.document_id,
         "category": truth.category,
@@ -323,15 +345,22 @@ def _document_scores(truth: GroundTruth, parsed: ParsedDocument) -> dict[str, An
         "page_accuracy": [_parsed_page_accuracy(truth, page) for page in parsed.page_results],
         "page_success": [page.success for page in parsed.page_results],
         "quality_scores": [page.quality_score for page in parsed.page_results],
+        "review_flags": [bool(page.review_reasons) for page in parsed.page_results],
+        "page_texts": parsed.page_texts,
+        "expected_page_texts": [page.expected_text for page in truth.pages],
         "escalated_pages": len(escalation_deltas),
         "escalation_improved_pages": sum(delta > 0 for delta in escalation_deltas),
         "escalation_accuracy_deltas": escalation_deltas,
-        "vlm_attempted_pages": len(vlm_attempts),
-        "vlm_time_s": sum(attempt.duration_s for attempt in vlm_attempts),
-        "vlm_uncached_pages": sum(not attempt.cache_hit for attempt in vlm_attempts),
+        "vlm_attempted_pages": len(routed_vlm_attempts) + len(direct_vlm_pages),
+        "vlm_time_s": sum(attempt.duration_s for attempt in routed_vlm_attempts)
+        + sum(page.parse_time_s for page in direct_vlm_pages),
+        "vlm_uncached_pages": sum(not attempt.cache_hit for attempt in routed_vlm_attempts)
+        + sum(not page.cache_hit for page in direct_vlm_pages),
         "vlm_uncached_time_s": sum(
-            attempt.duration_s for attempt in vlm_attempts if not attempt.cache_hit
-        ),
+            attempt.duration_s for attempt in routed_vlm_attempts if not attempt.cache_hit
+        )
+        + sum(page.parse_time_s for page in direct_vlm_pages if not page.cache_hit),
+        "table_failures": table_failures,
         "failures": [
             {
                 "page": page.page_number,
@@ -366,11 +395,17 @@ def _run_adapter(
         for row in rows
         for failure in row["failures"]
     ]
+    table_failures = [
+        {"document_id": row["document_id"], **failure}
+        for row in rows
+        for failure in row["table_failures"]
+    ]
     return {
         "status": "ok" if not failures else "partial_failure",
         "summary": _summarize(rows),
         "documents": rows,
         "failures": failures,
+        "table_failures": table_failures,
     }
 
 
@@ -385,6 +420,9 @@ def _calibration(rows: list[dict[str, Any]]) -> dict[str, Any]:
     ]
     scores = [score for score, _ in successful]
     accuracy = [value for _, value in successful]
+    all_scores = [score for row in rows for score in row["quality_scores"]]
+    all_accuracy = [value for row in rows for value in row["page_accuracy"]]
+    all_flags = [flag for row in rows for flag in row["review_flags"]]
     return {
         "pages": len(scores),
         "failed_pages_excluded": sum(row["failed_pages"] for row in rows),
@@ -393,6 +431,62 @@ def _calibration(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "accuracy_definition": (
             "mean of clipped normalized-text similarity and page table F1 where tables exist"
         ),
+        "review_gate": review_metrics(
+            all_scores,
+            all_accuracy,
+            all_flags,
+            BAD_PAGE_ACCURACY_CUTOFF,
+        ),
+    }
+
+
+def _adapter_configuration(adapter: PipelineAdapter) -> dict[str, object]:
+    if isinstance(adapter, PlainPyMuPDF):
+        return adapter.configuration()
+    if isinstance(adapter, DoclingOnly):
+        return adapter.configuration()
+    if isinstance(adapter, UnmessParsing):
+        return adapter.configuration()
+    if isinstance(adapter, VLMEveryPage):
+        return adapter.configuration()
+    raise TypeError(f"unknown adapter: {type(adapter).__name__}")
+
+
+def _bootstrap(rows: list[dict[str, Any]]) -> dict[str, dict[str, float | int | None]]:
+    return {
+        metric: document_bootstrap_ci(
+            rows,
+            metric,
+            seed=BOOTSTRAP_SEED,
+            samples=BOOTSTRAP_SAMPLES,
+        )
+        for metric in ("text_cer", "text_wer", "table_f1")
+    }
+
+
+def _cache_state(system_name: str, overall: dict[str, Any]) -> str:
+    if system_name == "pymupdf_fixed":
+        return "cache-independent (no model/response cache)"
+    if system_name == "docling_only":
+        return "cold parser process; local model artifacts already on disk"
+    attempts = int(overall["vlm_attempted_pages"])
+    misses = int(overall["vlm_uncached_pages"])
+    if not attempts:
+        return "no VLM pages"
+    if misses == 0:
+        return f"warm VLM response cache ({attempts}/{attempts} hits)"
+    hits = attempts - misses
+    return f"mixed VLM response cache ({hits}/{attempts} hits; {misses} misses)"
+
+
+def _phase2c_headlines() -> dict[str, dict[str, Any]] | None:
+    if not PHASE2C_REPORT.is_file():
+        return None
+    previous = json.loads(PHASE2C_REPORT.read_text(encoding="utf-8"))
+    return {
+        name: system["dev"]["summary"]["overall"]
+        for name, system in previous["systems"].items()
+        if system["dev"] is not None
     }
 
 
@@ -429,15 +523,22 @@ def run(
         },
         "systems": {},
         "calibration_dev": None,
+        "baseline_configurations": {},
+        "previous_phase2c": _phase2c_headlines() if split == "dev" else None,
     }
     splits = ("dev", "test") if split == "test" else ("dev",)
     adapters: list[PipelineAdapter] = [PlainPyMuPDF(), DoclingOnly(), UnmessParsing(settings)]
     if include_vlm_baseline:
         adapters.append(VLMEveryPage(settings))
     for adapter in adapters:
+        result["baseline_configurations"][adapter.name] = _adapter_configuration(adapter)
         result["systems"][adapter.name] = {selected: None for selected in ("dev", "test")}
         for selected in splits:
             part = _run_adapter(adapter, truths, dataset, selected)
+            part["bootstrap_95_ci"] = _bootstrap(part["documents"])
+            part["timing_cache_state"] = _cache_state(
+                adapter.name, part["summary"]["overall"]
+            )
             result["systems"][adapter.name][selected] = part
             if adapter.name == UnmessParsing.name and selected == "dev":
                 result["calibration_dev"] = _calibration(part["documents"])
@@ -448,10 +549,58 @@ def _format(value: Any) -> str:
     return "n/a" if value is None else f"{value:.4f}" if isinstance(value, float) else str(value)
 
 
+def _hindi_loss_diffs(result: dict[str, Any]) -> list[str]:
+    ours_part = result["systems"]["unmess_parsing"]["dev"]
+    vlm_part = result["systems"].get("vlm_every_page", {}).get("dev")
+    if ours_part is None or vlm_part is None:
+        return []
+    vlm_documents = {row["document_id"]: row for row in vlm_part["documents"]}
+    output: list[str] = []
+    for ours in ours_part["documents"]:
+        if ours["language"] != "hi" or ours["document_id"] not in vlm_documents:
+            continue
+        vlm = vlm_documents[ours["document_id"]]
+        for index, (ours_accuracy, vlm_accuracy) in enumerate(
+            zip(ours["page_accuracy"], vlm["page_accuracy"], strict=True)
+        ):
+            if ours_accuracy >= vlm_accuracy:
+                continue
+            expected = ours["expected_page_texts"][index]
+            output += [
+                f"### {ours['document_id']} page {index + 1}",
+                "",
+                f"Unmess accuracy {_format(ours_accuracy)}; "
+                f"VLM-only accuracy {_format(vlm_accuracy)}.",
+                "",
+                "Unmess versus expected:",
+                "```diff",
+                *difflib.unified_diff(
+                    expected.splitlines(),
+                    ours["page_texts"][index].splitlines(),
+                    fromfile="expected",
+                    tofile="unmess",
+                    lineterm="",
+                ),
+                "```",
+                "VLM-only versus expected:",
+                "```diff",
+                *difflib.unified_diff(
+                    expected.splitlines(),
+                    vlm["page_texts"][index].splitlines(),
+                    fromfile="expected",
+                    tofile="vlm_every_page",
+                    lineterm="",
+                ),
+                "```",
+                "",
+            ]
+    return output
+
+
 def markdown(result: dict[str, Any]) -> str:
     meta = result["metadata"]
     lines = [
-        "# Unmess Phase 2c DEV-only parsing evaluation",
+        "# Unmess Phase 2d DEV-only fairness audit",
         "",
         f"Run: {meta['run_date_utc']} | source commit `{meta['git_commit']}` | "
         f"freeze commit `{meta['freeze_commit'] or 'not yet committed'}`",
@@ -465,6 +614,23 @@ def markdown(result: dict[str, Any]) -> str:
         "",
         f"Threshold source: `{meta['thresholds_file']}`",
         "Threshold values: `" + json.dumps(meta["threshold_values"], sort_keys=True) + "`",
+        "",
+        "## Exact system configurations",
+        "",
+        "```json",
+        json.dumps(result["baseline_configurations"], indent=2, sort_keys=True),
+        "```",
+        "",
+        "Phase 2d fairness changes: PyMuPDF now attempts structured extraction with "
+        "`page.find_tables()`; Docling changed from its default RapidOCR path to forced "
+        "full-page EasyOCR with explicit English and Hindi; and VLM-only cached Markdown "
+        "tables are parsed through the same `Table` contract as routed VLM output. "
+        "No VLM model request was made for this audit.",
+        "",
+        "The merged-heading geometry is generated by `scripts/make_synthetic_docs.py`, not "
+        "hand-edited ground truth. DEV and test PDFs were regenerated by that generator, and "
+        "the integration test verified their bytes and SHA-256 values against MANIFEST.json "
+        "without evaluating test outcomes.",
     ]
     columns = (*METRICS,)
     for split in ("test", "dev"):
@@ -504,14 +670,31 @@ def markdown(result: dict[str, Any]) -> str:
                     )
     calibration = result["calibration_dev"]
     if calibration:
+        gate = calibration["review_gate"]
         lines += [
             "",
-            "## Dev quality calibration",
+            "## DEV quality score and review-gate evaluation",
             "",
             f"Spearman rho: {_format(calibration['spearman_rho'])} "
             f"over {calibration['pages']} successfully parsed pages; "
             f"{calibration['failed_pages_excluded']} failed pages excluded.",
             f"Page accuracy: {calibration['accuracy_definition']}.",
+            "Exact composite: after whitespace normalization, text_accuracy = "
+            "max(0, 1 - CER); pages without a reference table use text_accuracy, while "
+            "table pages use 0.5 * text_accuracy + 0.5 * page table-cell F1.",
+            f"Locked bad-page rule: composite accuracy < "
+            f"{_format(gate['bad_page_cutoff'])}. Bad pages: {gate['bad_pages']} / "
+            f"{gate['pages']}; good pages: {gate['good_pages']} / {gate['pages']}.",
+            f"Review detection AUROC: {_format(gate['auroc'])}; precision: "
+            f"{_format(gate['precision'])}; recall: {_format(gate['recall'])}.",
+            f"Confusion counts: TP={gate['true_positive']}, FP={gate['false_positive']}, "
+            f"FN={gate['false_negative']}, TN={gate['true_negative']}.",
+            (
+                "**UNSTABLE:** fewer than 10 bad pages; AUROC, precision, and recall "
+                "have high sampling uncertainty."
+                if gate["unstable"]
+                else "Stability flag: at least 10 bad pages observed."
+            ),
             "",
             "| Score bucket | Pages | Mean page accuracy |",
             "|---|---:|---:|",
@@ -519,6 +702,29 @@ def markdown(result: dict[str, Any]) -> str:
         for bucket, values in calibration["score_buckets"].items():
             lines.append(
                 f"| {bucket} | {values['pages']} | {_format(values['mean_page_accuracy'])} |"
+            )
+    lines += [
+        "",
+        "## Document-bootstrap 95% confidence intervals",
+        "",
+        f"Fixed seed `{BOOTSTRAP_SEED}`; {BOOTSTRAP_SAMPLES} document-resampling draws. "
+        "Intervals are percentile intervals and may be wide on this small DEV corpus.",
+        "",
+        "| System | Metric | Estimate | 95% CI | Documents | Applicable pages |",
+        "|---|---|---:|---:|---:|---:|",
+    ]
+    for name, system in result["systems"].items():
+        part = system["dev"]
+        if part is None:
+            continue
+        overall = part["summary"]["overall"]
+        for metric in ("text_cer", "text_wer", "table_f1"):
+            interval = part["bootstrap_95_ci"][metric]
+            count = overall["metric_counts"][metric]
+            lines.append(
+                f"| {name} | {metric} | {_format(overall[metric])} | "
+                f"[{_format(interval['lower'])}, {_format(interval['upper'])}] | "
+                f"{count['documents']} | {count['pages']} |"
             )
     for selected in ("test", "dev"):
         part = result["systems"]["unmess_parsing"][selected]
@@ -539,11 +745,10 @@ def markdown(result: dict[str, Any]) -> str:
             f"accuracy improved on {overall['escalation_improved_pages']}; "
             f"mean accuracy delta {_format(overall['mean_escalation_accuracy_delta'])}.",
         ]
-    lines += ["", "## Accuracy versus cost", ""]
+    lines += ["", "## Timing with cache state", ""]
     lines += [
-        "| System | DEV documents | DEV pages | Mean page accuracy | Text CER | Table F1 | "
-        "Total parser time (s) | s/page |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|",
+        "| System | Cache state | DEV pages | Total parser time (s) | s/page |",
+        "|---|---|---:|---:|---:|",
     ]
     for name, system in result["systems"].items():
         part = system["dev"]
@@ -551,11 +756,44 @@ def markdown(result: dict[str, Any]) -> str:
             continue
         overall = part["summary"]["overall"]
         lines.append(
-            f"| {name} | {overall['documents']} | {overall['pages']} | "
-            f"{_format(overall['mean_page_accuracy'])} | {_format(overall['text_cer'])} | "
-            f"{_format(overall['table_f1'])} | {_format(overall['total_time_s'])} | "
+            f"| {name} | {part['timing_cache_state']} | {overall['pages']} | "
+            f"{_format(overall['total_time_s'])} | "
             f"{_format(overall['total_time_s'] / overall['pages'])} |"
         )
+    lines += [
+        "",
+        "Only cache-independent or genuinely cold-cache measurements may support a timing "
+        "comparison. Warm/mixed rows are operational measurements and are not ranked against "
+        "cold rows.",
+    ]
+    previous = result.get("previous_phase2c")
+    if previous:
+        lines += [
+            "",
+            "## Numbers moved since Phase 2c",
+            "",
+            "Positive deltas mean the numeric value increased; for CER/WER an increase is "
+            "worse, while for table F1 it is better.",
+            "",
+            "| System | Metric | Phase 2c | Phase 2d | Delta |",
+            "|---|---|---:|---:|---:|",
+        ]
+        for name, system in result["systems"].items():
+            part = system["dev"]
+            if part is None or name not in previous:
+                continue
+            current = part["summary"]["overall"]
+            for metric in ("text_cer", "text_wer", "table_f1", "failed_pages"):
+                old_value = previous[name].get(metric)
+                new_value = current.get(metric)
+                if old_value is None or new_value is None:
+                    delta = None
+                else:
+                    delta = float(new_value) - float(old_value)
+                lines.append(
+                    f"| {name} | {metric} | {_format(old_value)} | "
+                    f"{_format(new_value)} | {_format(delta)} |"
+                )
     ours_part = result["systems"]["unmess_parsing"]["dev"]
     if ours_part is not None:
         lines += [
@@ -601,16 +839,27 @@ def markdown(result: dict[str, Any]) -> str:
             if vlm_part is not None:
                 ours = ours_part["summary"]["overall"]
                 vlm = vlm_part["summary"]["overall"]
-                if ours["mean_page_accuracy"] < vlm["mean_page_accuracy"]:
-                    lines.append(
-                        "Unmess is faster than VLM-every-page but less accurate overall on "
-                        "this DEV set; this is a cost/accuracy tradeoff, not a clear win."
-                    )
-                elif ours["total_time_s"] > vlm["total_time_s"]:
-                    lines.append(
-                        "Unmess is not faster than VLM-every-page on this run; "
-                        "no clear cost/accuracy win is established."
-                    )
+                accuracy_relation = (
+                    "lower"
+                    if ours["mean_page_accuracy"] < vlm["mean_page_accuracy"]
+                    else "higher or equal"
+                )
+                lines.append(
+                    f"Unmess overall page accuracy is {accuracy_relation} than VLM-only, "
+                    "but no accuracy-vs-cost winner is claimed: Unmess and VLM-only used "
+                    "warm/mixed response caches, so their timings are not cold-cache costs."
+                )
+    hindi_diffs = _hindi_loss_diffs(result)
+    lines += [
+        "",
+        "## Hindi pages where Unmess loses to VLM-only",
+        "",
+        "The VLM prompt asks for every visible word and preserves the returned Markdown; "
+        "cached outputs demonstrate that it can return Devanagari. The loss is therefore "
+        "not attributed to a VLM language-configuration error.",
+        "",
+    ]
+    lines += hindi_diffs or ["No Hindi page had lower Unmess composite accuracy.", ""]
     test_unmess = result["systems"]["unmess_parsing"]["test"]
     test_fast = result["systems"]["pymupdf_fixed"]["test"]
     if test_unmess is not None and test_fast is not None:
@@ -662,13 +911,27 @@ def markdown(result: dict[str, Any]) -> str:
                 )
     if not failures_found:
         lines.append("None.")
+    lines += ["", "## Structured-table extraction failures", ""]
+    table_failures_found = False
+    for split in ("test", "dev"):
+        for name, system in result["systems"].items():
+            part = system[split]
+            if part is None:
+                continue
+            for failure in part["table_failures"]:
+                table_failures_found = True
+                lines.append(
+                    f"- {split} / {name} / {failure['document_id']} page "
+                    f"{failure['page']}: {failure['reason']} ({failure['parser']})."
+                )
+    if not table_failures_found:
+        lines.append("None.")
     lines += [
         "",
         "Metric cells show their own document and page denominators. "
         "Means are document-weighted; time is measured end-to-end in each adapter. "
-        "The VLM cache was warm for the routed Unmess pass and partly cold for the "
-        "VLM-every-page pass. These timings are not an apples-to-apples cold-cost "
-        "comparison; no general speed advantage is claimed.",
+        "Cache state is reported per system above. Warm and mixed measurements are not used "
+        "to claim a timing advantage over cold measurements.",
         "See EVAL.md for metric definitions and dataset limits.",
         "",
     ]
@@ -693,8 +956,8 @@ def main() -> None:
         if args.archive_dev:
             if result["systems"]["unmess_parsing"]["test"] is not None:
                 raise RuntimeError("cannot archive test results as a DEV report")
-            (args.output_dir / "phase2c-dev.md").write_text(report)
-            (args.output_dir / "phase2c-dev.json").write_text(json.dumps(result, indent=2) + "\n")
+            (args.output_dir / "phase2d-dev.md").write_text(report)
+            (args.output_dir / "phase2d-dev.json").write_text(json.dumps(result, indent=2) + "\n")
         return
     result = run(args.dataset, args.split, include_vlm_baseline=not args.skip_vlm_baseline)
     args.output_dir.mkdir(parents=True, exist_ok=True)

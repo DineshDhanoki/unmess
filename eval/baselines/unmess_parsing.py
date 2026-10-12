@@ -16,6 +16,20 @@ class UnmessParsing:
         self.settings = settings
         self.router = PageRouter(settings)
 
+    def configuration(self) -> dict[str, object]:
+        return {
+            "routing": "PyMuPDF clean; Docling table/complex; VLM scan/low-density or escalation",
+            "quality_review_threshold": self.settings.quality_review_threshold,
+            "parser_text_density_threshold": self.settings.parser_text_density_threshold,
+            "parser_image_coverage_threshold": self.settings.parser_image_coverage_threshold,
+            "parser_scan_likelihood_threshold": self.settings.parser_scan_likelihood_threshold,
+            "parser_table_likelihood_threshold": self.settings.parser_table_likelihood_threshold,
+            "parser_complex_layout_threshold": self.settings.parser_complex_layout_threshold,
+            "parser_max_skew_degrees": self.settings.parser_max_skew_degrees,
+            "vision_model": self.settings.vision_model,
+            "vision_raster_dpi": self.settings.vision_raster_dpi,
+        }
+
     def parse(self, path: Path, doc_id: str) -> ParsedDocument:
         with pymupdf.open(path) as document:
             page_count = len(document)

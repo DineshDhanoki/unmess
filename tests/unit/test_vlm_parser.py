@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from unmess.config import Settings
-from unmess.parsing.vlm_parser import VLMParser
+from unmess.parsing.vlm_parser import VLMParser, markdown_tables
 
 
 class FakeClient:
@@ -56,3 +56,21 @@ def test_vlm_invalid_output_is_failed_page(tmp_path: Path, monkeypatch: pytest.M
     assert not page.success
     assert client.calls == 2
     assert not list(tmp_path.glob("*.json"))
+
+
+def test_markdown_table_contract_emits_table_model() -> None:
+    tables = markdown_tables(
+        "Text\n\n| Item | Qty | Amount |\n|---|---:|---:|\n| Tea | 2 | 250 |",
+        3,
+    )
+    assert len(tables) == 1
+    assert tables[0].table_id == "line-items"
+    assert [(cell.row, cell.col, cell.text) for cell in tables[0].cells] == [
+        (0, 0, "Item"),
+        (0, 1, "Qty"),
+        (0, 2, "Amount"),
+        (1, 0, "Tea"),
+        (1, 1, "2"),
+        (1, 2, "250"),
+    ]
+    assert all(cell.bbox.page == 3 for cell in tables[0].cells)

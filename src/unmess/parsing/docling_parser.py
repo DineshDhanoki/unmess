@@ -13,7 +13,12 @@ from unmess.models import BBox, Block, Cell, Table
 from unmess.parsing.base import ParsedPage, ParserUnavailable, normalized_bbox
 
 
-def make_docling_converter(artifacts_path: Path) -> Any:
+def make_docling_converter(
+    artifacts_path: Path,
+    *,
+    ocr_languages: list[str] | None = None,
+    force_full_page_ocr: bool = False,
+) -> Any:
     """Build a Docling converter against prefetched local artifacts only."""
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
@@ -21,6 +26,18 @@ def make_docling_converter(artifacts_path: Path) -> Any:
     pipeline_module = importlib.import_module("docling.datamodel.pipeline_options")
     base_module = importlib.import_module("docling.datamodel.base_models")
     options = pipeline_module.PdfPipelineOptions(artifacts_path=artifacts_path.expanduser())
+    if ocr_languages is not None:
+        mode = (
+            pipeline_module.OcrMode.FULL_PAGE
+            if force_full_page_ocr
+            else pipeline_module.OcrMode.DEFAULT
+        )
+        options.do_ocr = True
+        options.ocr_options = pipeline_module.EasyOcrOptions(
+            lang=ocr_languages,
+            mode=mode,
+            download_enabled=False,
+        )
     return converter_module.DocumentConverter(
         format_options={
             base_module.InputFormat.PDF: converter_module.PdfFormatOption(pipeline_options=options)
