@@ -176,6 +176,24 @@ label response-cache state. Only genuinely cold or cache-independent measurement
 cost comparisons; warm-cache measurements are retained as operational observations rather
 than presented as cold latency.
 
+## Test-run criteria (written before the run)
+
+These criteria were committed before Phase 2e DEV diagnostics, any new threshold freeze, and
+any valid test-split evaluation. They may not be revised after test results are inspected:
+
+1. Unmess overall all-page CER must be lower than every baseline's point estimate. Report the
+   point estimates and document-bootstrap 95% confidence intervals for every system.
+2. Unmess table F1 must either lie inside Docling's document-bootstrap 95% confidence interval
+   or have a bootstrap interval that overlaps Docling's. This is a non-inferiority-style
+   compatibility criterion; it does not support a claim that Unmess has better tables.
+3. Unmess cold-cache total processing time must be lower than VLM-only cold-cache total time
+   on the same machine and DEV-established timing protocol.
+4. Review-gate AUROC must exceed 0.70 on test pages, using the already locked bad-page rule of
+   composite page accuracy strictly below 0.90. If it does not, README must label the gate
+   **experimental, not validated**.
+5. Parser and backend failures remain in all applicable denominators and are listed. No failed
+   page or document may be silently dropped.
+
 ## Limits
 
 The documents deliberately use a small set of templates and fictional values. They are not a
