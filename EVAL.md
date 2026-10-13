@@ -297,7 +297,9 @@ stack trace, so the API error body was the diagnostic. The installed model tag s
 temperature `0.0001`. With the schema retained,
 temperature `0.1`, repeat penalty `1.1`, repeat window `64`, and output limit `2048` made all
 three targeted pages succeed. These options are environment-backed and shared by routed VLM
-and VLM-only; the cache prompt/config version was advanced to `phase2e-v3`. Only the affected
+and VLM-only, so the failure mechanism would affect the Unmess VLM parser equally. It did not
+affect the routed Unmess results for these three pages because they went to Docling and made no
+VLM attempt. The cache prompt/config version was advanced to `phase2e-v3`. Only the affected
 DEV pages were rerun. Unaffected rows were retained, and the Phase 2e report labels the aggregate
 as an incremental refresh rather than a homogeneous full rerun.
 All three pages returned text after the change, but their merged-table cell F1 remained zero:

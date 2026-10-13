@@ -54,6 +54,7 @@ synthetic-corpus results; the quality gate remains experimental pending the prer
   machine, although it is faster than VLM-only for the recorded page mix.
 - The post-parse escalation fallback did not trigger in the final DEV run and remains untested
   by this corpus.
+- Evaluation uses synthetic data only; behavior on real-world documents is not yet measured.
 
 See the [Phase 2e DEV report](eval/results/phase2e-dev.md) and
 [cold timing report](eval/results/phase2e-cold.md) for denominators, confidence intervals,
