@@ -33,6 +33,10 @@ class UnmessParsing:
             "parser_max_skew_degrees": self.settings.parser_max_skew_degrees,
             "vision_model": self.settings.vision_model,
             "vision_raster_dpi": self.settings.vision_raster_dpi,
+            "vision_temperature": self.settings.vision_temperature,
+            "vision_repeat_penalty": self.settings.vision_repeat_penalty,
+            "vision_repeat_last_n": self.settings.vision_repeat_last_n,
+            "vision_num_predict": self.settings.vision_num_predict,
             "vision_timeout_s": self.settings.vision_timeout_s,
             "vision_retries_after_first_attempt": self.settings.vision_retries,
             "vision_failure_policy": (

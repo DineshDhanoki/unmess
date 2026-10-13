@@ -44,6 +44,21 @@ The separate [cold timing report](eval/results/phase2e-cold.md) records the mach
 system order, cache-hit counters, failures, and measured wall times. These are DEV-only
 synthetic-corpus results; the quality gate remains experimental pending the preregistered test run.
 
+## Known limitations
+
+- Spanning-table F1 is `0.625` on DEV; continuation structure across pages is not resolved.
+- High-difficulty scan CER is `0.091` and WER is `0.475` on the synthetic DEV corpus.
+- The review gate is experimental and statistically unstable because DEV contains only seven
+  bad pages.
+- Cold Unmess processing is slower than both PyMuPDF-only and Docling-only on the measured
+  machine, although it is faster than VLM-only for the recorded page mix.
+- The post-parse escalation fallback did not trigger in the final DEV run and remains untested
+  by this corpus.
+
+See the [Phase 2e DEV report](eval/results/phase2e-dev.md) and
+[cold timing report](eval/results/phase2e-cold.md) for denominators, confidence intervals,
+hardware, model tag, and failures. These values are not test-set or production claims.
+
 ## Quick start
 
 Install Python 3.11 or 3.12, Docker, and

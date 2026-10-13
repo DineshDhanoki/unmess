@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "run_date_utc": "2026-10-12T21:05:06.178094+00:00",
+    "run_date_utc": "2026-10-13T11:50:55.007162+00:00",
     "git_commit": "e4e6a83b5fc05bfbe11c6c60102a70b947f24e57",
     "freeze_commit": null,
     "working_tree_dirty": true,
@@ -37,7 +37,24 @@
       "vision_timeout_s": 120.0
     },
     "retrieval": "n/a: parsing stage only",
-    "incremental_refresh": "Unmess DEV refreshed after generic feature update; baselines retained from the immediately preceding Phase 2e run because their code paths were unchanged"
+    "incremental_refresh": "Unmess DEV refreshed after generic feature update; baselines retained from the immediately preceding Phase 2e run because their code paths were unchanged",
+    "targeted_vlm_refresh": {
+      "documents": [
+        "synthetic-merged_table-00",
+        "synthetic-merged_table-02",
+        "synthetic-merged_table-04"
+      ],
+      "pages": 3,
+      "succeeded": 3,
+      "prompt_version": "phase2e-v3",
+      "options": {
+        "temperature": 0.1,
+        "repeat_penalty": 1.1,
+        "repeat_last_n": 64,
+        "num_predict": 2048
+      },
+      "cause": "Ollama constrained decoding aborted at token repeat limit"
+    }
   },
   "systems": {
     "pymupdf_fixed": {
@@ -15244,19 +15261,19 @@
     },
     "vlm_every_page": {
       "dev": {
-        "status": "partial_failure",
+        "status": "ok",
         "summary": {
           "overall": {
             "documents": 43,
             "pages": 52,
-            "failed_pages": 3,
+            "failed_pages": 0,
             "table_f1": 0.6471774193548387,
             "ocr_cer": 0.03063770232444931,
-            "text_cer": 0.1731056902658013,
-            "text_wer": 0.26689335212591025,
+            "text_cer": 0.1224900951905619,
+            "text_wer": 0.23588560018792576,
             "cheap_parser_share": 0.0,
-            "latency_per_page_s": 4.100283327553053,
-            "failed_page_rate": 0.06976744186046512,
+            "latency_per_page_s": 1.2878549564142474,
+            "failed_page_rate": 0.0,
             "metric_counts": {
               "table_f1": {
                 "documents": 14,
@@ -15287,16 +15304,16 @@
                 "pages": 52
               }
             },
-            "total_time_s": 176.5629432097776,
-            "mean_page_accuracy": 0.8805815269522058,
+            "total_time_s": 55.62852325080894,
+            "mean_page_accuracy": 0.903205961341346,
             "escalated_pages": 0,
             "escalation_improved_pages": 0,
             "vlm_attempted_pages": 52,
             "vlm_uncached_pages": 3,
-            "vlm_time_s": 176.5629432097776,
-            "vlm_pages_per_second": 0.29451253504659736,
-            "vlm_uncached_time_s": 175.33422208402772,
-            "vlm_uncached_pages_per_second": 0.017110179429559797,
+            "vlm_time_s": 55.62852325080894,
+            "vlm_pages_per_second": 0.9347722528162533,
+            "vlm_uncached_time_s": 54.39980212505907,
+            "vlm_uncached_pages_per_second": 0.05514725941655698,
             "mean_escalation_accuracy_delta": null
           },
           "by_cohort": {
@@ -15356,14 +15373,14 @@
             "original": {
               "documents": 28,
               "pages": 32,
-              "failed_pages": 3,
+              "failed_pages": 0,
               "table_f1": 0.6223118279569892,
               "ocr_cer": 0.028660094925155165,
-              "text_cer": 0.2282906985760412,
-              "text_wer": 0.3293975468975469,
+              "text_cer": 0.15055960613906644,
+              "text_wer": 0.2817784992784993,
               "cheap_parser_share": 0.0,
-              "latency_per_page_s": 6.276749764895483,
-              "failed_page_rate": 0.10714285714285714,
+              "latency_per_page_s": 1.9576633377894592,
+              "failed_page_rate": 0.0,
               "metric_counts": {
                 "table_f1": {
                   "documents": 12,
@@ -15394,16 +15411,16 @@
                   "pages": 32
                 }
               },
-              "total_time_s": 175.80497612454928,
-              "mean_page_accuracy": 0.8312557404882962,
+              "total_time_s": 54.87055616558064,
+              "mean_page_accuracy": 0.8680204463706491,
               "escalated_pages": 0,
               "escalation_improved_pages": 0,
               "vlm_attempted_pages": 32,
               "vlm_uncached_pages": 3,
-              "vlm_time_s": 175.80497612454928,
-              "vlm_pages_per_second": 0.1820198762595295,
-              "vlm_uncached_time_s": 175.33422208402772,
-              "vlm_uncached_pages_per_second": 0.017110179429559797,
+              "vlm_time_s": 54.87055616558064,
+              "vlm_pages_per_second": 0.5831907353633323,
+              "vlm_uncached_time_s": 54.39980212505907,
+              "vlm_uncached_pages_per_second": 0.05514725941655698,
               "mean_escalation_accuracy_delta": null
             }
           },
@@ -15676,14 +15693,14 @@
             "merged_table": {
               "documents": 5,
               "pages": 5,
-              "failed_pages": 3,
+              "failed_pages": 0,
               "table_f1": 0.3870967741935484,
               "ocr_cer": null,
-              "text_cer": 0.7029315960912053,
-              "text_wer": 0.8,
+              "text_cer": 0.2676374784441464,
+              "text_wer": 0.5333333333333333,
               "cheap_parser_share": 0.0,
-              "latency_per_page_s": 35.073390691820535,
-              "failed_page_rate": 0.6,
+              "latency_per_page_s": 10.886506700026803,
+              "failed_page_rate": 0.0,
               "metric_counts": {
                 "table_f1": {
                   "documents": 5,
@@ -15714,16 +15731,16 @@
                   "pages": 5
                 }
               },
-              "total_time_s": 175.36695345910266,
-              "mean_page_accuracy": 0.354460439214038,
+              "total_time_s": 54.432533500134014,
+              "mean_page_accuracy": 0.5897545568610969,
               "escalated_pages": 0,
               "escalation_improved_pages": 0,
               "vlm_attempted_pages": 5,
               "vlm_uncached_pages": 3,
-              "vlm_time_s": 175.36695345910266,
-              "vlm_pages_per_second": 0.02851164316523324,
-              "vlm_uncached_time_s": 175.33422208402772,
-              "vlm_uncached_pages_per_second": 0.017110179429559797,
+              "vlm_time_s": 54.432533500134014,
+              "vlm_pages_per_second": 0.09185683043740174,
+              "vlm_uncached_time_s": 54.39980212505907,
+              "vlm_uncached_pages_per_second": 0.05514725941655698,
               "mean_escalation_accuracy_delta": null
             },
             "mixed_pages": {
@@ -15943,14 +15960,14 @@
             "en": {
               "documents": 38,
               "pages": 47,
-              "failed_pages": 3,
+              "failed_pages": 0,
               "table_f1": 0.6471774193548387,
               "ocr_cer": 0.03063770232444931,
-              "text_cer": 0.19148208830381347,
-              "text_wer": 0.3020108984582669,
+              "text_cer": 0.13420654650814784,
+              "text_wer": 0.2669231791600213,
               "cheap_parser_share": 0.0,
-              "latency_per_page_s": 4.638095459444326,
-              "failed_page_rate": 0.07894736842105263,
+              "latency_per_page_s": 1.455610723681993,
+              "failed_page_rate": 0.0,
               "metric_counts": {
                 "table_f1": {
                   "documents": 14,
@@ -15981,16 +15998,16 @@
                   "pages": 47
                 }
               },
-              "total_time_s": 176.49838758388069,
-              "mean_page_accuracy": 0.8678774340747809,
+              "total_time_s": 55.56396762491204,
+              "mean_page_accuracy": 0.8929087231861701,
               "escalated_pages": 0,
               "escalation_improved_pages": 0,
               "vlm_attempted_pages": 47,
               "vlm_uncached_pages": 3,
-              "vlm_time_s": 176.49838758388069,
-              "vlm_pages_per_second": 0.2662913845468605,
-              "vlm_uncached_time_s": 175.33422208402772,
-              "vlm_uncached_pages_per_second": 0.017110179429559797,
+              "vlm_time_s": 55.56396762491204,
+              "vlm_pages_per_second": 0.8458719204012999,
+              "vlm_uncached_time_s": 54.39980212505907,
+              "vlm_uncached_pages_per_second": 0.05514725941655698,
               "mean_escalation_accuracy_delta": null
             },
             "hi": {
@@ -16210,14 +16227,14 @@
             "not_scan": {
               "documents": 31,
               "pages": 36,
-              "failed_pages": 3,
+              "failed_pages": 0,
               "table_f1": 0.6471774193548387,
               "ocr_cer": null,
-              "text_cer": 0.22835466073588553,
-              "text_wer": 0.3242391658520691,
+              "text_cer": 0.1581459320831341,
+              "text_wer": 0.281228413163897,
               "cheap_parser_share": 0.0,
-              "latency_per_page_s": 5.668425856871651,
-              "failed_page_rate": 0.0967741935483871,
+              "latency_per_page_s": 1.7673155356145975,
+              "failed_page_rate": 0.0,
               "metric_counts": {
                 "table_f1": {
                   "documents": 14,
@@ -16248,16 +16265,16 @@
                   "pages": 36
                 }
               },
-              "total_time_s": 175.7903075000504,
-              "mean_page_accuracy": 0.8368774666418073,
+              "total_time_s": 54.855887541081756,
+              "mean_page_accuracy": 0.8695572052038988,
               "escalated_pages": 0,
               "escalation_improved_pages": 0,
               "vlm_attempted_pages": 36,
               "vlm_uncached_pages": 3,
-              "vlm_time_s": 175.7903075000504,
-              "vlm_pages_per_second": 0.20478944779131056,
-              "vlm_uncached_time_s": 175.33422208402772,
-              "vlm_uncached_pages_per_second": 0.017110179429559797,
+              "vlm_time_s": 54.855887541081756,
+              "vlm_pages_per_second": 0.6562650175523909,
+              "vlm_uncached_time_s": 54.39980212505907,
+              "vlm_uncached_pages_per_second": 0.05514725941655698,
               "mean_escalation_accuracy_delta": null
             }
           }
@@ -17137,21 +17154,21 @@
             "table_pages": 1,
             "ocr_pages": 0,
             "page_durations_s": [
-              60.686010334058665
+              8.999394041020423
             ],
-            "failed_pages": 1,
+            "failed_pages": 0,
             "table_f1": 0.0,
             "ocr_cer": null,
-            "text_cer": 1.0,
-            "text_wer": 1.0,
+            "text_cer": 0.27450980392156865,
+            "text_wer": 0.5555555555555556,
             "cheap_parser_share": 0.0,
-            "latency_per_page_s": 60.686010334058665,
-            "failed_page_rate": 1.0,
+            "latency_per_page_s": 8.999394041020423,
+            "failed_page_rate": 0.0,
             "page_accuracy": [
-              0.0
+              0.39215686274509803
             ],
             "page_success": [
-              false
+              true
             ],
             "quality_scores": [
               0.0
@@ -17166,7 +17183,7 @@
               false
             ],
             "page_texts": [
-              ""
+              "# SYNTHETIC DOCUMENT - MERGED TABLE\n\nDocument code: FAKE-MER-00\n\nFictional seller: Demo Vendor 00\n\nIssue date: 2026-02-01\n\nTotal INR: 10,000\n\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\n\n\n| Merged line item heading |\n| --- | --- | --- |\n| Item | Qty | Amount |\n| Fake item 1 | 1 | 125 |\n| Fake item 2 | 2 | 250 |\n| Fake item 3 | 3 | 375 |\n| Fake item 4 | 4 | 500 |\n"
             ],
             "expected_page_texts": [
               "SYNTHETIC DOCUMENT - MERGED TABLE\nDocument code: FAKE-MER-00\nFictional seller: Demo Vendor 00\nIssue date: 2026-02-01\nTotal INR: 10,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nMerged line item heading\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375\nFake item 4\n4\n500"
@@ -17175,9 +17192,9 @@
             "escalation_improved_pages": 0,
             "escalation_accuracy_deltas": [],
             "vlm_attempted_pages": 1,
-            "vlm_time_s": 60.686010334058665,
+            "vlm_time_s": 8.999394041020423,
             "vlm_uncached_pages": 1,
-            "vlm_uncached_time_s": 60.686010334058665,
+            "vlm_uncached_time_s": 8.999394041020423,
             "table_failures": [
               {
                 "page": 1,
@@ -17185,14 +17202,7 @@
                 "reason": "reference table present but no structured Table emitted"
               }
             ],
-            "failures": [
-              {
-                "page": 1,
-                "parser": "vlm",
-                "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
-                "attempts": []
-              }
-            ]
+            "failures": []
           },
           {
             "document_id": "synthetic-merged_table-02",
@@ -17204,21 +17214,21 @@
             "table_pages": 1,
             "ocr_pages": 0,
             "page_durations_s": [
-              56.9268414999824
+              22.410308166989125
             ],
-            "failed_pages": 1,
+            "failed_pages": 0,
             "table_f1": 0.0,
             "ocr_cer": null,
-            "text_cer": 1.0,
-            "text_wer": 1.0,
+            "text_cer": 0.27450980392156865,
+            "text_wer": 0.5555555555555556,
             "cheap_parser_share": 0.0,
-            "latency_per_page_s": 56.9268414999824,
-            "failed_page_rate": 1.0,
+            "latency_per_page_s": 22.410308166989125,
+            "failed_page_rate": 0.0,
             "page_accuracy": [
-              0.0
+              0.39215686274509803
             ],
             "page_success": [
-              false
+              true
             ],
             "quality_scores": [
               0.0
@@ -17233,7 +17243,7 @@
               false
             ],
             "page_texts": [
-              ""
+              "# SYNTHETIC DOCUMENT - MERGED TABLE\n\nDocument code: FAKE-MER-02\n\nFictional seller: Demo Vendor 02\n\nIssue date: 2026-02-03\n\nTotal INR: 46,000\n\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\n\n\n| Merged line item heading |\n| --- | --- | --- |\n| Item | Qty | Amount |\n| Fake item 1 | 1 | 125 |\n| Fake item 2 | 2 | 250 |\n| Fake item 3 | 3 | 375 |\n| Fake item 4 | 4 | 500 |\n"
             ],
             "expected_page_texts": [
               "SYNTHETIC DOCUMENT - MERGED TABLE\nDocument code: FAKE-MER-02\nFictional seller: Demo Vendor 02\nIssue date: 2026-02-03\nTotal INR: 46,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nMerged line item heading\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375\nFake item 4\n4\n500"
@@ -17242,9 +17252,9 @@
             "escalation_improved_pages": 0,
             "escalation_accuracy_deltas": [],
             "vlm_attempted_pages": 1,
-            "vlm_time_s": 56.9268414999824,
+            "vlm_time_s": 22.410308166989125,
             "vlm_uncached_pages": 1,
-            "vlm_uncached_time_s": 56.9268414999824,
+            "vlm_uncached_time_s": 22.410308166989125,
             "table_failures": [
               {
                 "page": 1,
@@ -17252,14 +17262,7 @@
                 "reason": "reference table present but no structured Table emitted"
               }
             ],
-            "failures": [
-              {
-                "page": 1,
-                "parser": "vlm",
-                "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
-                "attempts": []
-              }
-            ]
+            "failures": []
           },
           {
             "document_id": "synthetic-merged_table-04",
@@ -17271,21 +17274,21 @@
             "table_pages": 1,
             "ocr_pages": 0,
             "page_durations_s": [
-              57.72137024998665
+              22.99009991704952
             ],
-            "failed_pages": 1,
+            "failed_pages": 0,
             "table_f1": 0.0,
             "ocr_cer": null,
-            "text_cer": 1.0,
-            "text_wer": 1.0,
+            "text_cer": 0.27450980392156865,
+            "text_wer": 0.5555555555555556,
             "cheap_parser_share": 0.0,
-            "latency_per_page_s": 57.72137024998665,
-            "failed_page_rate": 1.0,
+            "latency_per_page_s": 22.99009991704952,
+            "failed_page_rate": 0.0,
             "page_accuracy": [
-              0.0
+              0.39215686274509803
             ],
             "page_success": [
-              false
+              true
             ],
             "quality_scores": [
               0.0
@@ -17300,7 +17303,7 @@
               false
             ],
             "page_texts": [
-              ""
+              "# SYNTHETIC DOCUMENT - MERGED TABLE\n\nDocument code: FAKE-MER-04\n\nFictional seller: Demo Vendor 04\n\nIssue date: 2026-02-05\n\nTotal INR: 82,000\n\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\n\n\n| Merged line item heading |\n| --- | --- | --- |\n| Item | Qty | Amount |\n| Fake item 1 | 1 | 125 |\n| Fake item 2 | 2 | 250 |\n| Fake item 3 | 3 | 375 |\n| Fake item 4 | 4 | 500 |\n"
             ],
             "expected_page_texts": [
               "SYNTHETIC DOCUMENT - MERGED TABLE\nDocument code: FAKE-MER-04\nFictional seller: Demo Vendor 04\nIssue date: 2026-02-05\nTotal INR: 82,000\nGSTIN: INVALID-SYNTHETIC-NOT-A-REAL-ID | CGST 9% | SGST 9%\nMerged line item heading\nItem\nQty\nAmount\nFake item 1\n1\n125\nFake item 2\n2\n250\nFake item 3\n3\n375\nFake item 4\n4\n500"
@@ -17309,9 +17312,9 @@
             "escalation_improved_pages": 0,
             "escalation_accuracy_deltas": [],
             "vlm_attempted_pages": 1,
-            "vlm_time_s": 57.72137024998665,
+            "vlm_time_s": 22.99009991704952,
             "vlm_uncached_pages": 1,
-            "vlm_uncached_time_s": 57.72137024998665,
+            "vlm_uncached_time_s": 22.99009991704952,
             "table_failures": [
               {
                 "page": 1,
@@ -17319,14 +17322,7 @@
                 "reason": "reference table present but no structured Table emitted"
               }
             ],
-            "failures": [
-              {
-                "page": 1,
-                "parser": "vlm",
-                "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
-                "attempts": []
-              }
-            ]
+            "failures": []
           },
           {
             "document_id": "synthetic-merged_table-06",
@@ -18706,29 +18702,7 @@
             "failures": []
           }
         ],
-        "failures": [
-          {
-            "document_id": "synthetic-merged_table-00",
-            "page": 1,
-            "parser": "vlm",
-            "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
-            "attempts": []
-          },
-          {
-            "document_id": "synthetic-merged_table-02",
-            "page": 1,
-            "parser": "vlm",
-            "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
-            "attempts": []
-          },
-          {
-            "document_id": "synthetic-merged_table-04",
-            "page": 1,
-            "parser": "vlm",
-            "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
-            "attempts": []
-          }
-        ],
+        "failures": [],
         "table_failures": [
           {
             "document_id": "synthetic-merged_table-00",
@@ -18751,14 +18725,14 @@
         ],
         "bootstrap_95_ci": {
           "text_cer": {
-            "lower": 0.1036504878718937,
-            "upper": 0.25344947536154744,
+            "lower": 0.08261607062373474,
+            "upper": 0.1661396049983554,
             "samples": 2000,
             "seed": 20261011
           },
           "text_wer": {
-            "lower": 0.1690662438336857,
-            "upper": 0.3745642471223867,
+            "lower": 0.15024195442800095,
+            "upper": 0.3289323467230444,
             "samples": 2000,
             "seed": 20261011
           },
@@ -19015,7 +18989,11 @@
     "vlm_every_page": {
       "model": "qwen2.5vl",
       "raster_dpi": 110,
-      "prompt_version": "phase2b-v2",
+      "temperature": 0.1,
+      "repeat_penalty": 1.1,
+      "repeat_last_n": 64,
+      "num_predict": 2048,
+      "prompt_version": "phase2e-v3",
       "timeout_s": 120.0,
       "retries_after_first_attempt": 1,
       "failure_policy": "return failed ParsedPage after all attempts; never drop page",

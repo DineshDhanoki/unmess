@@ -43,6 +43,11 @@ BOOTSTRAP_SEED = 20261011
 BOOTSTRAP_SAMPLES = 2000
 PHASE2D_REPORT = ROOT / "eval/results/phase2d-dev.json"
 PHASE2E_COLD_REPORT = ROOT / "eval/results/phase2e-cold.json"
+VLM_MERGED_REFRESH_IDS = {
+    "synthetic-merged_table-00",
+    "synthetic-merged_table-02",
+    "synthetic-merged_table-04",
+}
 METRICS = (
     "table_f1",
     "ocr_cer",
@@ -514,6 +519,42 @@ def _phase2e_cold() -> dict[str, Any] | None:
     return result
 
 
+def _replace_document_rows(part: dict[str, Any], replacements: list[dict[str, Any]]) -> None:
+    by_id = {row["document_id"]: row for row in replacements}
+    rows = [by_id.get(row["document_id"], row) for row in part["documents"]]
+    part["documents"] = rows
+    part["summary"] = _summarize(rows)
+    part["failures"] = [
+        {"document_id": row["document_id"], **failure}
+        for row in rows
+        for failure in row["failures"]
+    ]
+    part["table_failures"] = [
+        {"document_id": row["document_id"], **failure}
+        for row in rows
+        for failure in row["table_failures"]
+    ]
+    part["status"] = "partial_failure" if part["failures"] else "ok"
+    part["bootstrap_95_ci"] = _bootstrap(rows)
+
+
+def _route_shares(part: dict[str, Any]) -> dict[str, int | float]:
+    rows = part["documents"]
+    total = sum(row["pages"] for row in rows)
+    pymupdf_pages = round(sum(row["cheap_parser_share"] * row["pages"] for row in rows))
+    vlm_pages = sum(row["vlm_attempted_pages"] for row in rows)
+    docling_pages = total - pymupdf_pages - vlm_pages
+    return {
+        "total": total,
+        "pymupdf_pages": pymupdf_pages,
+        "pymupdf_share": pymupdf_pages / total,
+        "docling_pages": docling_pages,
+        "docling_share": docling_pages / total,
+        "vlm_pages": vlm_pages,
+        "vlm_share": vlm_pages / total,
+    }
+
+
 def run(
     dataset: Path, split: Literal["dev", "test"] = "dev", *, include_vlm_baseline: bool = True
 ) -> dict[str, Any]:
@@ -722,6 +763,32 @@ def markdown(result: dict[str, Any]) -> str:
         "the integration test verified their bytes and SHA-256 values against MANIFEST.json "
         "without evaluating test outcomes.",
     ]
+    targeted_refresh = meta.get("targeted_vlm_refresh")
+    if targeted_refresh:
+        lines += [
+            "",
+            "## VLM merged-table HTTP 500 diagnosis",
+            "",
+            "The three affected 110-DPI page images were 935 x 1210 pixels and about 41 KB "
+            "as PNG (about 55 KB base64), while the installed qwen2.5vl metadata advertises "
+            "a 128,000-token context. Ollama returned `prediction aborted, token repeat limit "
+            "reached`; macOS unified Ollama logs contained no runner error beyond network/trust "
+            "events, so the API response body supplied the diagnostic. The same image "
+            "succeeded without constrained output but violated the "
+            "required JSON contract. The model tag's baked-in temperature was 0.0001. Keeping "
+            "the strict JSON schema while setting temperature 0.1, repeat penalty 1.1, repeat "
+            "window 64, and output limit 2048 made all three targeted pages succeed. This was "
+            "a constrained-decoding repetition configuration issue shared by routed VLM and "
+            "VLM-only, not image size or context exhaustion.",
+            "",
+            f"Targeted rerun: {targeted_refresh['succeeded']} / "
+            f"{targeted_refresh['pages']} pages succeeded; prompt/config version "
+            f"`{targeted_refresh['prompt_version']}`. Only the three previously failed DEV "
+            "documents were rerun; unaffected VLM-only rows were retained and this incremental "
+            "refresh is disclosed rather than presented as a homogeneous full rerun. The pages "
+            "now return text but their merged tables still score 0.0 cell F1 because ordinary "
+            "Markdown cannot represent the required merged-cell spans.",
+        ]
     columns = (*METRICS,)
     for split in ("test", "dev"):
         if all(system[split] is None for system in result["systems"].values()):
@@ -873,6 +940,23 @@ def markdown(result: dict[str, Any]) -> str:
             f"accuracy improved on {overall['escalation_improved_pages']}; "
             f"mean accuracy delta {_format(overall['mean_escalation_accuracy_delta'])}.",
         ]
+    ours_dev = result["systems"]["unmess_parsing"]["dev"]
+    if ours_dev is not None:
+        shares = _route_shares(ours_dev)
+        lines += [
+            "",
+            "## DEV final parser mix",
+            "",
+            "| Parser | Pages | Share |",
+            "|---|---:|---:|",
+            f"| PyMuPDF | {shares['pymupdf_pages']} | {_format(shares['pymupdf_share'])} |",
+            f"| Docling | {shares['docling_pages']} | {_format(shares['docling_share'])} |",
+            f"| VLM | {shares['vlm_pages']} | {_format(shares['vlm_share'])} |",
+            "",
+            "The speedup versus VLM-only depends on this page mix. This synthetic DEV corpus "
+            "is deliberately hard, so its VLM share is not a prevalence estimate for typical "
+            "production documents.",
+        ]
     lines += ["", "## Timing with cache state", ""]
     lines += [
         "| System | Cache state | DEV pages | Total parser time (s) | s/page |",
@@ -939,6 +1023,12 @@ def markdown(result: dict[str, Any]) -> str:
             "one pass, and a synthetic corpus; it is evidence for this run, not a general "
             "performance claim.",
         ]
+        if targeted_refresh:
+            lines.append(
+                "The cold pass predates the anti-repetition configuration fix and is retained "
+                "unchanged; its three VLM-only failures are historical outcomes of that run. "
+                "Only the affected warm DEV pages were rerun for this housekeeping audit."
+            )
     previous = result.get("previous_phase2d")
     if previous:
         lines += [
@@ -969,10 +1059,11 @@ def markdown(result: dict[str, Any]) -> str:
                 )
         lines += [
             "",
-            "PyMuPDF, forced multilingual Docling, and VLM-only headline accuracy numbers "
-            "did not move from Phase 2d. `docling_default` is a newly separated baseline and "
-            "has no Phase 2d comparator. The three VLM-only merged-table failures persisted "
-            "after rerunning with the same timeout, one retry, and failure policy as Unmess.",
+            "PyMuPDF and forced multilingual Docling headline accuracy numbers did not move "
+            "from Phase 2d. `docling_default` is a newly separated baseline and has no Phase 2d "
+            "comparator. VLM-only changes above come only from the disclosed three-page "
+            "anti-repetition refresh; table F1 did not improve because merged spans remain "
+            "unrepresentable in ordinary Markdown.",
         ]
     ours_part = result["systems"]["unmess_parsing"]["dev"]
     if ours_part is not None:
@@ -1139,6 +1230,7 @@ def main() -> None:
     parser.add_argument("--render-only", action="store_true")
     parser.add_argument("--archive-dev", action="store_true")
     parser.add_argument("--refresh-unmess-dev", action="store_true")
+    parser.add_argument("--refresh-vlm-merged-dev", action="store_true")
     args = parser.parse_args()
     if args.render_only:
         result = json.loads((args.output_dir / "latest.json").read_text())
@@ -1173,6 +1265,40 @@ def main() -> None:
             "Unmess DEV refreshed after generic feature update; baselines retained from "
             "the immediately preceding Phase 2e run because their code paths were unchanged"
         )
+        (args.output_dir / "latest.json").write_text(json.dumps(result, indent=2) + "\n")
+        (args.output_dir / "latest.md").write_text(markdown(result))
+        return
+    if args.refresh_vlm_merged_dev:
+        if args.split != "dev":
+            raise RuntimeError("targeted VLM refresh is DEV-only")
+        result = json.loads((args.output_dir / "latest.json").read_text())
+        settings = _settings("dev")
+        truths, _manifest = _validate_manifest(args.dataset, "dev")
+        affected = [truth for truth in truths if truth.document_id in VLM_MERGED_REFRESH_IDS]
+        if {truth.document_id for truth in affected} != VLM_MERGED_REFRESH_IDS:
+            raise RuntimeError("targeted VLM DEV documents are missing")
+        vlm_adapter = VLMEveryPage(settings)
+        refreshed = _run_adapter(vlm_adapter, affected, args.dataset, "dev")
+        affected_pages = sum(len(truth.pages) for truth in affected)
+        part = result["systems"][vlm_adapter.name]["dev"]
+        _replace_document_rows(part, refreshed["documents"])
+        part["timing_cache_state"] = _cache_state(vlm_adapter.name, part["summary"]["overall"])
+        result["baseline_configurations"][vlm_adapter.name] = vlm_adapter.configuration()
+        result["metadata"]["run_date_utc"] = datetime.now(UTC).isoformat()
+        result["metadata"]["working_tree_dirty"] = True
+        result["metadata"]["targeted_vlm_refresh"] = {
+            "documents": sorted(VLM_MERGED_REFRESH_IDS),
+            "pages": affected_pages,
+            "succeeded": affected_pages - refreshed["summary"]["overall"]["failed_pages"],
+            "prompt_version": PROMPT_VERSION,
+            "options": {
+                "temperature": settings.vision_temperature,
+                "repeat_penalty": settings.vision_repeat_penalty,
+                "repeat_last_n": settings.vision_repeat_last_n,
+                "num_predict": settings.vision_num_predict,
+            },
+            "cause": "Ollama constrained decoding aborted at token repeat limit",
+        }
         (args.output_dir / "latest.json").write_text(json.dumps(result, indent=2) + "\n")
         (args.output_dir / "latest.md").write_text(markdown(result))
         return

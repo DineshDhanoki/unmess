@@ -5,6 +5,7 @@
 .ruff_cache/
 .venv/
 .cache/
+eval/real_smoke/
 __pycache__/
 *.egg-info/
 *.py[cod]

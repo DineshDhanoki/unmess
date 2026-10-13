@@ -10,3 +10,7 @@ parser_max_skew_degrees = 3.0
 quality_review_threshold = 0.70
 quality_visual_noise_threshold = 0.85
 vision_timeout_s = 120.0
+vision_temperature = 0.1
+vision_repeat_penalty = 1.1
+vision_repeat_last_n = 64
+vision_num_predict = 2048

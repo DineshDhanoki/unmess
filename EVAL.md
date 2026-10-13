@@ -261,11 +261,12 @@ The two Docling baselines are reported without choosing between them on DEV:
   `3.0`, confidence threshold `0.5`, accurate table structure, and cell matching. Model
   downloads are disabled and prefetched local artifacts are required.
 
-Unmess and VLM-only both use `qwen2.5vl`, prompt contract `phase2b-v2`, 110-DPI rendering,
+The original Phase 2e pass used `qwen2.5vl`, prompt contract `phase2b-v2`, 110-DPI rendering,
 a 120-second timeout per attempt, one retry after the first attempt, and the same policy:
-return a failed `ParsedPage` after all attempts and retain it in every denominator. The three
-VLM-only merged-table pages that returned local Ollama HTTP 500 errors still failed under this
-symmetric retry policy and are listed in both reports.
+return a failed `ParsedPage` after all attempts and retain it in every denominator. At that
+stage the three VLM-only merged-table pages still failed under the symmetric retry policy and
+were listed in both reports. The targeted diagnosis and `phase2e-v3` correction below supersede
+their warm DEV failure status; the earlier cold report remains an unchanged record of its run.
 
 Controlled cold timing used this fixed sequence: PyMuPDF, Docling default, forced multilingual
 Docling, Unmess, VLM-only. The Mac was plugged in and held awake with `caffeinate -i`; the vision
@@ -283,3 +284,21 @@ intra-system cache hits despite an initially empty directory. It was stopped bef
 its times are not reported, and no routing or gate threshold changed in response. The replacement
 run disabled reads, used new directories, and recorded zero hits for every system. This protocol
 correction is logged in `eval/TUNING_PHASE2E.md`.
+
+### Merged-table VLM repetition failure
+
+The three VLM-only HTTP 500 failures on DEV merged-table pages were an Ollama constrained-
+decoding repetition issue. At 110 DPI each request image was 935 by 1210 pixels and about
+41 KB as PNG (about 55 KB base64); installed model metadata reported a 128,000-token context.
+Ollama's response body was `prediction aborted, token repeat limit reached`. Generic JSON mode
+failed identically, while unconstrained output succeeded but did not satisfy the strict JSON
+contract. macOS unified Ollama logs contained only network/trust events and no useful runner
+stack trace, so the API error body was the diagnostic. The installed model tag supplied
+temperature `0.0001`. With the schema retained,
+temperature `0.1`, repeat penalty `1.1`, repeat window `64`, and output limit `2048` made all
+three targeted pages succeed. These options are environment-backed and shared by routed VLM
+and VLM-only; the cache prompt/config version was advanced to `phase2e-v3`. Only the affected
+DEV pages were rerun. Unaffected rows were retained, and the Phase 2e report labels the aggregate
+as an incremental refresh rather than a homogeneous full rerun.
+All three pages returned text after the change, but their merged-table cell F1 remained zero:
+ordinary Markdown cannot encode the reference merged-cell spans.

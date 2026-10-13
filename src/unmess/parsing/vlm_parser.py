@@ -14,7 +14,7 @@ from unmess.config import Settings
 from unmess.models import BBox, Block, Cell, Table
 from unmess.parsing.base import ParsedPage
 
-PROMPT_VERSION = "phase2b-v2"
+PROMPT_VERSION = "phase2e-v3"
 PROMPT = (
     "Transcribe every visible word on this document page. Preserve reading order and use "
     "Markdown table syntax for tables. Return ONLY a JSON object with one key, markdown, "
@@ -80,8 +80,9 @@ class VisionClient(Protocol):
 
 
 class OllamaVisionClient:
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, options: dict[str, float | int]) -> None:
         self.url = url.rstrip("/")
+        self.options = options
 
     def generate(self, model: str, prompt: str, image_b64: str, timeout_s: float) -> str:
         with httpx.Client(timeout=timeout_s) as client:
@@ -92,6 +93,7 @@ class OllamaVisionClient:
                     "prompt": prompt,
                     "images": [image_b64],
                     "format": VisionResponse.model_json_schema(),
+                    "options": self.options,
                     "stream": False,
                 },
             )
@@ -114,7 +116,15 @@ class VLMParser:
         allow_model_calls: bool = True,
     ) -> None:
         self.settings = settings
-        self.client = client or OllamaVisionClient(str(settings.ollama_url))
+        self.client = client or OllamaVisionClient(
+            str(settings.ollama_url),
+            {
+                "temperature": settings.vision_temperature,
+                "repeat_penalty": settings.vision_repeat_penalty,
+                "repeat_last_n": settings.vision_repeat_last_n,
+                "num_predict": settings.vision_num_predict,
+            },
+        )
         self.allow_model_calls = allow_model_calls
 
     def _image(self, pdf: Path, page_number: int) -> bytes:

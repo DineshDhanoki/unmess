@@ -35,6 +35,10 @@ class Settings(BaseSettings):
     vision_timeout_s: float = Field(default=120.0, gt=0, le=300)
     vision_retries: int = Field(default=1, ge=0, le=5)
     vision_raster_dpi: int = Field(default=110, ge=50, le=300)
+    vision_temperature: float = Field(default=0.1, ge=0, le=2)
+    vision_repeat_penalty: float = Field(default=1.1, gt=0, le=2)
+    vision_repeat_last_n: int = Field(default=64, ge=0, le=4096)
+    vision_num_predict: int = Field(default=2048, gt=0, le=32768)
     vision_cache_dir: Path = Path(".cache/unmess/vlm")
     vision_cache_reads: bool = True
     chunk_target_tokens: int = Field(default=600, gt=0)

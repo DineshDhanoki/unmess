@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from unmess.config import Settings
-from unmess.parsing.vlm_parser import VLMParser, markdown_tables
+from unmess.parsing.vlm_parser import OllamaVisionClient, VLMParser, markdown_tables
 
 
 class FakeClient:
@@ -27,6 +27,24 @@ class FailingClient:
     def generate(self, model: str, prompt: str, image_b64: str, timeout_s: float) -> str:
         self.calls += 1
         raise RuntimeError("temporary local model failure")
+
+
+def test_default_ollama_client_receives_configured_generation_options() -> None:
+    settings = Settings(
+        vision_temperature=0.2,
+        vision_repeat_penalty=1.2,
+        vision_repeat_last_n=32,
+        vision_num_predict=1024,
+    )
+    parser = VLMParser(settings)
+
+    assert isinstance(parser.client, OllamaVisionClient)
+    assert parser.client.options == {
+        "temperature": 0.2,
+        "repeat_penalty": 1.2,
+        "repeat_last_n": 32,
+        "num_predict": 1024,
+    }
 
 
 def test_vlm_cache_uses_model_and_prompt_version(

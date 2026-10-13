@@ -20,6 +20,10 @@ class VLMEveryPage:
         return {
             "model": self.settings.vision_model,
             "raster_dpi": self.settings.vision_raster_dpi,
+            "temperature": self.settings.vision_temperature,
+            "repeat_penalty": self.settings.vision_repeat_penalty,
+            "repeat_last_n": self.settings.vision_repeat_last_n,
+            "num_predict": self.settings.vision_num_predict,
             "prompt_version": PROMPT_VERSION,
             "timeout_s": self.settings.vision_timeout_s,
             "retries_after_first_attempt": self.settings.vision_retries,

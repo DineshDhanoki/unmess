@@ -30,7 +30,8 @@ threshold remained `0.70`.
 5. The VLM-only baseline was changed from cache-miss failure to the same live local-model
    policy as routed VLM: 120 seconds per attempt, one retry, and a failed `ParsedPage` after
    both attempts. The three earlier merged-table failures (`00`, `02`, and `04`) were retried
-   and still returned HTTP 500. They remain failures in all denominators; the overall VLM-only
+   and still returned HTTP 500. At that stage they remained failures in all denominators; the
+   overall VLM-only
    CER `0.17311`, WER `0.26689`, table F1 `0.64718`, and failed-page count `3` did not move.
 
 The final gate flags all seven bad pages and three good pages. This small, templated DEV set
@@ -47,3 +48,17 @@ gate, or bad-page threshold changed. The runner now disables cache reads during 
 still writing successful responses. A unit test verifies that two identical pages make two model
 calls and report zero hits. The complete replacement pass used fresh directories and every system
 reported zero cache hits.
+
+## Merged-table VLM HTTP 500 diagnosis
+
+The three VLM-only failures were reproduced on DEV pages `synthetic-merged_table-00`, `02`,
+and `04`. Ollama returned `prediction aborted, token repeat limit reached`. Their 110-DPI
+renders were 935 by 1210 pixels and roughly 41 KB PNG; model metadata reported a 128,000-token
+context, excluding image size and context exhaustion. Schema mode and generic JSON mode failed;
+unconstrained output succeeded but violated the required response contract. The model tag's
+temperature was `0.0001`. The shared client now sends temperature `0.1`, repeat penalty `1.1`,
+repeat window `64`, and output limit `2048`, while keeping schema validation. The cache version
+is `phase2e-v3`. Only the three affected pages were rerun; the report records their outcomes and
+labels the baseline aggregate as incrementally refreshed.
+All three targeted pages then returned text, but each still scored `0.0` merged-table cell F1
+because the VLM Markdown contract cannot express the required cell spans.
