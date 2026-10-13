@@ -27,13 +27,16 @@ class Settings(BaseSettings):
     parser_table_likelihood_threshold: float = Field(default=0.55, ge=0, le=1)
     parser_scan_likelihood_threshold: float = Field(default=0.60, ge=0, le=1)
     parser_complex_layout_threshold: float = Field(default=0.90, ge=0, le=1)
+    parser_uncovered_ink_threshold: float = Field(default=0.05, ge=0, le=1)
     parser_garbled_ratio_threshold: float = Field(default=0.10, ge=0, le=1)
     parser_max_skew_degrees: float = Field(default=3.0, ge=0, le=90)
     quality_review_threshold: float = Field(default=0.70, ge=0, le=1)
+    quality_visual_noise_threshold: float = Field(default=0.85, ge=0, le=1)
     vision_timeout_s: float = Field(default=120.0, gt=0, le=300)
     vision_retries: int = Field(default=1, ge=0, le=5)
     vision_raster_dpi: int = Field(default=110, ge=50, le=300)
     vision_cache_dir: Path = Path(".cache/unmess/vlm")
+    vision_cache_reads: bool = True
     chunk_target_tokens: int = Field(default=600, gt=0)
     chunk_overlap_tokens: int = Field(default=80, ge=0)
 

@@ -60,9 +60,7 @@ def markdown_tables(markdown: str, page_number: int) -> list[Table]:
                 table_index = len(tables)
                 tables.append(
                     Table(
-                        table_id=(
-                            "line-items" if table_index == 0 else f"table-{table_index}"
-                        ),
+                        table_id=("line-items" if table_index == 0 else f"table-{table_index}"),
                         page_numbers=[page_number],
                         cells=cells,
                     )
@@ -140,7 +138,7 @@ class VLMParser:
         try:
             image = self._image(pdf, page_number)
             cache_path = self._cache_path(image)
-            cache_hit = cache_path.is_file()
+            cache_hit = self.settings.vision_cache_reads and cache_path.is_file()
             if cache_hit:
                 raw = cache_path.read_text(encoding="utf-8")
             else:
@@ -166,7 +164,7 @@ class VLMParser:
                         cache_path.parent.mkdir(parents=True, exist_ok=True)
                         cache_path.write_text(parsed.model_dump_json(), encoding="utf-8")
                         break
-                    except (httpx.HTTPError, ValueError, ValidationError) as exc:
+                    except Exception as exc:
                         errors.append(f"{type(exc).__name__}: {exc}")
                 else:
                     return ParsedPage.failed(

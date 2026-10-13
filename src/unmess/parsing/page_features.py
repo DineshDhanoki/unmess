@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import cast
 
 import pymupdf
-from PIL import Image
+from PIL import Image, ImageChops, ImageDraw
 
 
 @dataclass(frozen=True)
@@ -23,6 +23,9 @@ class PageFeatures:
     dominant_script: str
     layout_complexity: float
     text_ink_alignment: float = 1.0
+    uncovered_ink_ratio: float = 0.0
+    rendered_noise_score: float = 0.0
+    previous_page_table_likelihood: float = 0.0
 
 
 def text_density(text: str, width: float, height: float) -> float:
@@ -105,6 +108,65 @@ def text_ink_alignment(
     return occupied / len(word_boxes)
 
 
+def uncovered_ink_ratio(
+    gray: Image.Image,
+    word_boxes: Sequence[tuple[float, float, float, float]],
+    image_rectangles: Sequence[tuple[float, float, float, float]],
+    width: float,
+    height: float,
+) -> float:
+    """Share of image-region ink outside padded text-layer word boxes."""
+    if not image_rectangles:
+        return 0.0
+    image = gray.convert("L")
+    dark = image.point(lambda value: 255 if value < 210 else 0)
+    covered = Image.new("L", image.size, 0)
+    image_regions = Image.new("L", image.size, 0)
+    draw = ImageDraw.Draw(covered)
+    image_draw = ImageDraw.Draw(image_regions)
+    scale_x, scale_y = image.width / width, image.height / height
+    for x0, y0, x1, y1 in image_rectangles:
+        image_draw.rectangle(
+            (int(x0 * scale_x), int(y0 * scale_y), int(x1 * scale_x), int(y1 * scale_y)),
+            fill=255,
+        )
+    for x0, y0, x1, y1 in word_boxes:
+        left = max(0, int(x0 * scale_x) - 1)
+        top = max(0, int(y0 * scale_y) - 1)
+        right = min(image.width - 1, int(x1 * scale_x) + 1)
+        bottom = min(image.height - 1, int(y1 * scale_y) + 1)
+        draw.rectangle((left, top, right, bottom), fill=255)
+    image_ink = ImageChops.multiply(dark, image_regions)
+    outside = ImageChops.subtract(image_ink, covered)
+    total_dark = image.width * image.height - image_ink.histogram()[0]
+    outside_dark = image.width * image.height - outside.histogram()[0]
+    return outside_dark / total_dark if total_dark else 0.0
+
+
+def rendered_noise_score(gray: Image.Image) -> float:
+    """Generic high-frequency noise estimate, normalized to 0-1."""
+    image = gray.convert("L")
+    pixels = image.load()
+    assert pixels is not None
+    values: list[float] = []
+    for y in range(1, image.height - 1, 2):
+        for x in range(1, image.width - 1, 2):
+            center = cast(int, pixels[x, y])
+            laplacian = (
+                4 * center
+                - cast(int, pixels[x - 1, y])
+                - cast(int, pixels[x + 1, y])
+                - cast(int, pixels[x, y - 1])
+                - cast(int, pixels[x, y + 1])
+            )
+            values.append(float(laplacian))
+    if len(values) < 2:
+        return 0.0
+    mean = sum(values) / len(values)
+    variance = sum((value - mean) ** 2 for value in values) / len(values)
+    return min(1.0, variance / 1000.0)
+
+
 def dominant_script(text: str) -> str:
     devanagari = sum("\u0900" <= char <= "\u097f" for char in text)
     latin = sum("A" <= char <= "Z" or "a" <= char <= "z" for char in text)
@@ -156,6 +218,9 @@ def from_observations(
     block_count: int,
     skew_degrees: float,
     ink_alignment: float = 1.0,
+    uncovered_ink: float = 0.0,
+    noise_score: float = 0.0,
+    previous_table_score: float = 0.0,
 ) -> PageFeatures:
     density = text_density(text, width, height)
     coverage = area_coverage(image_rectangles, width, height)
@@ -171,34 +236,42 @@ def from_observations(
         dominant_script=dominant_script(text),
         layout_complexity=layout_complexity(block_count, aligned_columns, table_score),
         text_ink_alignment=ink_alignment,
+        uncovered_ink_ratio=uncovered_ink,
+        rendered_noise_score=noise_score,
+        previous_page_table_likelihood=previous_table_score,
     )
+
+
+def _table_observations(page: pymupdf.Page) -> tuple[str, int, int]:
+    text = page.get_text("text")
+    horizontal = sum(
+        item[0] == "l" and abs(item[1].y - item[2].y) < 2
+        for drawing in page.get_drawings()
+        for item in drawing["items"]
+    )
+    buckets: dict[int, int] = {}
+    for word in page.get_text("words"):
+        column = round(float(word[0]) / 25)
+        buckets[column] = buckets.get(column, 0) + 1
+    return text, horizontal, sum(count >= 3 for count in buckets.values())
 
 
 def inspect_page(pdf: Path, page_number: int) -> PageFeatures:
     """Collect observations; feature calculations remain independently testable."""
     with pymupdf.open(pdf) as document:
         page = document[page_number - 1]
-        text = page.get_text("text")
+        text, horizontal, columns = _table_observations(page)
         blocks = page.get_text("blocks")
         image_rects = [
             (float(rect.x0), float(rect.y0), float(rect.x1), float(rect.y1))
             for image in page.get_images(full=True)
             for rect in page.get_image_rects(image[0])
         ]
-        drawings = page.get_drawings()
-        horizontal = sum(
-            item[0] == "l" and abs(item[1].y - item[2].y) < 2
-            for drawing in drawings
-            for item in drawing["items"]
-        )
         words = page.get_text("words")
-        buckets: dict[int, int] = {}
-        for word in words:
-            column = round(float(word[0]) / 25)
-            buckets[column] = buckets.get(column, 0) + 1
-        columns = sum(count >= 3 for count in buckets.values())
         skew = 0.0
         ink_alignment = 1.0
+        missing_ink = 0.0
+        noise_score = 0.0
         if image_rects or words:
             pix = page.get_pixmap(matrix=pymupdf.Matrix(0.3, 0.3), colorspace=pymupdf.csGRAY)
             gray = Image.frombytes("L", (pix.width, pix.height), pix.samples)
@@ -210,6 +283,22 @@ def inspect_page(pdf: Path, page_number: int) -> PageFeatures:
                 page.rect.width,
                 page.rect.height,
             )
+            missing_ink = uncovered_ink_ratio(
+                gray,
+                [(float(w[0]), float(w[1]), float(w[2]), float(w[3])) for w in words],
+                image_rects,
+                page.rect.width,
+                page.rect.height,
+            )
+            noise_score = rendered_noise_score(gray)
+        previous_table_score = 0.0
+        if page_number > 1:
+            previous_text, previous_horizontal, previous_columns = _table_observations(
+                document[page_number - 2]
+            )
+            previous_table_score = table_likelihood(
+                previous_text, previous_horizontal, previous_columns
+            )
         return from_observations(
             text,
             page.rect.width,
@@ -220,4 +309,7 @@ def inspect_page(pdf: Path, page_number: int) -> PageFeatures:
             len(blocks),
             skew,
             ink_alignment,
+            missing_ink,
+            noise_score,
+            previous_table_score,
         )

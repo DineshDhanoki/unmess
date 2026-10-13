@@ -1,6 +1,7 @@
 """Per-page parser selection and single-step quality escalation."""
 
 from collections.abc import Callable
+from dataclasses import asdict
 from pathlib import Path
 from time import perf_counter
 
@@ -13,7 +14,7 @@ from unmess.parsing.page_features import PageFeatures, inspect_page
 from unmess.parsing.pymupdf_parser import PyMuPDFParser
 from unmess.parsing.vlm_parser import VLMParser
 from unmess.quality.gates import review_gate
-from unmess.quality.scorer import score_page
+from unmess.quality.scorer import combine_signals, score_page
 
 logger = structlog.get_logger(__name__)
 
@@ -43,9 +44,12 @@ class PageRouter:
             or features.embedded_text_density < settings.parser_text_density_threshold
         ):
             return "vlm", "scan_or_low_text_density"
+        if features.table_likelihood >= settings.parser_table_likelihood_threshold:
+            return "docling", "complex_layout_or_table"
+        if features.uncovered_ink_ratio >= settings.parser_uncovered_ink_threshold:
+            return "vlm", "rendered_ink_not_covered_by_text_layer"
         if (
-            features.table_likelihood >= settings.parser_table_likelihood_threshold
-            or features.layout_complexity >= settings.parser_complex_layout_threshold
+            features.layout_complexity >= settings.parser_complex_layout_threshold
             or abs(features.skew_degrees) > settings.parser_max_skew_degrees
         ):
             return "docling", "complex_layout_or_table"
@@ -70,6 +74,10 @@ class PageRouter:
                 parsed = ParsedPage.failed(page_number, parser_name, f"{type(exc).__name__}: {exc}")
             score = score_page(parsed, features, self.settings)
             parsed.quality_score = score.score
+            parsed.quality_signals = score.signals
+            parsed.source_features = {
+                name: value for name, value in asdict(features).items() if name != "embedded_text"
+            }
             attempts.append(
                 ParserAttempt(
                     parser=parser_name,
@@ -81,10 +89,18 @@ class PageRouter:
                     cache_hit=parsed.cache_hit,
                 )
             )
+            escalation_signals = {
+                name: value
+                for name, value in score.signals.items()
+                if name != "cross_page_table_continuity"
+            }
+            escalation_score = combine_signals(escalation_signals)
             if (
                 step == 0
                 and parser_name != "vlm"
-                and (not parsed.success or score.score < self.settings.quality_review_threshold)
+                and (
+                    not parsed.success or escalation_score < self.settings.quality_review_threshold
+                )
             ):
                 previous_attempt = parsed
                 parser_name, reason = (

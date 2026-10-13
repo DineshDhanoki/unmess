@@ -1,8 +1,12 @@
+import io
 from pathlib import Path
+
+import pymupdf
+from PIL import Image, ImageDraw
 
 from unmess.config import Settings
 from unmess.parsing.base import ParsedPage
-from unmess.parsing.page_features import PageFeatures
+from unmess.parsing.page_features import PageFeatures, inspect_page
 from unmess.parsing.router import PageRouter
 from unmess.quality.gates import review_gate
 from unmess.quality.scorer import score_page
@@ -113,3 +117,47 @@ def test_dense_but_ink_misaligned_text_escalates() -> None:
     parsed = router.parse_page(Path("broken.pdf"), 1)
     assert [attempt.parser for attempt in parsed.attempts] == ["pymupdf", "vlm"]
     assert parsed.attempts[0].quality_score < Settings().quality_review_threshold
+
+
+def _png_bytes(image: Image.Image) -> bytes:
+    stream = io.BytesIO()
+    image.save(stream, format="PNG")
+    return stream.getvalue()
+
+
+def test_uncovered_english_raster_line_and_stamp_route_to_vision(tmp_path: Path) -> None:
+    pdf = tmp_path / "mixed-visible-content.pdf"
+    document = pymupdf.open()
+    page = document.new_page(width=612, height=792)
+    for index, line in enumerate(
+        (
+            "Synthetic service record",
+            "Document code: FIXTURE-001",
+            "Seller: Example Test Vendor",
+            "Issue date: 2026-10-12",
+            "Total: INR 12,345",
+        )
+    ):
+        page.insert_text((60, 80 + index * 30), line, fontsize=12)
+    raster_line = Image.new("RGB", (420, 54), "white")
+    ImageDraw.Draw(raster_line).text((8, 15), "Approved after visual inspection", fill="black")
+    page.insert_image(pymupdf.Rect(60, 260, 480, 314), stream=_png_bytes(raster_line))
+    stamp = Image.new("RGB", (110, 70), "white")
+    stamp_draw = ImageDraw.Draw(stamp)
+    stamp_draw.ellipse((8, 5, 102, 64), outline="navy", width=4)
+    stamp_draw.line((18, 48, 44, 25, 70, 51, 94, 18), fill="navy", width=3)
+    page.insert_image(pymupdf.Rect(420, 350, 530, 420), stream=_png_bytes(stamp))
+    document.set_metadata({"producer": "Unmess test fixture", "creationDate": "D:20261012000000Z"})
+    document.save(pdf, garbage=4, deflate=True, no_new_id=True)
+    document.close()
+
+    observed = inspect_page(pdf, 1)
+    assert observed.dominant_script == "Latin"
+    assert observed.uncovered_ink_ratio >= Settings().parser_uncovered_ink_threshold
+    fast = StubParser("pymupdf", observed.embedded_text)
+    vision = StubParser("vlm", observed.embedded_text + " Approved after visual inspection")
+    router = PageRouter(Settings(), fast, StubParser("docling", observed.embedded_text), vision)
+    parsed = router.parse_page(pdf, 1)
+    assert parsed.parser_name == "vlm"
+    assert parsed.route_reason == "rendered_ink_not_covered_by_text_layer"
+    assert fast.calls == 0 and vision.calls == 1

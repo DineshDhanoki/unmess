@@ -14,16 +14,19 @@ class VLMEveryPage:
 
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
-        self.parser = VLMParser(settings, allow_model_calls=False)
+        self.parser = VLMParser(settings)
 
     def configuration(self) -> dict[str, object]:
         return {
             "model": self.settings.vision_model,
             "raster_dpi": self.settings.vision_raster_dpi,
             "prompt_version": PROMPT_VERSION,
+            "timeout_s": self.settings.vision_timeout_s,
+            "retries_after_first_attempt": self.settings.vision_retries,
+            "failure_policy": "return failed ParsedPage after all attempts; never drop page",
             "response_contract": "strict JSON object with Markdown transcription",
             "table_contract": "pipe-table Markdown parsed into Table cells; spans unavailable",
-            "cache": "read-only; cache misses are failures; no model rerun",
+            "cache": "read/write; key includes page image, model tag, and prompt version",
         }
 
     def parse(self, path: Path, doc_id: str) -> ParsedDocument:

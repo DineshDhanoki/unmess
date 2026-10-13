@@ -38,6 +38,12 @@ The [Phase 2d DEV-only fairness report](eval/results/phase2d-dev.md) records aud
 configurations, review-gate evaluation, uncertainty intervals, failures, and cache-state-aware
 timing. It remains a development-set report, not a test-set claim.
 
+The [Phase 2e DEV-only report](eval/results/phase2e-dev.md) evaluates generic mixed-content
+routing, the review gate, leave-one-category-out stress tests, and controlled cold-cache cost.
+The separate [cold timing report](eval/results/phase2e-cold.md) records the machine, model,
+system order, cache-hit counters, failures, and measured wall times. These are DEV-only
+synthetic-corpus results; the quality gate remains experimental pending the preregistered test run.
+
 ## Quick start
 
 Install Python 3.11 or 3.12, Docker, and

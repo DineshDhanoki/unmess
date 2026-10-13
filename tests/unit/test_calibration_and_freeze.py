@@ -27,6 +27,7 @@ def test_calibration_excludes_failed_pages() -> None:
                 "page_success": [False, True, True],
                 "review_flags": [True, True, False],
                 "failed_pages": 1,
+                "category": "fixture",
             }
         ]
     )

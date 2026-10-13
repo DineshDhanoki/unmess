@@ -31,6 +31,8 @@ class ParsedPage:
     error: str | None = None
     reported_confidence: float | None = None
     quality_score: float = 0.0
+    quality_signals: dict[str, float] = field(default_factory=dict)
+    source_features: dict[str, float | str] = field(default_factory=dict)
     review_reasons: list[str] = field(default_factory=list)
     route_reason: str = ""
     attempts: list[ParserAttempt] = field(default_factory=list)

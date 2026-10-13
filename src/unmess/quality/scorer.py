@@ -21,6 +21,8 @@ WEIGHTS = {
     "table_consistency": 0.15,
     "parser_confidence": 0.05,
     "parser_agreement": 0.05,
+    "visual_clarity": 0.30,
+    "cross_page_table_continuity": 0.40,
 }
 
 
@@ -28,6 +30,15 @@ WEIGHTS = {
 class ScoreResult:
     score: float
     signals: dict[str, float]
+
+
+def combine_signals(signals: dict[str, float]) -> float:
+    """Combine available signals while renormalizing missing-signal weights."""
+    known = {name: value for name, value in signals.items() if name in WEIGHTS}
+    weight = sum(WEIGHTS[name] for name in known)
+    if not weight:
+        return 0.0
+    return sum(value * WEIGHTS[name] for name, value in known.items()) / weight
 
 
 def _words(value: str) -> set[str]:
@@ -70,6 +81,10 @@ def score_page(page: ParsedPage, features: PageFeatures, settings: Settings) -> 
         signals["text_ink_alignment"] = features.text_ink_alignment
     if features.table_likelihood >= settings.parser_table_likelihood_threshold:
         signals["table_consistency"] = _table_consistency(page)
+        if features.previous_page_table_likelihood >= settings.parser_table_likelihood_threshold:
+            signals["cross_page_table_continuity"] = 0.0
+    if features.image_coverage >= 0.5:
+        signals["visual_clarity"] = 1.0 - features.rendered_noise_score
     if page.reported_confidence is not None:
         signals["parser_confidence"] = page.reported_confidence
     if (
@@ -84,8 +99,4 @@ def score_page(page: ParsedPage, features: PageFeatures, settings: Settings) -> 
             if source_words | parsed_words
             else 1.0
         )
-    weight = sum(WEIGHTS[name] for name in signals)
-    return ScoreResult(
-        score=sum(value * WEIGHTS[name] for name, value in signals.items()) / weight,
-        signals=signals,
-    )
+    return ScoreResult(score=combine_signals(signals), signals=signals)

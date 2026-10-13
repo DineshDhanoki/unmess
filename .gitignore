@@ -21,3 +21,7 @@ eval/results/*
 !eval/results/phase2c-dev.json
 !eval/results/phase2d-dev.md
 !eval/results/phase2d-dev.json
+!eval/results/phase2e-dev.md
+!eval/results/phase2e-dev.json
+!eval/results/phase2e-cold.md
+!eval/results/phase2e-cold.json

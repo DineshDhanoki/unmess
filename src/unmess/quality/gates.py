@@ -20,6 +20,16 @@ def review_gate(
         reasons.append("table_not_recovered")
     if garbled_ratio(page.text) > settings.parser_garbled_ratio_threshold:
         reasons.append("garbled_text")
+    if (
+        features.table_likelihood >= settings.parser_table_likelihood_threshold
+        and features.previous_page_table_likelihood >= settings.parser_table_likelihood_threshold
+    ):
+        reasons.append("cross_page_table_continuity_unverified")
+    if (
+        features.image_coverage >= 0.5
+        and features.rendered_noise_score >= settings.quality_visual_noise_threshold
+    ):
+        reasons.append("visually_degraded_source")
     return QualityReport(
         document_id=document_id,
         page_number=page.page_number,

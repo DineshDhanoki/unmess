@@ -67,13 +67,21 @@ remaining weights renormalized:
 | Table consistency | 0.15 | Nonempty, nonoverlapping structured cells when page features predict a table. |
 | Parser confidence | 0.05 | Parser-provided value, when available. |
 | Parser agreement | 0.05 | Word-set overlap with embedded text only when that text passes plausibility and ink checks. |
+| Visual clarity | 0.30 | One minus normalized rendered-image noise, applied only to image-dominant pages. |
+| Cross-page table continuity | 0.40 | Zero when consecutive pages are independently table-likely, because continuation structure is not yet verified. |
 
 Failure scores zero. Review reasons include `parser_failed`, `below_quality_threshold`,
-`empty_text`, `table_not_recovered`, and `garbled_text`. Thresholds are environment settings;
+`empty_text`, `table_not_recovered`, `garbled_text`,
+`cross_page_table_continuity_unverified`, and `visually_degraded_source`. The continuity signal
+is review-only: it does not replace a successful structured parse with VLM output. Routing also
+measures rendered ink inside image regions that is not covered by embedded word boxes. This
+generic signal detects mixed visible content such as raster text, stamps, and signatures without
+checking a language, category, or generator-specific coordinate. Thresholds are environment settings;
 Phase 2b tunes only `eval/config/phase2b_dev.toml` until a new freeze is approved. Vision
 requests use a strict JSON envelope containing Markdown text. The fallback attaches a
 full-page bbox and does not claim cell geometry from the VLM; structured tables come from
 Docling when available. Successful vision responses are cached by page-image hash, model tag,
-and prompt version under the ignored local cache directory. Only local Ollama hosts are
+and prompt version under the ignored local cache directory. Cache reads can be disabled for
+controlled cold timing while successful responses are still written for audit/resume. Only local Ollama hosts are
 accepted. Preflight exercises all three parsers before test-split evaluation; the old freeze
 is superseded.

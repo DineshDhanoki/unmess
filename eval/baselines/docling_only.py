@@ -18,12 +18,26 @@ from unmess.parsing.docling_parser import make_docling_converter
 class DoclingOnly:
     name = "docling_only"
 
-    def __init__(self) -> None:
+    def __init__(self, *, forced_multilingual_ocr: bool = True) -> None:
         self._converter: Any = None
+        self.forced_multilingual_ocr = forced_multilingual_ocr
 
-    @staticmethod
-    def configuration() -> dict[str, object]:
+    def configuration(self) -> dict[str, object]:
+        if not self.forced_multilingual_ocr:
+            return {
+                "profile": "Docling defaults",
+                "do_ocr": True,
+                "ocr_engine": "RapidOCR auto/default",
+                "ocr_languages": [],
+                "ocr_mode": "default",
+                "force_full_page_ocr": False,
+                "do_table_structure": True,
+                "table_structure_mode": "accurate",
+                "do_cell_matching": True,
+                "artifacts": "local only; downloads disabled",
+            }
         return {
+            "profile": "forced multilingual full-page OCR",
             "do_ocr": True,
             "ocr_engine": "EasyOCR",
             "ocr_languages": ["en", "hi"],
@@ -47,11 +61,14 @@ class DoclingOnly:
             raise RuntimeError("skipped: optional dependency not installed")
         start = perf_counter()
         if self._converter is None:
-            self._converter = make_docling_converter(
-                Settings().docling_artifacts_path,
-                ocr_languages=["en", "hi"],
-                force_full_page_ocr=True,
-            )
+            if self.forced_multilingual_ocr:
+                self._converter = make_docling_converter(
+                    Settings().docling_artifacts_path,
+                    ocr_languages=["en", "hi"],
+                    force_full_page_ocr=True,
+                )
+            else:
+                self._converter = make_docling_converter(Settings().docling_artifacts_path)
         document = self._converter.convert(str(path)).document
         page_count = len(pymupdf.open(path))
         page_texts = ["" for _ in range(page_count)]
@@ -122,3 +139,10 @@ class DoclingOnly:
                 for index, text in enumerate(page_texts, 1)
             ],
         )
+
+
+class DoclingDefault(DoclingOnly):
+    name = "docling_default"
+
+    def __init__(self) -> None:
+        super().__init__(forced_multilingual_ocr=False)

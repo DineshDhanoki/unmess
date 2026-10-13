@@ -232,3 +232,54 @@ EasyOCR with explicit `en` and `hi`, while the VLM prompt is script-neutral and 
 visible word. The routed system still chooses PyMuPDF for the synthetic bilingual digital
 pages and consequently omits the rasterized Hindi line; this is a routing limitation, not a
 missing language setting in either heavy parser.
+
+## Phase 2e DEV-only routing and gate audit
+
+Phase 2e corrects the mixed-content routing limitation with a generic feature: dark rendered
+ink inside image rectangles that is not covered by padded embedded-text word boxes. It does
+not inspect Devanagari, a dataset category, known corruption text, or generator coordinates.
+An out-of-dataset unit fixture contains a clean English text layer, a separate raster English
+line, and a stamp/signature-like image; the signal routes it to the OCR/VLM path. On the five
+DEV bilingual pages, the same signal recovered the previously omitted Hindi line. The report
+contains every before/after diff and the final page-feature values.
+
+The final DEV gate observed seven bad pages out of 52, so its AUROC `0.9794`, precision `0.7000`,
+and recall `1.0000` are **unstable**. All seven bad pages were flagged and three good pages were
+also flagged. Five bad pages are second pages of spanning tables; local cell structure appears
+consistent, but continuation structure across the page boundary is unverified. The remaining
+two are heavily degraded image pages. The earlier scorer lacked both cross-page continuity and
+rendered visual-clarity signals. Leave-one-category-out is reported as a fixed-scorer stress
+test, not independent validation: most held-out categories contain no bad pages, and every
+holdout has fewer than ten bad pages. The gate remains experimental pending the preregistered
+test run; the locked bad-page cutoff remains `0.90`.
+
+The two Docling baselines are reported without choosing between them on DEV:
+
+- `docling_default`: Docling defaults, OCR on, RapidOCR auto/default languages, no forced
+  full-page OCR, accurate table structure, and cell matching.
+- `docling_only`: EasyOCR forced on the full page with languages `en` and `hi`, OCR scale
+  `3.0`, confidence threshold `0.5`, accurate table structure, and cell matching. Model
+  downloads are disabled and prefetched local artifacts are required.
+
+Unmess and VLM-only both use `qwen2.5vl`, prompt contract `phase2b-v2`, 110-DPI rendering,
+a 120-second timeout per attempt, one retry after the first attempt, and the same policy:
+return a failed `ParsedPage` after all attempts and retain it in every denominator. The three
+VLM-only merged-table pages that returned local Ollama HTTP 500 errors still failed under this
+symmetric retry policy and are listed in both reports.
+
+Controlled cold timing used this fixed sequence: PyMuPDF, Docling default, forced multilingual
+Docling, Unmess, VLM-only. The Mac was plugged in and held awake with `caffeinate -i`; the vision
+model was loaded first and its load time was excluded. Each VLM-using system had a unique empty
+cache directory with reads disabled, writes retained, and a zero-hit validity requirement. One
+pass was run because the estimate for two exceeded 45 minutes. On the recorded Apple M4 machine,
+Unmess took `643.8690` seconds for 52 pages versus `1384.3580` seconds for VLM-only; Unmess was
+slower than PyMuPDF and both Docling-only configurations. Thermal throttling was not instrumented,
+so these times are machine-specific observations rather than a general speed claim. Exact
+hardware, OS, Ollama version, per-system accuracy, failures, and cache counters are in
+`eval/results/phase2e-cold.md` and `.json`.
+
+The first cold attempt was invalid because repeated synthetic page content produced four
+intra-system cache hits despite an initially empty directory. It was stopped before completion,
+its times are not reported, and no routing or gate threshold changed in response. The replacement
+run disabled reads, used new directories, and recorded zero hits for every system. This protocol
+correction is logged in `eval/TUNING_PHASE2E.md`.

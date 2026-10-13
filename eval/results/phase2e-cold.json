@@ -1,0 +1,5385 @@
+{
+  "run_date_utc": "2026-10-12T21:25:38.740160+00:00",
+  "system_order": [
+    "pymupdf_fixed",
+    "docling_default",
+    "docling_only",
+    "unmess_parsing",
+    "vlm_every_page"
+  ],
+  "hardware": {
+    "machine": "Mac16,12",
+    "chip": "Apple M4",
+    "memory_bytes": "17179869184",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "ollama_version": "0.40.2",
+    "model_tag": "qwen2.5vl",
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22544483)\t100%; charged; 0:00 remaining present: true",
+    "process_snapshot": [
+      "PID  %CPU COMM",
+      "46333  40.3 /Users/dineshdhanoki/unmess/.venv/bin/python3",
+      "  407   9.6 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer",
+      "54206   6.5 /System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal",
+      "39901   4.2 codex",
+      "  640   3.4 /System/Library/CoreServices/WindowManager.app/Contents/MacOS/WindowManager",
+      "46319   2.9 uv",
+      "39910   1.8 /Users/dineshdhanoki/.codex/packages/app-server-daemon/releases/0.162.1-aarch64-apple-darwin/bin/codex"
+    ],
+    "thermal_throttling": "not instrumented; retained as a timing limitation"
+  },
+  "timing_controls": {
+    "caffeinate": true,
+    "sequential": true,
+    "isolated_response_caches": true,
+    "response_cache_reads": false,
+    "runs": 1
+  },
+  "systems": {
+    "pymupdf_fixed": {
+      "wall_time_s": 0.7260258339811116,
+      "seconds_per_page": 0.013962035268867532,
+      "cache_hits": 0,
+      "cold_valid": true,
+      "summary": {
+        "overall": {
+          "documents": 43,
+          "pages": 52,
+          "failed_pages": 8,
+          "table_f1": 0.0,
+          "ocr_cer": 1.5562340270171595,
+          "text_cer": 0.930388796141615,
+          "text_wer": 0.3361522198731501,
+          "cheap_parser_share": 1.0,
+          "latency_per_page_s": 0.003711947709657685,
+          "failed_page_rate": 0.13953488372093023,
+          "metric_counts": {
+            "table_f1": {
+              "documents": 14,
+              "pages": 19
+            },
+            "ocr_cer": {
+              "documents": 12,
+              "pages": 12
+            },
+            "text_cer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "text_wer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "cheap_parser_share": {
+              "documents": 43,
+              "pages": 52
+            },
+            "latency_per_page_s": {
+              "documents": 43,
+              "pages": 52
+            },
+            "failed_page_rate": {
+              "documents": 43,
+              "pages": 52
+            }
+          },
+          "total_time_s": 0.1816529610659927,
+          "mean_page_accuracy": 0.5047915771379459,
+          "escalated_pages": 0,
+          "escalation_improved_pages": 0,
+          "vlm_attempted_pages": 0,
+          "vlm_uncached_pages": 0,
+          "vlm_time_s": 0,
+          "vlm_pages_per_second": null,
+          "vlm_uncached_time_s": 0,
+          "vlm_uncached_pages_per_second": null,
+          "mean_escalation_accuracy_delta": null
+        },
+        "by_cohort": {
+          "expanded": {
+            "documents": 15,
+            "pages": 20,
+            "failed_pages": 4,
+            "table_f1": 0.0,
+            "ocr_cer": 1.8343510405257395,
+            "text_cer": 1.6801578273262856,
+            "text_wer": 0.6727272727272727,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.004248683422338218,
+            "failed_page_rate": 0.13333333333333333,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 2,
+                "pages": 3
+              },
+              "ocr_cer": {
+                "documents": 8,
+                "pages": 8
+              },
+              "text_cer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "text_wer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "cheap_parser_share": {
+                "documents": 15,
+                "pages": 20
+              },
+              "latency_per_page_s": {
+                "documents": 15,
+                "pages": 20
+              },
+              "failed_page_rate": {
+                "documents": 15,
+                "pages": 20
+              }
+            },
+            "total_time_s": 0.07369225146248937,
+            "mean_page_accuracy": 0.3225,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "original": {
+            "documents": 28,
+            "pages": 32,
+            "failed_pages": 4,
+            "table_f1": 0.0,
+            "ocr_cer": 1.0,
+            "text_cer": 0.5287268151498271,
+            "text_wer": 0.15584415584415584,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0034244107207216856,
+            "failed_page_rate": 0.14285714285714285,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 12,
+                "pages": 16
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "text_wer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "cheap_parser_share": {
+                "documents": 28,
+                "pages": 32
+              },
+              "latency_per_page_s": {
+                "documents": 28,
+                "pages": 32
+              },
+              "failed_page_rate": {
+                "documents": 28,
+                "pages": 32
+              }
+            },
+            "total_time_s": 0.10796070960350335,
+            "mean_page_accuracy": 0.618723812849162,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_category": {
+          "bilingual": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.07803848541278709,
+            "text_wer": 0.09090909090909091,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0026234915712848306,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 0.013117457856424153,
+            "mean_page_accuracy": 0.9498324022346368,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "broken_text_layer": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 2.6526495202366354,
+            "text_wer": 1.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0055478542926721275,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.02219141717068851,
+            "mean_page_accuracy": 0.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "clean": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.030075391385902893,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0058066352212335914,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.023226540884934366,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "fake_text_layer_scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 2.668702081051479,
+            "text_cer": 2.668702081051479,
+            "text_wer": 1.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.005945698008872569,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.023782792035490274,
+            "mean_page_accuracy": 0.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "gst_invoice": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": 0.0,
+            "ocr_cer": null,
+            "text_cer": 0.7814470005083884,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.004300176980905235,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 4,
+                "pages": 4
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.01720070792362094,
+            "mean_page_accuracy": 0.5,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "merged_table": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": 0.0,
+            "ocr_cer": null,
+            "text_cer": 0.7212812160694897,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.004714300017803907,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 5
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 0.023571500089019537,
+            "mean_page_accuracy": 0.5,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "mixed_pages": {
+            "documents": 4,
+            "pages": 8,
+            "failed_pages": 4,
+            "table_f1": null,
+            "ocr_cer": 1.0,
+            "text_cer": 0.5150376956929514,
+            "text_wer": 0.5,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0017146562604466453,
+            "failed_page_rate": 0.5,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 8
+              }
+            },
+            "total_time_s": 0.013717250083573163,
+            "mean_page_accuracy": 0.5,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "receipt": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.029717878275570583,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.002736021007876843,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.010944084031507373,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 4,
+            "table_f1": null,
+            "ocr_cer": 1.0,
+            "text_cer": 1.0,
+            "text_wer": 1.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0008850104932207614,
+            "failed_page_rate": 1.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.0035400419728830457,
+            "mean_page_accuracy": 0.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "spanning_table": {
+            "documents": 5,
+            "pages": 10,
+            "failed_pages": 0,
+            "table_f1": 0.0,
+            "ocr_cer": null,
+            "text_cer": 1.0599202916148702,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0030361169017851354,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 10
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 10
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 10
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 10
+              }
+            },
+            "total_time_s": 0.030361169017851353,
+            "mean_page_accuracy": 0.5,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_language": {
+          "en": {
+            "documents": 38,
+            "pages": 47,
+            "failed_pages": 8,
+            "table_f1": 0.0,
+            "ocr_cer": 1.5562340270171595,
+            "text_cer": 1.0425401528164608,
+            "text_wer": 0.3684210526315789,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0038551656226014815,
+            "failed_page_rate": 0.15789473684210525,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 12,
+                "pages": 12
+              },
+              "text_cer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "text_wer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "cheap_parser_share": {
+                "documents": 38,
+                "pages": 47
+              },
+              "latency_per_page_s": {
+                "documents": 38,
+                "pages": 47
+              },
+              "failed_page_rate": {
+                "documents": 38,
+                "pages": 47
+              }
+            },
+            "total_time_s": 0.16853550320956856,
+            "mean_page_accuracy": 0.4574468085106383,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "hi": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.07803848541278709,
+            "text_wer": 0.09090909090909091,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0026234915712848306,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 0.013117457856424153,
+            "mean_page_accuracy": 0.9498324022346368,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_scan_difficulty": {
+          "high": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 2,
+            "table_f1": null,
+            "ocr_cer": 1.5522088353413654,
+            "text_cer": 1.3905321886347788,
+            "text_wer": 0.8333333333333334,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.0028901389838817217,
+            "failed_page_rate": 0.5,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.010401041945442557,
+            "mean_page_accuracy": 0.25,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "low": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 2,
+            "table_f1": null,
+            "ocr_cer": 1.5575757575757576,
+            "text_cer": 1.395929171230376,
+            "text_wer": 0.8333333333333334,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.00276691666416203,
+            "failed_page_rate": 0.5,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.010003249975852668,
+            "mean_page_accuracy": 0.25,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "medium": {
+            "documents": 6,
+            "pages": 8,
+            "failed_pages": 4,
+            "table_f1": null,
+            "ocr_cer": 1.5575757575757576,
+            "text_cer": 1.395929171230376,
+            "text_wer": 0.8333333333333334,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.002868382017671441,
+            "failed_page_rate": 0.5,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 6,
+                "pages": 6
+              },
+              "text_cer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 6,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 6,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 6,
+                "pages": 8
+              }
+            },
+            "total_time_s": 0.020635792170651257,
+            "mean_page_accuracy": 0.25,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "not_scan": {
+            "documents": 31,
+            "pages": 36,
+            "failed_pages": 0,
+            "table_f1": 0.0,
+            "ocr_cer": null,
+            "text_cer": 0.7507019073261846,
+            "text_wer": 0.1436950146627566,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.004046202982745824,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "text_wer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "cheap_parser_share": {
+                "documents": 31,
+                "pages": 36
+              },
+              "latency_per_page_s": {
+                "documents": 31,
+                "pages": 36
+              },
+              "failed_page_rate": {
+                "documents": 31,
+                "pages": 36
+              }
+            },
+            "total_time_s": 0.14061287697404623,
+            "mean_page_accuracy": 0.618032278088144,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        }
+      },
+      "bootstrap_95_ci": {
+        "text_cer": {
+          "lower": 0.6557046990990358,
+          "upper": 1.1939530616868608,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "text_wer": {
+          "lower": 0.20613107822410148,
+          "upper": 0.46617336152219874,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "table_f1": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "samples": 2000,
+          "seed": 20261011
+        }
+      },
+      "failures": [
+        {
+          "document_id": "synthetic-scan-00",
+          "page": 1,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-scan-02",
+          "page": 1,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-scan-04",
+          "page": 1,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-scan-06",
+          "page": 1,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-mixed_pages-00",
+          "page": 2,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-mixed_pages-02",
+          "page": 2,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-mixed_pages-04",
+          "page": 2,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-mixed_pages-06",
+          "page": 2,
+          "parser": "pymupdf",
+          "error": "no embedded text",
+          "attempts": []
+        }
+      ],
+      "cache_directory": null,
+      "cache_files_before": null,
+      "cache_files_after": null
+    },
+    "docling_default": {
+      "wall_time_s": 162.34562904201448,
+      "seconds_per_page": 3.122031327731048,
+      "cache_hits": 0,
+      "cold_valid": true,
+      "summary": {
+        "overall": {
+          "documents": 43,
+          "pages": 52,
+          "failed_pages": 2,
+          "table_f1": 0.8214285714285714,
+          "ocr_cer": 1.3264573445296337,
+          "text_cer": 0.737745513427221,
+          "text_wer": 0.4230232558139535,
+          "cheap_parser_share": 0.0,
+          "latency_per_page_s": 2.9458965024813404,
+          "failed_page_rate": 0.03488372093023256,
+          "metric_counts": {
+            "table_f1": {
+              "documents": 14,
+              "pages": 19
+            },
+            "ocr_cer": {
+              "documents": 12,
+              "pages": 12
+            },
+            "text_cer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "text_wer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "cheap_parser_share": {
+              "documents": 43,
+              "pages": 52
+            },
+            "latency_per_page_s": {
+              "documents": 43,
+              "pages": 52
+            },
+            "failed_page_rate": {
+              "documents": 43,
+              "pages": 52
+            }
+          },
+          "total_time_s": 161.12614671024494,
+          "mean_page_accuracy": 0.6314519766697544,
+          "escalated_pages": 0,
+          "escalation_improved_pages": 0,
+          "vlm_attempted_pages": 0,
+          "vlm_uncached_pages": 0,
+          "vlm_time_s": 0,
+          "vlm_pages_per_second": null,
+          "vlm_uncached_time_s": 0,
+          "vlm_uncached_pages_per_second": null,
+          "mean_escalation_accuracy_delta": null
+        },
+        "by_cohort": {
+          "expanded": {
+            "documents": 15,
+            "pages": 20,
+            "failed_pages": 1,
+            "table_f1": 0.75,
+            "ocr_cer": 1.6927163198247537,
+            "text_cer": 1.6172152275516989,
+            "text_wer": 0.5733333333333334,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 5.453615904191975,
+            "failed_page_rate": 0.03333333333333333,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 2,
+                "pages": 3
+              },
+              "ocr_cer": {
+                "documents": 8,
+                "pages": 8
+              },
+              "text_cer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "text_wer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "cheap_parser_share": {
+                "documents": 15,
+                "pages": 20
+              },
+              "latency_per_page_s": {
+                "documents": 15,
+                "pages": 20
+              },
+              "failed_page_rate": {
+                "documents": 15,
+                "pages": 20
+              }
+            },
+            "total_time_s": 114.10561987489928,
+            "mean_page_accuracy": 0.42370677157779035,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "original": {
+            "documents": 28,
+            "pages": 32,
+            "failed_pages": 1,
+            "table_f1": 0.8333333333333334,
+            "ocr_cer": 0.5939393939393939,
+            "text_cer": 0.2666010237176792,
+            "text_wer": 0.3425,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 1.602475394422072,
+            "failed_page_rate": 0.03571428571428571,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 12,
+                "pages": 16
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "text_wer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "cheap_parser_share": {
+                "documents": 28,
+                "pages": 32
+              },
+              "latency_per_page_s": {
+                "documents": 28,
+                "pages": 32
+              },
+              "failed_page_rate": {
+                "documents": 28,
+                "pages": 32
+              }
+            },
+            "total_time_s": 47.02052683534566,
+            "mean_page_accuracy": 0.761292729852232,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_category": {
+          "bilingual": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.0724643078833023,
+            "text_wer": 0.09090909090909091,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.28421101660933346,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 1.4210550830466673,
+            "mean_page_accuracy": 0.9498324022346368,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "broken_text_layer": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 2.7384207488637182,
+            "text_wer": 0.5375,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.6895770417468157,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 2.7583081669872627,
+            "mean_page_accuracy": 0.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "clean": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.03609046966308347,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 2.127558625245001,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 8.510234500980005,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "fake_text_layer_scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 2.7899780941949617,
+            "text_cer": 2.7899780941949617,
+            "text_wer": 0.95,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 11.295974270964507,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 45.18389708385803,
+            "mean_page_accuracy": 0.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "gst_invoice": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.3149021352313167,
+            "text_wer": 0.46,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.8062065417470876,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 4,
+                "pages": 4
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 3.2248261669883505,
+            "mean_page_accuracy": 0.8429969496695475,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "merged_table": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.38054970087926593,
+            "text_wer": 0.5,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 1.452541300212033,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 5
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 7.2627065010601655,
+            "mean_page_accuracy": 0.8156000510953567,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "mixed_pages": {
+            "documents": 4,
+            "pages": 8,
+            "failed_pages": 1,
+            "table_f1": null,
+            "ocr_cer": 0.5954545454545455,
+            "text_cer": 0.3157725075588145,
+            "text_wer": 0.3625,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 7.9483884321234655,
+            "failed_page_rate": 0.125,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 8
+              }
+            },
+            "total_time_s": 63.587107456987724,
+            "mean_page_accuracy": 0.7045454545454546,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "receipt": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.0356614539306847,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 1.3069312500301749,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 5.227725000120699,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 1,
+            "table_f1": null,
+            "ocr_cer": 0.5939393939393939,
+            "text_cer": 0.5939393939393939,
+            "text_wer": 0.7375,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 4.658050000027288,
+            "failed_page_rate": 0.25,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 18.63220000010915,
+            "mean_page_accuracy": 0.4106060606060606,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "spanning_table": {
+            "documents": 5,
+            "pages": 10,
+            "failed_pages": 0,
+            "table_f1": 0.5,
+            "ocr_cer": null,
+            "text_cer": 0.43178556400595347,
+            "text_wer": 0.6090909090909091,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.5318086750106886,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 10
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 10
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 10
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 10
+              }
+            },
+            "total_time_s": 5.318086750106886,
+            "mean_page_accuracy": 0.5357564842711191,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_language": {
+          "en": {
+            "documents": 38,
+            "pages": 47,
+            "failed_pages": 2,
+            "table_f1": 0.8214285714285714,
+            "ocr_cer": 1.3264573445296337,
+            "text_cer": 0.825282514156684,
+            "text_wer": 0.46672248803827754,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.2961182769381834,
+            "failed_page_rate": 0.039473684210526314,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 12,
+                "pages": 12
+              },
+              "text_cer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "text_wer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "cheap_parser_share": {
+                "documents": 38,
+                "pages": 47
+              },
+              "latency_per_page_s": {
+                "documents": 38,
+                "pages": 47
+              },
+              "failed_page_rate": {
+                "documents": 38,
+                "pages": 47
+              }
+            },
+            "total_time_s": 159.70509162719827,
+            "mean_page_accuracy": 0.5975817186309371,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "hi": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.0724643078833023,
+            "text_wer": 0.09090909090909091,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.28421101660933346,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 1.4210550830466673,
+            "mean_page_accuracy": 0.9498324022346368,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_scan_difficulty": {
+          "high": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 2,
+            "table_f1": null,
+            "ocr_cer": 1.538152610441767,
+            "text_cer": 1.3774739677271963,
+            "text_wer": 0.8333333333333334,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 16.98180343785013,
+            "failed_page_rate": 0.5,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 67.59087025106419,
+            "mean_page_accuracy": 0.25,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "low": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 1.0585858585858585,
+            "text_cer": 1.0252160155774614,
+            "text_wer": 0.4,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.8312940202886239,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 3.737997289863415,
+            "mean_page_accuracy": 0.6878787878787879,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "medium": {
+            "documents": 6,
+            "pages": 8,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 1.3545454545454545,
+            "text_cer": 1.2651150054764513,
+            "text_wer": 0.75,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 7.028393073007464,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 6,
+                "pages": 6
+              },
+              "text_cer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 6,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 6,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 6,
+                "pages": 8
+              }
+            },
+            "total_time_s": 56.0743370000273,
+            "mean_page_accuracy": 0.4409090909090909,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "not_scan": {
+            "documents": 31,
+            "pages": 36,
+            "failed_pages": 0,
+            "table_f1": 0.8214285714285714,
+            "ocr_cer": null,
+            "text_cer": 0.5459450675676717,
+            "text_wer": 0.32225806451612904,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 1.0020612514269869,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "text_wer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "cheap_parser_share": {
+                "documents": 31,
+                "pages": 36
+              },
+              "latency_per_page_s": {
+                "documents": 31,
+                "pages": 36
+              },
+              "failed_page_rate": {
+                "documents": 31,
+                "pages": 36
+              }
+            },
+            "total_time_s": 33.722942169290036,
+            "mean_page_accuracy": 0.7099087474455374,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        }
+      },
+      "bootstrap_95_ci": {
+        "text_cer": {
+          "lower": 0.4479132145844954,
+          "upper": 1.032013803457279,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "text_wer": {
+          "lower": 0.32693446088794925,
+          "upper": 0.5118393234672305,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "table_f1": {
+          "lower": 0.6818181818181818,
+          "upper": 0.9444444444444444,
+          "samples": 2000,
+          "seed": 20261011
+        }
+      },
+      "failures": [
+        {
+          "document_id": "synthetic-scan-06",
+          "page": 1,
+          "parser": "docling",
+          "error": "no extracted text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-mixed_pages-06",
+          "page": 2,
+          "parser": "docling",
+          "error": "no extracted text",
+          "attempts": []
+        }
+      ],
+      "cache_directory": null,
+      "cache_files_before": null,
+      "cache_files_after": null
+    },
+    "docling_only": {
+      "wall_time_s": 281.3632237499114,
+      "seconds_per_page": 5.410831225959835,
+      "cache_hits": 0,
+      "cold_valid": true,
+      "summary": {
+        "overall": {
+          "documents": 43,
+          "pages": 52,
+          "failed_pages": 2,
+          "table_f1": 0.8214285714285714,
+          "ocr_cer": 0.7363818912011683,
+          "text_cer": 0.5503030868948833,
+          "text_wer": 0.7212125127241407,
+          "cheap_parser_share": 0.0,
+          "latency_per_page_s": 5.719964675859786,
+          "failed_page_rate": 0.046511627906976744,
+          "metric_counts": {
+            "table_f1": {
+              "documents": 14,
+              "pages": 19
+            },
+            "ocr_cer": {
+              "documents": 12,
+              "pages": 12
+            },
+            "text_cer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "text_wer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "cheap_parser_share": {
+              "documents": 43,
+              "pages": 52
+            },
+            "latency_per_page_s": {
+              "documents": 43,
+              "pages": 52
+            },
+            "failed_page_rate": {
+              "documents": 43,
+              "pages": 52
+            }
+          },
+          "total_time_s": 280.94137533195317,
+          "mean_page_accuracy": 0.5223214944093568,
+          "escalated_pages": 0,
+          "escalation_improved_pages": 0,
+          "vlm_attempted_pages": 0,
+          "vlm_uncached_pages": 0,
+          "vlm_time_s": 0,
+          "vlm_pages_per_second": null,
+          "vlm_uncached_time_s": 0,
+          "vlm_uncached_pages_per_second": null,
+          "mean_escalation_accuracy_delta": null
+        },
+        "by_cohort": {
+          "expanded": {
+            "documents": 15,
+            "pages": 20,
+            "failed_pages": 0,
+            "table_f1": 0.75,
+            "ocr_cer": 0.7303304125593282,
+            "text_cer": 0.575853474576164,
+            "text_wer": 0.7308024691358025,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.6859594416649393,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 2,
+                "pages": 3
+              },
+              "ocr_cer": {
+                "documents": 8,
+                "pages": 8
+              },
+              "text_cer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "text_wer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "cheap_parser_share": {
+                "documents": 15,
+                "pages": 20
+              },
+              "latency_per_page_s": {
+                "documents": 15,
+                "pages": 20
+              },
+              "failed_page_rate": {
+                "documents": 15,
+                "pages": 20
+              }
+            },
+            "total_time_s": 73.24300233297981,
+            "mean_page_accuracy": 0.45808875578203656,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "original": {
+            "documents": 28,
+            "pages": 32,
+            "failed_pages": 2,
+            "table_f1": 0.8333333333333334,
+            "ocr_cer": 0.7484848484848485,
+            "text_cer": 0.536615379208483,
+            "text_wer": 0.7160750360750361,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 6.809610337035598,
+            "failed_page_rate": 0.07142857142857142,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 12,
+                "pages": 16
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "text_wer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "cheap_parser_share": {
+                "documents": 28,
+                "pages": 32
+              },
+              "latency_per_page_s": {
+                "documents": 28,
+                "pages": 32
+              },
+              "failed_page_rate": {
+                "documents": 28,
+                "pages": 32
+              }
+            },
+            "total_time_s": 207.69837299897335,
+            "mean_page_accuracy": 0.562466956051432,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_category": {
+          "bilingual": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.2497330850403476,
+            "text_wer": 0.4818181818181818,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.7108096417970957,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 18.554048208985478,
+            "mean_page_accuracy": 0.7636374922408442,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "broken_text_layer": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.46901377966957647,
+            "text_wer": 0.525,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.610053010255797,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 14.440212041023187,
+            "mean_page_accuracy": 0.5385163408123512,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "clean": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.3640339802323065,
+            "text_wer": 0.625,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 10.340731364500243,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 41.36292545800097,
+            "mean_page_accuracy": 0.6524962123944882,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "fake_text_layer_scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.7303304125593282,
+            "text_cer": 0.7303304125593282,
+            "text_wer": 0.9125,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.4801941147597972,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 13.920776459039189,
+            "mean_page_accuracy": 0.26967871485943773,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "gst_invoice": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.7208343924758516,
+            "text_wer": 0.8099999999999999,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 5.3749700730259065,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 4,
+                "pages": 4
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 21.499880292103626,
+            "mean_page_accuracy": 0.6382451067615658,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "merged_table": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.7160673607119286,
+            "text_wer": 0.7962962962962963,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 5.808494366402738,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 5
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 29.04247183201369,
+            "mean_page_accuracy": 0.6422920525430585,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "mixed_pages": {
+            "documents": 4,
+            "pages": 8,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.7303304125593282,
+            "text_cer": 0.5471821963958173,
+            "text_wer": 0.76875,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.4385184998827754,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 8
+              }
+            },
+            "total_time_s": 27.508147999062203,
+            "mean_page_accuracy": 0.46108746362696296,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "receipt": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.3564736545505776,
+            "text_wer": 0.6375,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.9920413542422466,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 15.968165416968986,
+            "mean_page_accuracy": 0.6598689771766695,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 2,
+            "table_f1": null,
+            "ocr_cer": 0.7484848484848485,
+            "text_cer": 0.7484848484848485,
+            "text_wer": 0.875,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 14.046776770963334,
+            "failed_page_rate": 0.5,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 56.187107083853334,
+            "mean_page_accuracy": 0.25,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "spanning_table": {
+            "documents": 5,
+            "pages": 10,
+            "failed_pages": 0,
+            "table_f1": 0.5,
+            "ocr_cer": null,
+            "text_cer": 0.6177234900490753,
+            "text_wer": 0.8013131313131313,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 4.24576405409025,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 10
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 10
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 10
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 10
+              }
+            },
+            "total_time_s": 42.4576405409025,
+            "mean_page_accuracy": 0.44071488683332893,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_language": {
+          "en": {
+            "documents": 38,
+            "pages": 47,
+            "failed_pages": 2,
+            "table_f1": 0.8214285714285714,
+            "ocr_cer": 0.7363818912011683,
+            "text_cer": 0.5898517713494275,
+            "text_wer": 0.7527117667907142,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 5.98432718034172,
+            "failed_page_rate": 0.05263157894736842,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 12,
+                "pages": 12
+              },
+              "text_cer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "text_wer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "cheap_parser_share": {
+                "documents": 38,
+                "pages": 47
+              },
+              "latency_per_page_s": {
+                "documents": 38,
+                "pages": 47
+              },
+              "failed_page_rate": {
+                "documents": 38,
+                "pages": 47
+              }
+            },
+            "total_time_s": 262.3873271229677,
+            "mean_page_accuracy": 0.49664957974643265,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "hi": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.2497330850403476,
+            "text_wer": 0.4818181818181818,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 3.7108096417970957,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 18.554048208985478,
+            "mean_page_accuracy": 0.7636374922408442,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_scan_difficulty": {
+          "high": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 1,
+            "table_f1": null,
+            "ocr_cer": 0.9879518072289156,
+            "text_cer": 0.8712033763797705,
+            "text_wer": 0.925,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 7.973068673687521,
+            "failed_page_rate": 0.3333333333333333,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 27.307043292094022,
+            "mean_page_accuracy": 0.19165283890051227,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "low": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.4484848484848485,
+            "text_cer": 0.4672082268467811,
+            "text_wer": 0.7416666666666667,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 4.162464847303151,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 15.848564124898985,
+            "mean_page_accuracy": 0.5537057320189851,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "medium": {
+            "documents": 6,
+            "pages": 8,
+            "failed_pages": 1,
+            "table_f1": null,
+            "ocr_cer": 0.7545454545454545,
+            "text_cer": 0.6814591700133869,
+            "text_wer": 0.8708333333333333,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 7.909226163241935,
+            "failed_page_rate": 0.16666666666666666,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 6,
+                "pages": 6
+              },
+              "text_cer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 6,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 6,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 6,
+                "pages": 8
+              }
+            },
+            "total_time_s": 54.46042412496172,
+            "mean_page_accuracy": 0.34824753559693317,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "not_scan": {
+            "documents": 31,
+            "pages": 36,
+            "failed_pages": 0,
+            "table_f1": 0.8214285714285714,
+            "ocr_cer": null,
+            "text_cer": 0.5019046098941937,
+            "text_wer": 0.6705528402302596,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 5.22892011353378,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "text_wer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "cheap_parser_share": {
+                "documents": 31,
+                "pages": 36
+              },
+              "latency_per_page_s": {
+                "documents": 31,
+                "pages": 36
+              },
+              "failed_page_rate": {
+                "documents": 31,
+                "pages": 36
+              }
+            },
+            "total_time_s": 183.32534378999844,
+            "mean_page_accuracy": 0.5942584205786973,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        }
+      },
+      "bootstrap_95_ci": {
+        "text_cer": {
+          "lower": 0.48840497058871635,
+          "upper": 0.6170690382256149,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "text_wer": {
+          "lower": 0.6755477253151672,
+          "upper": 0.7670229426043379,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "table_f1": {
+          "lower": 0.6818181818181818,
+          "upper": 0.9444444444444444,
+          "samples": 2000,
+          "seed": 20261011
+        }
+      },
+      "failures": [
+        {
+          "document_id": "synthetic-scan-04",
+          "page": 1,
+          "parser": "docling",
+          "error": "no extracted text",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-scan-06",
+          "page": 1,
+          "parser": "docling",
+          "error": "no extracted text",
+          "attempts": []
+        }
+      ],
+      "cache_directory": null,
+      "cache_files_before": null,
+      "cache_files_after": null
+    },
+    "unmess_parsing": {
+      "wall_time_s": 643.8689668329898,
+      "seconds_per_page": 12.382095516019035,
+      "cache_hits": 0,
+      "cold_valid": true,
+      "summary": {
+        "overall": {
+          "documents": 43,
+          "pages": 52,
+          "failed_pages": 0,
+          "table_f1": 0.8660714285714286,
+          "ocr_cer": 0.03063770232444931,
+          "text_cer": 0.017022091262863564,
+          "text_wer": 0.03313953488372093,
+          "cheap_parser_share": 0.23255813953488372,
+          "latency_per_page_s": 14.487523384672471,
+          "failed_page_rate": 0.0,
+          "metric_counts": {
+            "table_f1": {
+              "documents": 14,
+              "pages": 19
+            },
+            "ocr_cer": {
+              "documents": 12,
+              "pages": 12
+            },
+            "text_cer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "text_wer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "cheap_parser_share": {
+              "documents": 43,
+              "pages": 52
+            },
+            "latency_per_page_s": {
+              "documents": 43,
+              "pages": 52
+            },
+            "failed_page_rate": {
+              "documents": 43,
+              "pages": 52
+            }
+          },
+          "total_time_s": 643.156442206935,
+          "mean_page_accuracy": 0.98149328081557,
+          "escalated_pages": 0,
+          "escalation_improved_pages": 0,
+          "vlm_attempted_pages": 21,
+          "vlm_uncached_pages": 21,
+          "vlm_time_s": 619.4401337471791,
+          "vlm_pages_per_second": 0.033901581211673686,
+          "vlm_uncached_time_s": 619.4401337471791,
+          "vlm_uncached_pages_per_second": 0.033901581211673686,
+          "mean_escalation_accuracy_delta": null
+        },
+        "by_cohort": {
+          "expanded": {
+            "documents": 15,
+            "pages": 20,
+            "failed_pages": 0,
+            "table_f1": 0.8125,
+            "ocr_cer": 0.03162650602409638,
+            "text_cer": 0.024388116481535785,
+            "text_wer": 0.065,
+            "cheap_parser_share": 0.13333333333333333,
+            "latency_per_page_s": 21.362675268102127,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 2,
+                "pages": 3
+              },
+              "ocr_cer": {
+                "documents": 8,
+                "pages": 8
+              },
+              "text_cer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "text_wer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "cheap_parser_share": {
+                "documents": 15,
+                "pages": 20
+              },
+              "latency_per_page_s": {
+                "documents": 15,
+                "pages": 20
+              },
+              "failed_page_rate": {
+                "documents": 15,
+                "pages": 20
+              }
+            },
+            "total_time_s": 338.64486400107853,
+            "mean_page_accuracy": 0.9810993975903615,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 13,
+            "vlm_uncached_pages": 13,
+            "vlm_time_s": 335.0470271242084,
+            "vlm_pages_per_second": 0.03880052335214617,
+            "vlm_uncached_time_s": 335.0470271242084,
+            "vlm_uncached_pages_per_second": 0.03880052335214617,
+            "mean_escalation_accuracy_delta": null
+          },
+          "original": {
+            "documents": 28,
+            "pages": 32,
+            "failed_pages": 0,
+            "table_f1": 0.875,
+            "ocr_cer": 0.028660094925155165,
+            "text_cer": 0.01307600632428916,
+            "text_wer": 0.016071428571428573,
+            "cheap_parser_share": 0.2857142857142857,
+            "latency_per_page_s": 10.804406304263726,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 12,
+                "pages": 16
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "text_wer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "cheap_parser_share": {
+                "documents": 28,
+                "pages": 32
+              },
+              "latency_per_page_s": {
+                "documents": 28,
+                "pages": 32
+              },
+              "failed_page_rate": {
+                "documents": 28,
+                "pages": 32
+              }
+            },
+            "total_time_s": 304.5115782058565,
+            "mean_page_accuracy": 0.9817394578313253,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 8,
+            "vlm_uncached_pages": 8,
+            "vlm_time_s": 284.39310662297066,
+            "vlm_pages_per_second": 0.02813007704369524,
+            "vlm_uncached_time_s": 284.39310662297066,
+            "vlm_uncached_pages_per_second": 0.02813007704369524,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_category": {
+          "bilingual": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.033445065176908755,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 35.885898258001546,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 179.42949129000772,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 5,
+            "vlm_uncached_pages": 5,
+            "vlm_time_s": 179.15719708194956,
+            "vlm_pages_per_second": 0.02790845180343447,
+            "vlm_uncached_time_s": 179.15719708194956,
+            "vlm_uncached_pages_per_second": 0.02790845180343447,
+            "mean_escalation_accuracy_delta": null
+          },
+          "broken_text_layer": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.030075391385902893,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 32.86709973949473,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 131.46839895797893,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 131.29656004102435,
+            "vlm_pages_per_second": 0.030465383089626853,
+            "vlm_uncached_time_s": 131.29656004102435,
+            "vlm_uncached_pages_per_second": 0.030465383089626853,
+            "mean_escalation_accuracy_delta": null
+          },
+          "clean": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.0,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.019984687212854624,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.0799387488514185,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "fake_text_layer_scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.03162650602409638,
+            "text_cer": 0.03162650602409638,
+            "text_wer": 0.1625,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 33.7511325837404,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 135.0045303349616,
+            "mean_page_accuracy": 0.9683734939759037,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 134.84943770698737,
+            "vlm_pages_per_second": 0.02966271174739007,
+            "vlm_uncached_time_s": 134.84943770698737,
+            "vlm_uncached_pages_per_second": 0.02966271174739007,
+            "mean_escalation_accuracy_delta": null
+          },
+          "gst_invoice": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.004464285714285714,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 1.677698562736623,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 4,
+                "pages": 4
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 6.710794250946492,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "merged_table": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.015013518979796045,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 2.1572550166165456,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 5
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 10.786275083082728,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "mixed_pages": {
+            "documents": 4,
+            "pages": 8,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.03162650602409638,
+            "text_cer": 0.01581325301204819,
+            "text_wer": 0.08125,
+            "cheap_parser_share": 0.5,
+            "latency_per_page_s": 4.41819341162045,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 8
+              }
+            },
+            "total_time_s": 35.3455472929636,
+            "mean_page_accuracy": 0.9841867469879518,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 35.134779501124285,
+            "vlm_pages_per_second": 0.11384730619618669,
+            "vlm_uncached_time_s": 35.134779501124285,
+            "vlm_uncached_pages_per_second": 0.11384730619618669,
+            "mean_escalation_accuracy_delta": null
+          },
+          "receipt": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.0,
+            "text_wer": 0.0,
+            "cheap_parser_share": 1.0,
+            "latency_per_page_s": 0.007978708483278751,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 0.031914833933115005,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          },
+          "scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.028660094925155165,
+            "text_cer": 0.028660094925155165,
+            "text_wer": 0.1125,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 34.81480634378386,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 139.25922537513543,
+            "mean_page_accuracy": 0.9789156626506024,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 139.0021594160935,
+            "vlm_pages_per_second": 0.028776531363273808,
+            "vlm_uncached_time_s": 139.0021594160935,
+            "vlm_uncached_pages_per_second": 0.028776531363273808,
+            "mean_escalation_accuracy_delta": null
+          },
+          "spanning_table": {
+            "documents": 5,
+            "pages": 10,
+            "failed_pages": 0,
+            "table_f1": 0.625,
+            "ocr_cer": null,
+            "text_cer": 0.009419775854731168,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 0.5040326039073989,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 10
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 10
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 10
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 10
+              }
+            },
+            "total_time_s": 5.040326039073989,
+            "mean_page_accuracy": 0.9375,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 0,
+            "vlm_uncached_pages": 0,
+            "vlm_time_s": 0,
+            "vlm_pages_per_second": null,
+            "vlm_uncached_time_s": 0,
+            "vlm_uncached_pages_per_second": null,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_language": {
+          "en": {
+            "documents": 38,
+            "pages": 47,
+            "failed_pages": 0,
+            "table_f1": 0.8660714285714286,
+            "ocr_cer": 0.03063770232444931,
+            "text_cer": 0.014861173642594459,
+            "text_wer": 0.0375,
+            "cheap_parser_share": 0.2631578947368421,
+            "latency_per_page_s": 11.67194774344496,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 12,
+                "pages": 12
+              },
+              "text_cer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "text_wer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "cheap_parser_share": {
+                "documents": 38,
+                "pages": 47
+              },
+              "latency_per_page_s": {
+                "documents": 38,
+                "pages": 47
+              },
+              "failed_page_rate": {
+                "documents": 38,
+                "pages": 47
+              }
+            },
+            "total_time_s": 463.7269509169273,
+            "mean_page_accuracy": 0.9795244809023327,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 16,
+            "vlm_uncached_pages": 16,
+            "vlm_time_s": 440.2829366652295,
+            "vlm_pages_per_second": 0.036340268194780506,
+            "vlm_uncached_time_s": 440.2829366652295,
+            "vlm_uncached_pages_per_second": 0.036340268194780506,
+            "mean_escalation_accuracy_delta": null
+          },
+          "hi": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.033445065176908755,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 35.885898258001546,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 179.42949129000772,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 5,
+            "vlm_uncached_pages": 5,
+            "vlm_time_s": 179.15719708194956,
+            "vlm_pages_per_second": 0.02790845180343447,
+            "vlm_uncached_time_s": 179.15719708194956,
+            "vlm_uncached_pages_per_second": 0.02790845180343447,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_scan_difficulty": {
+          "high": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.11244979919678715,
+            "text_cer": 0.09136546184738956,
+            "text_wer": 0.47500000000000003,
+            "cheap_parser_share": 0.16666666666666666,
+            "latency_per_page_s": 24.268062298515968,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 76.79063050006516,
+            "mean_page_accuracy": 0.9156626506024097,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 3,
+            "vlm_uncached_pages": 3,
+            "vlm_time_s": 76.657397541916,
+            "vlm_pages_per_second": 0.039135166287892965,
+            "vlm_uncached_time_s": 76.657397541916,
+            "vlm_uncached_pages_per_second": 0.039135166287892965,
+            "mean_escalation_accuracy_delta": null
+          },
+          "low": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.0,
+            "text_cer": 0.0,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.16666666666666666,
+            "latency_per_page_s": 24.780065965702914,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 79.22977883508429,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 3,
+            "vlm_uncached_pages": 3,
+            "vlm_time_s": 79.08182841714006,
+            "vlm_pages_per_second": 0.03793538996311048,
+            "vlm_uncached_time_s": 79.08182841714006,
+            "vlm_uncached_pages_per_second": 0.03793538996311048,
+            "mean_escalation_accuracy_delta": null
+          },
+          "medium": {
+            "documents": 6,
+            "pages": 8,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.005050505050505051,
+            "text_cer": 0.005050505050505051,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.16666666666666666,
+            "latency_per_page_s": 24.13202409398703,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 6,
+                "pages": 6
+              },
+              "text_cer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 6,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 6,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 6,
+                "pages": 8
+              }
+            },
+            "total_time_s": 153.58889366791118,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 6,
+            "vlm_uncached_pages": 6,
+            "vlm_time_s": 153.2471506651491,
+            "vlm_pages_per_second": 0.039152440837939166,
+            "vlm_uncached_time_s": 153.2471506651491,
+            "vlm_uncached_pages_per_second": 0.039152440837939166,
+            "mean_escalation_accuracy_delta": null
+          },
+          "not_scan": {
+            "documents": 31,
+            "pages": 36,
+            "failed_pages": 0,
+            "table_f1": 0.8660714285714286,
+            "ocr_cer": null,
+            "text_cer": 0.013791951885739815,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.25806451612903225,
+            "latency_per_page_s": 10.678289554333464,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "text_wer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "cheap_parser_share": {
+                "documents": 31,
+                "pages": 36
+              },
+              "latency_per_page_s": {
+                "documents": 31,
+                "pages": 36
+              },
+              "failed_page_rate": {
+                "documents": 31,
+                "pages": 36
+              }
+            },
+            "total_time_s": 333.5471392038744,
+            "mean_page_accuracy": 0.9826388888888888,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 9,
+            "vlm_uncached_pages": 9,
+            "vlm_time_s": 310.4537571229739,
+            "vlm_pages_per_second": 0.028989824711430398,
+            "vlm_uncached_time_s": 310.4537571229739,
+            "vlm_uncached_pages_per_second": 0.028989824711430398,
+            "mean_escalation_accuracy_delta": null
+          }
+        }
+      },
+      "bootstrap_95_ci": {
+        "text_cer": {
+          "lower": 0.010274728855972613,
+          "upper": 0.025552102772171393,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "text_wer": {
+          "lower": 0.0,
+          "upper": 0.07674418604651163,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "table_f1": {
+          "lower": 0.7613636363636364,
+          "upper": 0.9583333333333334,
+          "samples": 2000,
+          "seed": 20261011
+        }
+      },
+      "failures": [],
+      "cache_directory": "/Users/dineshdhanoki/unmess/.cache/unmess/cold/20261012T212538Z/unmess_parsing",
+      "cache_files_before": 0,
+      "cache_files_after": 17
+    },
+    "vlm_every_page": {
+      "wall_time_s": 1384.3579797499115,
+      "seconds_per_page": 26.62226884134445,
+      "cache_hits": 0,
+      "cold_valid": true,
+      "summary": {
+        "overall": {
+          "documents": 43,
+          "pages": 52,
+          "failed_pages": 3,
+          "table_f1": 0.6471774193548387,
+          "ocr_cer": 0.03063770232444931,
+          "text_cer": 0.1731056902658013,
+          "text_wer": 0.26689335212591025,
+          "cheap_parser_share": 0.0,
+          "latency_per_page_s": 26.869094254833453,
+          "failed_page_rate": 0.06976744186046512,
+          "metric_counts": {
+            "table_f1": {
+              "documents": 14,
+              "pages": 19
+            },
+            "ocr_cer": {
+              "documents": 12,
+              "pages": 12
+            },
+            "text_cer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "text_wer": {
+              "documents": 43,
+              "pages": 52
+            },
+            "cheap_parser_share": {
+              "documents": 43,
+              "pages": 52
+            },
+            "latency_per_page_s": {
+              "documents": 43,
+              "pages": 52
+            },
+            "failed_page_rate": {
+              "documents": 43,
+              "pages": 52
+            }
+          },
+          "total_time_s": 1383.852788207354,
+          "mean_page_accuracy": 0.8805815269522058,
+          "escalated_pages": 0,
+          "escalation_improved_pages": 0,
+          "vlm_attempted_pages": 52,
+          "vlm_uncached_pages": 52,
+          "vlm_time_s": 1383.852788207354,
+          "vlm_pages_per_second": 0.03757625120469708,
+          "vlm_uncached_time_s": 1383.852788207354,
+          "vlm_uncached_pages_per_second": 0.03757625120469708,
+          "mean_escalation_accuracy_delta": null
+        },
+        "by_cohort": {
+          "expanded": {
+            "documents": 15,
+            "pages": 20,
+            "failed_pages": 0,
+            "table_f1": 0.7963709677419355,
+            "ocr_cer": 0.03162650602409638,
+            "text_cer": 0.07009367475335347,
+            "text_wer": 0.15021885521885522,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 13.818804565304891,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 2,
+                "pages": 3
+              },
+              "ocr_cer": {
+                "documents": 8,
+                "pages": 8
+              },
+              "text_cer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "text_wer": {
+                "documents": 15,
+                "pages": 20
+              },
+              "cheap_parser_share": {
+                "documents": 15,
+                "pages": 20
+              },
+              "latency_per_page_s": {
+                "documents": 15,
+                "pages": 20
+              },
+              "failed_page_rate": {
+                "documents": 15,
+                "pages": 20
+              }
+            },
+            "total_time_s": 282.3198352921754,
+            "mean_page_accuracy": 0.9595027852944611,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 20,
+            "vlm_uncached_pages": 20,
+            "vlm_time_s": 282.3198352921754,
+            "vlm_pages_per_second": 0.07084163951605389,
+            "vlm_uncached_time_s": 282.3198352921754,
+            "vlm_uncached_pages_per_second": 0.07084163951605389,
+            "mean_escalation_accuracy_delta": null
+          },
+          "original": {
+            "documents": 28,
+            "pages": 32,
+            "failed_pages": 3,
+            "table_f1": 0.6223118279569892,
+            "ocr_cer": 0.028660094925155165,
+            "text_cer": 0.2282906985760412,
+            "text_wer": 0.3293975468975469,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 33.86032087422375,
+            "failed_page_rate": 0.10714285714285714,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 12,
+                "pages": 16
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "text_wer": {
+                "documents": 28,
+                "pages": 32
+              },
+              "cheap_parser_share": {
+                "documents": 28,
+                "pages": 32
+              },
+              "latency_per_page_s": {
+                "documents": 28,
+                "pages": 32
+              },
+              "failed_page_rate": {
+                "documents": 28,
+                "pages": 32
+              }
+            },
+            "total_time_s": 1101.5329529151786,
+            "mean_page_accuracy": 0.8312557404882962,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 32,
+            "vlm_uncached_pages": 32,
+            "vlm_time_s": 1101.5329529151786,
+            "vlm_pages_per_second": 0.0290504246062842,
+            "vlm_uncached_time_s": 1101.5329529151786,
+            "vlm_uncached_pages_per_second": 0.0290504246062842,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_category": {
+          "bilingual": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.033445065176908755,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 10.408753191842697,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 52.04376595921349,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 5,
+            "vlm_uncached_pages": 5,
+            "vlm_time_s": 52.04376595921349,
+            "vlm_pages_per_second": 0.0960729860309971,
+            "vlm_uncached_time_s": 52.04376595921349,
+            "vlm_uncached_pages_per_second": 0.0960729860309971,
+            "mean_escalation_accuracy_delta": null
+          },
+          "broken_text_layer": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.030075391385902893,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.560297353978967,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 38.24118941591587,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 38.24118941591587,
+            "vlm_pages_per_second": 0.10459925700781712,
+            "vlm_uncached_time_s": 38.24118941591587,
+            "vlm_uncached_pages_per_second": 0.10459925700781712,
+            "mean_escalation_accuracy_delta": null
+          },
+          "clean": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.030075391385902893,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 34.835850676725386,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 139.34340270690154,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 139.34340270690154,
+            "vlm_pages_per_second": 0.028706059435147438,
+            "vlm_uncached_time_s": 139.34340270690154,
+            "vlm_uncached_pages_per_second": 0.028706059435147438,
+            "mean_escalation_accuracy_delta": null
+          },
+          "fake_text_layer_scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.03162650602409638,
+            "text_cer": 0.03162650602409638,
+            "text_wer": 0.1625,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.065804229234345,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 36.26321691693738,
+            "mean_page_accuracy": 0.9683734939759037,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 36.26321691693738,
+            "vlm_pages_per_second": 0.11030461001742316,
+            "vlm_uncached_time_s": 36.26321691693738,
+            "vlm_uncached_pages_per_second": 0.11030461001742316,
+            "mean_escalation_accuracy_delta": null
+          },
+          "gst_invoice": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": 1.0,
+            "ocr_cer": null,
+            "text_cer": 0.2783235892221657,
+            "text_wer": 0.54,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 43.929762333777035,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 4,
+                "pages": 4
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 175.71904933510814,
+            "mean_page_accuracy": 0.8929524656837824,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 175.71904933510814,
+            "vlm_pages_per_second": 0.022763610519948404,
+            "vlm_uncached_time_s": 175.71904933510814,
+            "vlm_uncached_pages_per_second": 0.022763610519948404,
+            "mean_escalation_accuracy_delta": null
+          },
+          "merged_table": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 3,
+            "table_f1": 0.3870967741935484,
+            "ocr_cer": null,
+            "text_cer": 0.7029315960912053,
+            "text_wer": 0.8,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 61.42870853343047,
+            "failed_page_rate": 0.6,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 5
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 307.14354266715236,
+            "mean_page_accuracy": 0.354460439214038,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 5,
+            "vlm_uncached_pages": 5,
+            "vlm_time_s": 307.14354266715236,
+            "vlm_pages_per_second": 0.016279033433623046,
+            "vlm_uncached_time_s": 307.14354266715236,
+            "vlm_uncached_pages_per_second": 0.016279033433623046,
+            "mean_escalation_accuracy_delta": null
+          },
+          "mixed_pages": {
+            "documents": 4,
+            "pages": 8,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.03162650602409638,
+            "text_cer": 0.030850948704999638,
+            "text_wer": 0.08125,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.286419151016162,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 8
+              }
+            },
+            "total_time_s": 74.2913532081293,
+            "mean_page_accuracy": 0.9841867469879518,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 8,
+            "vlm_uncached_pages": 8,
+            "vlm_time_s": 74.2913532081293,
+            "vlm_pages_per_second": 0.10768413354361411,
+            "vlm_uncached_time_s": 74.2913532081293,
+            "vlm_uncached_pages_per_second": 0.10768413354361411,
+            "mean_escalation_accuracy_delta": null
+          },
+          "receipt": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.02227740208509439,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 35.350863989267964,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 141.40345595707186,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 141.40345595707186,
+            "vlm_pages_per_second": 0.02828785175670915,
+            "vlm_uncached_time_s": 141.40345595707186,
+            "vlm_uncached_pages_per_second": 0.02828785175670915,
+            "mean_escalation_accuracy_delta": null
+          },
+          "scan": {
+            "documents": 4,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.028660094925155165,
+            "text_cer": 0.028660094925155165,
+            "text_wer": 0.1125,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.182923687505536,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_cer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 4,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 4,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 4,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 4,
+                "pages": 4
+              }
+            },
+            "total_time_s": 36.73169475002214,
+            "mean_page_accuracy": 0.9789156626506024,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 36.73169475002214,
+            "vlm_pages_per_second": 0.10889777962117005,
+            "vlm_uncached_time_s": 36.73169475002214,
+            "vlm_uncached_pages_per_second": 0.10889777962117005,
+            "mean_escalation_accuracy_delta": null
+          },
+          "spanning_table": {
+            "documents": 5,
+            "pages": 10,
+            "failed_pages": 0,
+            "table_f1": 0.625,
+            "ocr_cer": null,
+            "text_cer": 0.39082081603112356,
+            "text_wer": 0.7782828282828282,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 38.26721172909019,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 5,
+                "pages": 10
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 10
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 10
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 10
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 10
+              }
+            },
+            "total_time_s": 382.67211729090195,
+            "mean_page_accuracy": 0.7783476740299742,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 10,
+            "vlm_uncached_pages": 10,
+            "vlm_time_s": 382.67211729090195,
+            "vlm_pages_per_second": 0.026132031961968477,
+            "vlm_uncached_time_s": 382.67211729090195,
+            "vlm_uncached_pages_per_second": 0.026132031961968477,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_language": {
+          "en": {
+            "documents": 38,
+            "pages": 47,
+            "failed_pages": 3,
+            "table_f1": 0.6471774193548387,
+            "ocr_cer": 0.03063770232444931,
+            "text_cer": 0.19148208830381347,
+            "text_wer": 0.3020108984582669,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 29.03492860522697,
+            "failed_page_rate": 0.07894736842105263,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 12,
+                "pages": 12
+              },
+              "text_cer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "text_wer": {
+                "documents": 38,
+                "pages": 47
+              },
+              "cheap_parser_share": {
+                "documents": 38,
+                "pages": 47
+              },
+              "latency_per_page_s": {
+                "documents": 38,
+                "pages": 47
+              },
+              "failed_page_rate": {
+                "documents": 38,
+                "pages": 47
+              }
+            },
+            "total_time_s": 1331.8090222481405,
+            "mean_page_accuracy": 0.8678774340747809,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 47,
+            "vlm_uncached_pages": 47,
+            "vlm_time_s": 1331.8090222481405,
+            "vlm_pages_per_second": 0.03529034509817507,
+            "vlm_uncached_time_s": 1331.8090222481405,
+            "vlm_uncached_pages_per_second": 0.03529034509817507,
+            "mean_escalation_accuracy_delta": null
+          },
+          "hi": {
+            "documents": 5,
+            "pages": 5,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": null,
+            "text_cer": 0.033445065176908755,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 10.408753191842697,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "text_wer": {
+                "documents": 5,
+                "pages": 5
+              },
+              "cheap_parser_share": {
+                "documents": 5,
+                "pages": 5
+              },
+              "latency_per_page_s": {
+                "documents": 5,
+                "pages": 5
+              },
+              "failed_page_rate": {
+                "documents": 5,
+                "pages": 5
+              }
+            },
+            "total_time_s": 52.04376595921349,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 5,
+            "vlm_uncached_pages": 5,
+            "vlm_time_s": 52.04376595921349,
+            "vlm_pages_per_second": 0.0960729860309971,
+            "vlm_uncached_time_s": 52.04376595921349,
+            "vlm_uncached_pages_per_second": 0.0960729860309971,
+            "mean_escalation_accuracy_delta": null
+          }
+        },
+        "by_scan_difficulty": {
+          "high": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.11244979919678715,
+            "text_cer": 0.09635548180746939,
+            "text_wer": 0.47500000000000003,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.156976916652638,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 37.275227166945115,
+            "mean_page_accuracy": 0.9156626506024097,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 37.275227166945115,
+            "vlm_pages_per_second": 0.10730987586165848,
+            "vlm_uncached_time_s": 37.275227166945115,
+            "vlm_uncached_pages_per_second": 0.10730987586165848,
+            "mean_escalation_accuracy_delta": null
+          },
+          "low": {
+            "documents": 3,
+            "pages": 4,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.0,
+            "text_cer": 0.0050200803212851405,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.17699474982995,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 3,
+                "pages": 3
+              },
+              "text_cer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "text_wer": {
+                "documents": 3,
+                "pages": 4
+              },
+              "cheap_parser_share": {
+                "documents": 3,
+                "pages": 4
+              },
+              "latency_per_page_s": {
+                "documents": 3,
+                "pages": 4
+              },
+              "failed_page_rate": {
+                "documents": 3,
+                "pages": 4
+              }
+            },
+            "total_time_s": 36.61982691602316,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 4,
+            "vlm_uncached_pages": 4,
+            "vlm_time_s": 36.61982691602316,
+            "vlm_pages_per_second": 0.10923044527689407,
+            "vlm_uncached_time_s": 36.61982691602316,
+            "vlm_uncached_pages_per_second": 0.10923044527689407,
+            "mean_escalation_accuracy_delta": null
+          },
+          "medium": {
+            "documents": 6,
+            "pages": 8,
+            "failed_pages": 0,
+            "table_f1": null,
+            "ocr_cer": 0.005050505050505051,
+            "text_cer": 0.01007058537179019,
+            "text_wer": 0.0,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 9.189778878596067,
+            "failed_page_rate": 0.0,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 0,
+                "pages": 0
+              },
+              "ocr_cer": {
+                "documents": 6,
+                "pages": 6
+              },
+              "text_cer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "text_wer": {
+                "documents": 6,
+                "pages": 8
+              },
+              "cheap_parser_share": {
+                "documents": 6,
+                "pages": 8
+              },
+              "latency_per_page_s": {
+                "documents": 6,
+                "pages": 8
+              },
+              "failed_page_rate": {
+                "documents": 6,
+                "pages": 8
+              }
+            },
+            "total_time_s": 73.39121079212055,
+            "mean_page_accuracy": 1.0,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 8,
+            "vlm_uncached_pages": 8,
+            "vlm_time_s": 73.39121079212055,
+            "vlm_pages_per_second": 0.1090048782906699,
+            "vlm_uncached_time_s": 73.39121079212055,
+            "vlm_uncached_pages_per_second": 0.1090048782906699,
+            "mean_escalation_accuracy_delta": null
+          },
+          "not_scan": {
+            "documents": 31,
+            "pages": 36,
+            "failed_pages": 3,
+            "table_f1": 0.6471774193548387,
+            "ocr_cer": null,
+            "text_cer": 0.22835466073588553,
+            "text_wer": 0.3242391658520691,
+            "cheap_parser_share": 0.0,
+            "latency_per_page_s": 33.71711176409078,
+            "failed_page_rate": 0.0967741935483871,
+            "metric_counts": {
+              "table_f1": {
+                "documents": 14,
+                "pages": 19
+              },
+              "ocr_cer": {
+                "documents": 0,
+                "pages": 0
+              },
+              "text_cer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "text_wer": {
+                "documents": 31,
+                "pages": 36
+              },
+              "cheap_parser_share": {
+                "documents": 31,
+                "pages": 36
+              },
+              "latency_per_page_s": {
+                "documents": 31,
+                "pages": 36
+              },
+              "failed_page_rate": {
+                "documents": 31,
+                "pages": 36
+              }
+            },
+            "total_time_s": 1236.5665233322652,
+            "mean_page_accuracy": 0.8368774666418073,
+            "escalated_pages": 0,
+            "escalation_improved_pages": 0,
+            "vlm_attempted_pages": 36,
+            "vlm_uncached_pages": 36,
+            "vlm_time_s": 1236.5665233322652,
+            "vlm_pages_per_second": 0.029112869644075594,
+            "vlm_uncached_time_s": 1236.5665233322652,
+            "vlm_uncached_pages_per_second": 0.029112869644075594,
+            "mean_escalation_accuracy_delta": null
+          }
+        }
+      },
+      "bootstrap_95_ci": {
+        "text_cer": {
+          "lower": 0.1036504878718937,
+          "upper": 0.25344947536154744,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "text_wer": {
+          "lower": 0.1690662438336857,
+          "upper": 0.3745642471223867,
+          "samples": 2000,
+          "seed": 20261011
+        },
+        "table_f1": {
+          "lower": 0.4375,
+          "upper": 0.8389976958525346,
+          "samples": 2000,
+          "seed": 20261011
+        }
+      },
+      "failures": [
+        {
+          "document_id": "synthetic-merged_table-00",
+          "page": 1,
+          "parser": "vlm",
+          "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-merged_table-02",
+          "page": 1,
+          "parser": "vlm",
+          "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+          "attempts": []
+        },
+        {
+          "document_id": "synthetic-merged_table-04",
+          "page": 1,
+          "parser": "vlm",
+          "error": "HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500; HTTPStatusError: Server error '500 Internal Server Error' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+          "attempts": []
+        }
+      ],
+      "cache_directory": "/Users/dineshdhanoki/unmess/.cache/unmess/cold/20261012T212538Z/vlm_every_page",
+      "cache_files_before": 0,
+      "cache_files_after": 41
+    }
+  },
+  "vision_warmup_s": 6.3149789160816
+}
