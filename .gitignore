@@ -6,6 +6,7 @@
 .venv/
 .cache/
 eval/real_smoke/
+eval/real_smoke_out/
 __pycache__/
 *.egg-info/
 *.py[cod]
