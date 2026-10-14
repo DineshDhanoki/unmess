@@ -1,0 +1,1373 @@
+{
+  "split": "dev",
+  "docling_device": "cpu",
+  "default_config": {
+    "header_similarity": 0.72,
+    "geometry_tolerance": 0.08,
+    "page_edge_band": 0.2
+  },
+  "systems": [
+    {
+      "system": "oracle input",
+      "documents": 29,
+      "positive_pairs": 12,
+      "negative_pairs": 17,
+      "extracted_pair_coverage": 29,
+      "failed_pages": 0,
+      "routing_shares": {
+        "oracle": 58
+      },
+      "before_cell_f1": 0.7499999999999999,
+      "after_cell_f1": 1.0,
+      "chunk_integrity": {
+        "split_reference_tables": 0,
+        "reference_tables": 46,
+        "table_split_rate": 0.0,
+        "dual_format_table_chunks": 46,
+        "naive_fixed_600_token_oversized_documents": 0,
+        "naive_table_split_rate": 0.0
+      },
+      "citations": {
+        "correct": 46,
+        "chunks": 46,
+        "accuracy": 1.0
+      },
+      "fixed": {
+        "true_positive": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 17,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lopo": {
+        "true_positive": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 17,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lopo_config_selections": [
+        {
+          "config": {
+            "header_similarity": 0.72,
+            "geometry_tolerance": 0.08,
+            "page_edge_band": 0.2
+          },
+          "held_out_pairs": 29
+        }
+      ],
+      "categories": {
+        "continuation_across_figure": {
+          "true_positive": 2,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "continuation_after_figure": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 2
+        },
+        "continuation_repeated_header": {
+          "true_positive": 6,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "continuation_without_header": {
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "geometry_mismatch": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        },
+        "midpage_then_different": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 3
+        },
+        "misleading_repeated_header": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        },
+        "unrelated_same_columns": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        }
+      },
+      "pairs": [
+        {
+          "document_id": "synthetic-continuation_repeated_header-00",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-01",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-02",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-03",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-04",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-05",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-06",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-07",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-08",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-09",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_across_figure-10",
+          "category": "continuation_across_figure",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_across_figure-11",
+          "category": "continuation_across_figure",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-12",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-13",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-14",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-15",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-16",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-17",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-18",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-19",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-20",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-21",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-22",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-23",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-24",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-25",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-26",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_after_figure-27",
+          "category": "continuation_after_figure",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_after_figure-28",
+          "category": "continuation_after_figure",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "oracle",
+            "oracle"
+          ],
+          "failed_pages": 0
+        }
+      ]
+    },
+    {
+      "system": "Docling ParsedPage",
+      "documents": 29,
+      "positive_pairs": 12,
+      "negative_pairs": 17,
+      "extracted_pair_coverage": 29,
+      "failed_pages": 0,
+      "routing_shares": {
+        "docling": 58
+      },
+      "before_cell_f1": 0.7499999999999999,
+      "after_cell_f1": 0.912568306010929,
+      "chunk_integrity": {
+        "split_reference_tables": 0,
+        "reference_tables": 46,
+        "table_split_rate": 0.0,
+        "dual_format_table_chunks": 50,
+        "naive_fixed_600_token_oversized_documents": 0,
+        "naive_table_split_rate": 0.0
+      },
+      "citations": {
+        "correct": 46,
+        "chunks": 50,
+        "accuracy": 0.92
+      },
+      "fixed": {
+        "true_positive": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 17,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lopo": {
+        "true_positive": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 17,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lopo_config_selections": [
+        {
+          "config": {
+            "header_similarity": 0.72,
+            "geometry_tolerance": 0.08,
+            "page_edge_band": 0.2
+          },
+          "held_out_pairs": 29
+        }
+      ],
+      "categories": {
+        "continuation_across_figure": {
+          "true_positive": 2,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "continuation_after_figure": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 2
+        },
+        "continuation_repeated_header": {
+          "true_positive": 6,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "continuation_without_header": {
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "geometry_mismatch": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        },
+        "midpage_then_different": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 3
+        },
+        "misleading_repeated_header": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        },
+        "unrelated_same_columns": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        }
+      },
+      "pairs": [
+        {
+          "document_id": "synthetic-continuation_repeated_header-00",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-01",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-02",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-03",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-04",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-05",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-06",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-07",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-08",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-09",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_across_figure-10",
+          "category": "continuation_across_figure",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_across_figure-11",
+          "category": "continuation_across_figure",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-12",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-13",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-14",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-15",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-16",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-17",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-18",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-19",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-20",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-21",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-22",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-23",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-24",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-25",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-26",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_after_figure-27",
+          "category": "continuation_after_figure",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_after_figure-28",
+          "category": "continuation_after_figure",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        }
+      ]
+    },
+    {
+      "system": "Unmess router ParsedPage",
+      "documents": 29,
+      "positive_pairs": 12,
+      "negative_pairs": 17,
+      "extracted_pair_coverage": 29,
+      "failed_pages": 0,
+      "routing_shares": {
+        "docling": 58
+      },
+      "before_cell_f1": 0.7499999999999999,
+      "after_cell_f1": 0.912568306010929,
+      "chunk_integrity": {
+        "split_reference_tables": 0,
+        "reference_tables": 46,
+        "table_split_rate": 0.0,
+        "dual_format_table_chunks": 50,
+        "naive_fixed_600_token_oversized_documents": 0,
+        "naive_table_split_rate": 0.0
+      },
+      "citations": {
+        "correct": 46,
+        "chunks": 50,
+        "accuracy": 0.92
+      },
+      "fixed": {
+        "true_positive": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 17,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lopo": {
+        "true_positive": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 17,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "lopo_config_selections": [
+        {
+          "config": {
+            "header_similarity": 0.72,
+            "geometry_tolerance": 0.08,
+            "page_edge_band": 0.2
+          },
+          "held_out_pairs": 29
+        }
+      ],
+      "categories": {
+        "continuation_across_figure": {
+          "true_positive": 2,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "continuation_after_figure": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 2
+        },
+        "continuation_repeated_header": {
+          "true_positive": 6,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "continuation_without_header": {
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 0
+        },
+        "geometry_mismatch": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        },
+        "midpage_then_different": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 3
+        },
+        "misleading_repeated_header": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        },
+        "unrelated_same_columns": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4
+        }
+      },
+      "pairs": [
+        {
+          "document_id": "synthetic-continuation_repeated_header-00",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-01",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-02",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-03",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-04",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_repeated_header-05",
+          "category": "continuation_repeated_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-06",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-07",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-08",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_without_header-09",
+          "category": "continuation_without_header",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_across_figure-10",
+          "category": "continuation_across_figure",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_across_figure-11",
+          "category": "continuation_across_figure",
+          "expected_stitch": true,
+          "predicted_stitch": true,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-12",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-13",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-14",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-unrelated_same_columns-15",
+          "category": "unrelated_same_columns",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-16",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-17",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-18",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-misleading_repeated_header-19",
+          "category": "misleading_repeated_header",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-20",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-21",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-22",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-geometry_mismatch-23",
+          "category": "geometry_mismatch",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-24",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-25",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-midpage_then_different-26",
+          "category": "midpage_then_different",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 2,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_after_figure-27",
+          "category": "continuation_after_figure",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        },
+        {
+          "document_id": "synthetic-continuation_after_figure-28",
+          "category": "continuation_after_figure",
+          "expected_stitch": false,
+          "predicted_stitch": false,
+          "extracted_tables": 3,
+          "parsers": [
+            "docling",
+            "docling"
+          ],
+          "failed_pages": 0
+        }
+      ]
+    }
+  ]
+}

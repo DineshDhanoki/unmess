@@ -60,6 +60,11 @@ See the [Phase 2e DEV report](eval/results/phase2e-dev.md) and
 [cold timing report](eval/results/phase2e-cold.md) for denominators, confidence intervals,
 hardware, model tag, and failures. These values are not test-set or production claims.
 
+Real-document validation: pending.
+
+The deferred v1 test will run from a separate worktree checked out at `freeze-v1`; Phase 3 changes
+on `main` do not alter that frozen evaluation.
+
 ## Quick start
 
 Install Python 3.11 or 3.12, Docker, and
