@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generator_version": "phase3a-v1",
+  "generator_version": "phase3a-v2",
   "document_id": "synthetic-continuation_repeated_header-01",
-  "split": "test",
+  "split": "dev",
   "category": "continuation_repeated_header",
   "source_file": "pdf/synthetic-continuation_repeated_header-01.pdf",
-  "file_sha256": "cb8b764eebe04a9f1c8bdd867280d3c5d68bedfbfdc4d429b9c2d5edb0464ccc",
+  "file_sha256": "98ef333493db9ab42f6de34e1274a9d779cb5deb07cfb154365e2b13da955270",
   "page_size": {
     "width": 612.0,
     "height": 792.0
@@ -164,7 +164,7 @@
         {
           "kind": "table",
           "table_id": "synthetic-continuation_repeated_header-01-p2",
-          "caption": "Ledger (continued)",
+          "caption": "Ledger",
           "section_path": [
             "Ledger"
           ],
@@ -186,9 +186,9 @@
           ],
           "rows": [
             [
-              "Item",
-              "Qty",
-              "Amount"
+              "item",
+              "qty",
+              "amount"
             ],
             [
               "Synthetic item 1-C",
@@ -205,7 +205,7 @@
             {
               "row": 0,
               "col": 0,
-              "text": "Item",
+              "text": "item",
               "bbox": [
                 0.088235,
                 0.063131,
@@ -216,7 +216,7 @@
             {
               "row": 0,
               "col": 1,
-              "text": "Qty",
+              "text": "qty",
               "bbox": [
                 0.529412,
                 0.063131,
@@ -227,7 +227,7 @@
             {
               "row": 0,
               "col": 2,
-              "text": "Amount",
+              "text": "amount",
               "bbox": [
                 0.676471,
                 0.063131,

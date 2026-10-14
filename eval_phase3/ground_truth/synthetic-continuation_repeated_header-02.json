@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "generator_version": "phase3a-v2",
+  "document_id": "synthetic-continuation_repeated_header-02",
+  "split": "dev",
+  "category": "continuation_repeated_header",
+  "source_file": "pdf/synthetic-continuation_repeated_header-02.pdf",
+  "file_sha256": "79ddab59a457e91ce0d07d88eab359ce34d6fca294662748b4df4edfd8b7e37d",
+  "page_size": {
+    "width": 612.0,
+    "height": 792.0
+  },
+  "pages": [
+    {
+      "page": 1,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-continuation_repeated_header-02-p1",
+          "caption": "Ledger (part 1)",
+          "section_path": [
+            "Ledger"
+          ],
+          "page": 1,
+          "bbox": [
+            0.088235,
+            0.815657,
+            0.888889,
+            0.921717
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic item 2-A",
+              "1",
+              "125"
+            ],
+            [
+              "Synthetic item 2-B",
+              "2",
+              "250"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.088235,
+                0.815657,
+                0.529412,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.529412,
+                0.815657,
+                0.676471,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.676471,
+                0.815657,
+                0.888889,
+                0.85101
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic item 2-A",
+              "bbox": [
+                0.088235,
+                0.85101,
+                0.529412,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "1",
+              "bbox": [
+                0.529412,
+                0.85101,
+                0.676471,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "125",
+              "bbox": [
+                0.676471,
+                0.85101,
+                0.888889,
+                0.886364
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic item 2-B",
+              "bbox": [
+                0.088235,
+                0.886364,
+                0.529412,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "2",
+              "bbox": [
+                0.529412,
+                0.886364,
+                0.676471,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "250",
+              "bbox": [
+                0.676471,
+                0.886364,
+                0.888889,
+                0.921717
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-continuation_repeated_header-02-p2",
+          "caption": "Ledger (continued)",
+          "section_path": [
+            "Ledger"
+          ],
+          "page": 2,
+          "bbox": [
+            0.088235,
+            0.063131,
+            0.888889,
+            0.169192
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item.",
+              "Qty.",
+              "Amount."
+            ],
+            [
+              "Synthetic item 2-C",
+              "3",
+              "375"
+            ],
+            [
+              "Synthetic item 2-D",
+              "4",
+              "500"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item.",
+              "bbox": [
+                0.088235,
+                0.063131,
+                0.529412,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty.",
+              "bbox": [
+                0.529412,
+                0.063131,
+                0.676471,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount.",
+              "bbox": [
+                0.676471,
+                0.063131,
+                0.888889,
+                0.098485
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic item 2-C",
+              "bbox": [
+                0.088235,
+                0.098485,
+                0.529412,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "3",
+              "bbox": [
+                0.529412,
+                0.098485,
+                0.676471,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "375",
+              "bbox": [
+                0.676471,
+                0.098485,
+                0.888889,
+                0.133838
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic item 2-D",
+              "bbox": [
+                0.088235,
+                0.133838,
+                0.529412,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "4",
+              "bbox": [
+                0.529412,
+                0.133838,
+                0.676471,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "500",
+              "bbox": [
+                0.676471,
+                0.133838,
+                0.888889,
+                0.169192
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stitch_pair": {
+    "table_ids": [
+      "synthetic-continuation_repeated_header-02-p1",
+      "synthetic-continuation_repeated_header-02-p2"
+    ],
+    "should_stitch": true,
+    "reason": "repeated header and aligned boundary tables"
+  },
+  "expected_stitched_rows": [
+    [
+      "Item",
+      "Qty",
+      "Amount"
+    ],
+    [
+      "Synthetic item 2-A",
+      "1",
+      "125"
+    ],
+    [
+      "Synthetic item 2-B",
+      "2",
+      "250"
+    ],
+    [
+      "Synthetic item 2-C",
+      "3",
+      "375"
+    ],
+    [
+      "Synthetic item 2-D",
+      "4",
+      "500"
+    ]
+  ]
+}

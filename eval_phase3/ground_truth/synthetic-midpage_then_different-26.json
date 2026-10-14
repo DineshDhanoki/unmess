@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "generator_version": "phase3a-v2",
+  "document_id": "synthetic-midpage_then_different-26",
+  "split": "dev",
+  "category": "midpage_then_different",
+  "source_file": "pdf/synthetic-midpage_then_different-26.pdf",
+  "file_sha256": "9c751c7988a528f0c25d42624d2071a84b0a8503e24e7fcb81df454ea6c6f8a6",
+  "page_size": {
+    "width": 612.0,
+    "height": 792.0
+  },
+  "pages": [
+    {
+      "page": 1,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-midpage_then_different-26-p1",
+          "caption": "Charges",
+          "section_path": [
+            "Charges"
+          ],
+          "page": 1,
+          "bbox": [
+            0.088235,
+            0.292929,
+            0.888889,
+            0.39899
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic item 26-A",
+              "1",
+              "125"
+            ],
+            [
+              "Synthetic item 26-B",
+              "2",
+              "250"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.088235,
+                0.292929,
+                0.529412,
+                0.328283
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.529412,
+                0.292929,
+                0.676471,
+                0.328283
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.676471,
+                0.292929,
+                0.888889,
+                0.328283
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic item 26-A",
+              "bbox": [
+                0.088235,
+                0.328283,
+                0.529412,
+                0.363636
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "1",
+              "bbox": [
+                0.529412,
+                0.328283,
+                0.676471,
+                0.363636
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "125",
+              "bbox": [
+                0.676471,
+                0.328283,
+                0.888889,
+                0.363636
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic item 26-B",
+              "bbox": [
+                0.088235,
+                0.363636,
+                0.529412,
+                0.39899
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "2",
+              "bbox": [
+                0.529412,
+                0.363636,
+                0.676471,
+                0.39899
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "250",
+              "bbox": [
+                0.676471,
+                0.363636,
+                0.888889,
+                0.39899
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-midpage_then_different-26-p2",
+          "caption": "Credits",
+          "section_path": [
+            "Credits"
+          ],
+          "page": 2,
+          "bbox": [
+            0.088235,
+            0.063131,
+            0.888889,
+            0.169192
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic credit 26-X",
+              "8",
+              "800"
+            ],
+            [
+              "Synthetic credit 26-Y",
+              "9",
+              "900"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.088235,
+                0.063131,
+                0.529412,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.529412,
+                0.063131,
+                0.676471,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.676471,
+                0.063131,
+                0.888889,
+                0.098485
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic credit 26-X",
+              "bbox": [
+                0.088235,
+                0.098485,
+                0.529412,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "8",
+              "bbox": [
+                0.529412,
+                0.098485,
+                0.676471,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "800",
+              "bbox": [
+                0.676471,
+                0.098485,
+                0.888889,
+                0.133838
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic credit 26-Y",
+              "bbox": [
+                0.088235,
+                0.133838,
+                0.529412,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "9",
+              "bbox": [
+                0.529412,
+                0.133838,
+                0.676471,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "900",
+              "bbox": [
+                0.676471,
+                0.133838,
+                0.888889,
+                0.169192
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stitch_pair": {
+    "table_ids": [
+      "synthetic-midpage_then_different-26-p1",
+      "synthetic-midpage_then_different-26-p2"
+    ],
+    "should_stitch": false,
+    "reason": "first table ends mid-page before a different table"
+  },
+  "expected_stitched_rows": null
+}

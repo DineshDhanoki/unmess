@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "generator_version": "phase3a-v2",
+  "document_id": "synthetic-geometry_mismatch-20",
+  "split": "dev",
+  "category": "geometry_mismatch",
+  "source_file": "pdf/synthetic-geometry_mismatch-20.pdf",
+  "file_sha256": "fc077418a922047235be11588df7c19eaf4e2edfd6a3c2a93e28ed937667294f",
+  "page_size": {
+    "width": 612.0,
+    "height": 792.0
+  },
+  "pages": [
+    {
+      "page": 1,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-geometry_mismatch-20-p1",
+          "caption": "Ledger",
+          "section_path": [
+            "Ledger"
+          ],
+          "page": 1,
+          "bbox": [
+            0.088235,
+            0.815657,
+            0.888889,
+            0.921717
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic item 20-A",
+              "1",
+              "125"
+            ],
+            [
+              "Synthetic item 20-B",
+              "2",
+              "250"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.088235,
+                0.815657,
+                0.529412,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.529412,
+                0.815657,
+                0.676471,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.676471,
+                0.815657,
+                0.888889,
+                0.85101
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic item 20-A",
+              "bbox": [
+                0.088235,
+                0.85101,
+                0.529412,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "1",
+              "bbox": [
+                0.529412,
+                0.85101,
+                0.676471,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "125",
+              "bbox": [
+                0.676471,
+                0.85101,
+                0.888889,
+                0.886364
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic item 20-B",
+              "bbox": [
+                0.088235,
+                0.886364,
+                0.529412,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "2",
+              "bbox": [
+                0.529412,
+                0.886364,
+                0.676471,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "250",
+              "bbox": [
+                0.676471,
+                0.886364,
+                0.888889,
+                0.921717
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-geometry_mismatch-20-p2",
+          "caption": "Ledger appendix",
+          "section_path": [
+            "Ledger appendix"
+          ],
+          "page": 2,
+          "bbox": [
+            0.150327,
+            0.063131,
+            0.852941,
+            0.169192
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.343137,
+            0.187908,
+            0.171569
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic offset 20-X",
+              "8",
+              "800"
+            ],
+            [
+              "Synthetic offset 20-Y",
+              "9",
+              "900"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.150327,
+                0.063131,
+                0.493464,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.493464,
+                0.063131,
+                0.681373,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.681373,
+                0.063131,
+                0.852941,
+                0.098485
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic offset 20-X",
+              "bbox": [
+                0.150327,
+                0.098485,
+                0.493464,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "8",
+              "bbox": [
+                0.493464,
+                0.098485,
+                0.681373,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "800",
+              "bbox": [
+                0.681373,
+                0.098485,
+                0.852941,
+                0.133838
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic offset 20-Y",
+              "bbox": [
+                0.150327,
+                0.133838,
+                0.493464,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "9",
+              "bbox": [
+                0.493464,
+                0.133838,
+                0.681373,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "900",
+              "bbox": [
+                0.681373,
+                0.133838,
+                0.852941,
+                0.169192
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stitch_pair": {
+    "table_ids": [
+      "synthetic-geometry_mismatch-20-p1",
+      "synthetic-geometry_mismatch-20-p2"
+    ],
+    "should_stitch": false,
+    "reason": "similar headers but incompatible table width or column offsets"
+  },
+  "expected_stitched_rows": null
+}

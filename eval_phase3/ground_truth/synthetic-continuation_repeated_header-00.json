@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generator_version": "phase3a-v1",
+  "generator_version": "phase3a-v2",
   "document_id": "synthetic-continuation_repeated_header-00",
   "split": "dev",
   "category": "continuation_repeated_header",
   "source_file": "pdf/synthetic-continuation_repeated_header-00.pdf",
-  "file_sha256": "9a045c42c83875ac5623cafca8ace673ff2377485ca4cf2419c899862fdb8331",
+  "file_sha256": "41de07e9ee1e2503ae11f084f4319bddb1552d5709439ef8c5db053131d1b510",
   "page_size": {
     "width": 612.0,
     "height": 792.0

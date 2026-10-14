@@ -10,6 +10,8 @@ All content is visibly synthetic and fictional. DEV ground truth may be used dur
 development. The test ground-truth files are sealed until a future `freeze-v2` and its single
 test run. Manifest metadata may be inspected without opening test ground truth.
 
-The corpus pairs DEV and test variants for positive cross-page continuations and hard negatives:
-equal-column unrelated tables, misleading repeated headers, a table ending mid-page before a
-different table, and a possible continuation interrupted by a figure.
+Each split has 12 positive and 17 hard-negative stitch pairs. Variants cover exact and noisy
+repeated headers, headerless continuations, optional continued captions, running headers and
+footers, figures between true continuations, equal-column unrelated tables with near-identical
+headers, geometry mismatches, section changes after figures, and a table ending mid-page before a
+different table.

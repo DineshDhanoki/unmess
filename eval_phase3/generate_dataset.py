@@ -16,7 +16,7 @@ PAGE_HEIGHT = 792.0
 TABLE_X = 54.0
 ROW_HEIGHT = 28.0
 HEADERS = ("Item", "Qty", "Amount")
-GENERATOR_VERSION = "phase3a-v1"
+GENERATOR_VERSION = "phase3a-v2"
 
 
 @dataclass(frozen=True)
@@ -27,6 +27,8 @@ class TableSpec:
     rows: tuple[tuple[str, ...], ...]
     top_y: float
     header_rows: int = 1
+    x: float = TABLE_X
+    column_widths: tuple[float, ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -39,10 +41,18 @@ class FigureSpec:
 
 
 @dataclass(frozen=True)
+class TextSpec:
+    text: str
+    x: float
+    y: float
+
+
+@dataclass(frozen=True)
 class PageSpec:
     heading: str
     tables: tuple[TableSpec, ...]
     figures: tuple[FigureSpec, ...] = ()
+    running_text: tuple[TextSpec, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -68,27 +78,27 @@ def _bbox(x: float, top_y: float, width: float, height: float) -> list[float]:
 
 def _draw_table(pdf: canvas.Canvas, spec: TableSpec, page_number: int) -> dict[str, Any]:
     columns = len(spec.rows[0])
-    column_widths = (
+    column_widths = spec.column_widths or (
         (270.0, 90.0, 130.0) if columns == 3 else tuple(490.0 / columns for _ in range(columns))
     )
     width = sum(column_widths)
     height = ROW_HEIGHT * len(spec.rows)
     bottom = spec.top_y - height
     pdf.setFont("Helvetica-Bold", 10)
-    pdf.drawString(TABLE_X, spec.top_y + 16, spec.caption)
+    pdf.drawString(spec.x, spec.top_y + 16, spec.caption)
     pdf.setLineWidth(0.8)
     for row_index in range(len(spec.rows) + 1):
         y = spec.top_y - row_index * ROW_HEIGHT
-        pdf.line(TABLE_X, y, TABLE_X + width, y)
-    x = TABLE_X
+        pdf.line(spec.x, y, spec.x + width, y)
+    x = spec.x
     for column_width in column_widths:
         pdf.line(x, spec.top_y, x, bottom)
         x += column_width
-    pdf.line(TABLE_X + width, spec.top_y, TABLE_X + width, bottom)
+    pdf.line(spec.x + width, spec.top_y, spec.x + width, bottom)
 
     cells: list[dict[str, Any]] = []
     for row_index, row in enumerate(spec.rows):
-        x = TABLE_X
+        x = spec.x
         for column_index, (text, column_width) in enumerate(zip(row, column_widths, strict=True)):
             pdf.setFont("Helvetica-Bold" if row_index < spec.header_rows else "Helvetica", 9)
             pdf.drawString(x + 5, spec.top_y - row_index * ROW_HEIGHT - 18, text)
@@ -112,7 +122,7 @@ def _draw_table(pdf: canvas.Canvas, spec: TableSpec, page_number: int) -> dict[s
         "caption": spec.caption,
         "section_path": list(spec.section_path),
         "page": page_number,
-        "bbox": _bbox(TABLE_X, spec.top_y, width, height),
+        "bbox": _bbox(spec.x, spec.top_y, width, height),
         "column_count": columns,
         "column_widths_normalized": [round(value / PAGE_WIDTH, 6) for value in column_widths],
         "header_rows": list(range(spec.header_rows)),
@@ -146,6 +156,26 @@ def _variant_rows(index: int) -> tuple[tuple[str, ...], ...]:
     )
 
 
+def _other_rows(
+    index: int, label: str, header: tuple[str, ...] = HEADERS
+) -> tuple[tuple[str, ...], ...]:
+    return (
+        header,
+        (f"Synthetic {label} {index}-X", "8", "800"),
+        (f"Synthetic {label} {index}-Y", "9", "900"),
+    )
+
+
+def _header_variant(mode: int) -> tuple[str, ...]:
+    variants = (
+        HEADERS,
+        ("item", "qty", "amount"),
+        ("Item.", "Qty.", "Amount."),
+        ("ltem", "QTY", "Arnount"),
+    )
+    return variants[mode % len(variants)]
+
+
 def _table(
     table_id: str,
     caption: str,
@@ -154,17 +184,33 @@ def _table(
     top_y: float,
     *,
     header_rows: int = 1,
+    x: float = TABLE_X,
+    column_widths: tuple[float, ...] | None = None,
 ) -> TableSpec:
-    return TableSpec(table_id, caption, (section,), rows, top_y, header_rows)
+    return TableSpec(table_id, caption, (section,), rows, top_y, header_rows, x, column_widths)
 
 
-def _spec(category: str, split: Literal["dev", "test"], variant: int) -> DocumentSpec:
+def _spec(
+    category: str,
+    split: Literal["dev", "test"],
+    variant: int,
+    mode: int,
+) -> DocumentSpec:
     prefix = f"synthetic-{category}-{variant:02d}"
     rows = _variant_rows(variant)
     first_id, second_id = f"{prefix}-p1", f"{prefix}-p2"
     bottom_top = 146.0
     page_top = 742.0
     if category == "continuation_repeated_header":
+        continued_header = _header_variant(mode)
+        caption = "Ledger (continued)" if mode % 2 == 0 else "Ledger"
+        running = (
+            (TextSpec("SYNTHETIC LEDGER RUNNING HEADER", 190.0, 726.0),)
+            if mode % 3 == 1
+            else (TextSpec(f"Page {variant + 1}", 282.0, 28.0),)
+            if mode % 3 == 2
+            else ()
+        )
         pages = (
             PageSpec(
                 "Synthetic continued ledger",
@@ -172,11 +218,8 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             ),
             PageSpec(
                 "Synthetic continued ledger",
-                (
-                    _table(
-                        second_id, "Ledger (continued)", "Ledger", (rows[0], *rows[3:]), page_top
-                    ),
-                ),
+                (_table(second_id, caption, "Ledger", (continued_header, *rows[3:]), page_top),),
+                running_text=running,
             ),
         )
         return DocumentSpec(
@@ -190,6 +233,14 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             rows,
         )
     if category == "continuation_without_header":
+        caption = "Register (continued)" if mode % 2 == 0 else "Register"
+        running = (
+            (TextSpec("SYNTHETIC REGISTER", 230.0, 726.0),)
+            if mode % 3 == 1
+            else (TextSpec(f"Page {variant + 1}", 282.0, 28.0),)
+            if mode % 3 == 2
+            else ()
+        )
         pages = (
             PageSpec(
                 "Synthetic continued register",
@@ -200,13 +251,14 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
                 (
                     _table(
                         second_id,
-                        "Register (continued)",
+                        caption,
                         "Register",
                         rows[3:],
                         page_top,
                         header_rows=0,
                     ),
                 ),
+                running_text=running,
             ),
         )
         return DocumentSpec(
@@ -219,12 +271,40 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             "explicit continuation without a repeated header",
             rows,
         )
-    if category == "unrelated_same_columns":
-        other = (
-            HEADERS,
-            (f"Synthetic asset {variant}-X", "8", "800"),
-            (f"Synthetic asset {variant}-Y", "9", "900"),
+    if category == "continuation_across_figure":
+        caption = "Schedule (continued)" if mode % 2 == 0 else "Schedule"
+        pages = (
+            PageSpec(
+                "Synthetic schedule",
+                (_table(first_id, "Schedule", "Schedule", rows[:3], bottom_top),),
+            ),
+            PageSpec(
+                "Synthetic schedule",
+                (
+                    _table(
+                        second_id,
+                        caption,
+                        "Schedule",
+                        (_header_variant(mode), *rows[3:]),
+                        500.0,
+                    ),
+                ),
+                (FigureSpec("SYNTHETIC FIGURE", 106.0, 720.0, 400.0, 120.0),),
+            ),
         )
+        return DocumentSpec(
+            prefix,
+            split,
+            category,
+            pages,
+            (first_id, second_id),
+            True,
+            "same section and table continue after an intervening figure",
+            rows,
+        )
+    if category == "unrelated_same_columns":
+        near_header = _header_variant(mode) if mode % 2 else HEADERS
+        other = _other_rows(variant, "asset", near_header)
         pages = (
             PageSpec(
                 "Synthetic purchases",
@@ -245,11 +325,7 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             "unrelated sections with the same column count",
         )
     if category == "midpage_then_different":
-        other = (
-            HEADERS,
-            (f"Synthetic credit {variant}-X", "5", "625"),
-            (f"Synthetic credit {variant}-Y", "6", "750"),
-        )
+        other = _other_rows(variant, "credit")
         pages = (
             PageSpec(
                 "Synthetic charges", (_table(first_id, "Charges", "Charges", rows[:3], 560.0),)
@@ -268,6 +344,7 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             "first table ends mid-page before a different table",
         )
     if category == "continuation_after_figure":
+        other = _other_rows(variant, "note", _header_variant(mode))
         pages = (
             PageSpec(
                 "Synthetic schedule",
@@ -275,11 +352,7 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             ),
             PageSpec(
                 "Synthetic illustrated notes",
-                (
-                    _table(
-                        second_id, "Schedule rows", "Illustrated notes", (rows[0], *rows[3:]), 500.0
-                    ),
-                ),
+                (_table(second_id, "Schedule rows", "Illustrated notes", other, 500.0),),
                 (FigureSpec("SYNTHETIC FIGURE", 106.0, 720.0, 400.0, 120.0),),
             ),
         )
@@ -293,11 +366,7 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             "a figure and section boundary interrupt the apparent continuation",
         )
     if category == "misleading_repeated_header":
-        other = (
-            HEADERS,
-            (f"Synthetic refund {variant}-X", "7", "875"),
-            (f"Synthetic refund {variant}-Y", "8", "1000"),
-        )
+        other = _other_rows(variant, "refund", _header_variant(mode))
         pages = (
             PageSpec(
                 "Synthetic orders", (_table(first_id, "Orders", "Orders", rows[:3], bottom_top),)
@@ -315,24 +384,62 @@ def _spec(category: str, split: Literal["dev", "test"], variant: int) -> Documen
             False,
             "header and geometry repeat but section identity changes",
         )
+    if category == "geometry_mismatch":
+        other = _other_rows(variant, "offset", _header_variant(mode))
+        widths = (210.0, 115.0, 105.0) if mode % 2 == 0 else (300.0, 70.0, 90.0)
+        offset = 92.0 if mode % 2 == 0 else 34.0
+        pages = (
+            PageSpec(
+                "Synthetic ledger",
+                (_table(first_id, "Ledger", "Ledger", rows[:3], bottom_top),),
+            ),
+            PageSpec(
+                "Synthetic ledger appendix",
+                (
+                    _table(
+                        second_id,
+                        "Ledger appendix",
+                        "Ledger appendix",
+                        other,
+                        page_top,
+                        x=offset,
+                        column_widths=widths,
+                    ),
+                ),
+            ),
+        )
+        return DocumentSpec(
+            prefix,
+            split,
+            category,
+            pages,
+            (first_id, second_id),
+            False,
+            "similar headers but incompatible table width or column offsets",
+        )
     raise ValueError(category)
 
 
 def _specs() -> list[DocumentSpec]:
-    categories = (
-        "continuation_repeated_header",
-        "continuation_without_header",
-        "unrelated_same_columns",
-        "midpage_then_different",
-        "continuation_after_figure",
-        "misleading_repeated_header",
+    cases = (
+        ("continuation_repeated_header", 6),
+        ("continuation_without_header", 4),
+        ("continuation_across_figure", 2),
+        ("unrelated_same_columns", 4),
+        ("misleading_repeated_header", 4),
+        ("geometry_mismatch", 4),
+        ("midpage_then_different", 3),
+        ("continuation_after_figure", 2),
     )
     splits: tuple[Literal["dev", "test"], ...] = ("dev", "test")
-    return [
-        _spec(category, split, category_index * 2 + split_index)
-        for category_index, category in enumerate(categories)
-        for split_index, split in enumerate(splits)
-    ]
+    specs: list[DocumentSpec] = []
+    for split_index, split in enumerate(splits):
+        variant = split_index * 100
+        for category, count in cases:
+            for mode in range(count):
+                specs.append(_spec(category, split, variant, mode))
+                variant += 1
+    return specs
 
 
 def _write_document(spec: DocumentSpec, pdf_path: Path) -> dict[str, Any]:
@@ -345,6 +452,9 @@ def _write_document(spec: DocumentSpec, pdf_path: Path) -> dict[str, Any]:
         pdf.drawString(54, 770, "SYNTHETIC DOCUMENT - NOT REAL DATA")
         pdf.setFont("Helvetica", 11)
         pdf.drawString(54, 752, page.heading)
+        pdf.setFont("Helvetica", 8)
+        for running_text in page.running_text:
+            pdf.drawString(running_text.x, running_text.y, running_text.text)
         elements: list[dict[str, Any]] = []
         elements.extend(_draw_figure(pdf, figure, page_number) for figure in page.figures)
         elements.extend(_draw_table(pdf, table, page_number) for table in page.tables)
@@ -378,6 +488,8 @@ def generate(output: Path = ROOT) -> dict[str, Any]:
     truth_dir = output / "ground_truth"
     pdf_dir.mkdir(parents=True, exist_ok=True)
     truth_dir.mkdir(parents=True, exist_ok=True)
+    for old_path in (*pdf_dir.glob("synthetic-*.pdf"), *truth_dir.glob("synthetic-*.json")):
+        old_path.unlink()
     documents: list[dict[str, Any]] = []
     for spec in _specs():
         pdf_path = pdf_dir / f"{spec.document_id}.pdf"

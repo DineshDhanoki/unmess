@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "generator_version": "phase3a-v2",
+  "document_id": "synthetic-geometry_mismatch-121",
+  "split": "test",
+  "category": "geometry_mismatch",
+  "source_file": "pdf/synthetic-geometry_mismatch-121.pdf",
+  "file_sha256": "905ee8c60aaca7607b650c6483fa3d982901b242604d9a08371c623115de8ce5",
+  "page_size": {
+    "width": 612.0,
+    "height": 792.0
+  },
+  "pages": [
+    {
+      "page": 1,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-geometry_mismatch-121-p1",
+          "caption": "Ledger",
+          "section_path": [
+            "Ledger"
+          ],
+          "page": 1,
+          "bbox": [
+            0.088235,
+            0.815657,
+            0.888889,
+            0.921717
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic item 121-A",
+              "1",
+              "125"
+            ],
+            [
+              "Synthetic item 121-B",
+              "2",
+              "250"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.088235,
+                0.815657,
+                0.529412,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.529412,
+                0.815657,
+                0.676471,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.676471,
+                0.815657,
+                0.888889,
+                0.85101
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic item 121-A",
+              "bbox": [
+                0.088235,
+                0.85101,
+                0.529412,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "1",
+              "bbox": [
+                0.529412,
+                0.85101,
+                0.676471,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "125",
+              "bbox": [
+                0.676471,
+                0.85101,
+                0.888889,
+                0.886364
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic item 121-B",
+              "bbox": [
+                0.088235,
+                0.886364,
+                0.529412,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "2",
+              "bbox": [
+                0.529412,
+                0.886364,
+                0.676471,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "250",
+              "bbox": [
+                0.676471,
+                0.886364,
+                0.888889,
+                0.921717
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-geometry_mismatch-121-p2",
+          "caption": "Ledger appendix",
+          "section_path": [
+            "Ledger appendix"
+          ],
+          "page": 2,
+          "bbox": [
+            0.055556,
+            0.063131,
+            0.80719,
+            0.169192
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.490196,
+            0.114379,
+            0.147059
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "item",
+              "qty",
+              "amount"
+            ],
+            [
+              "Synthetic offset 121-X",
+              "8",
+              "800"
+            ],
+            [
+              "Synthetic offset 121-Y",
+              "9",
+              "900"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "item",
+              "bbox": [
+                0.055556,
+                0.063131,
+                0.545752,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "qty",
+              "bbox": [
+                0.545752,
+                0.063131,
+                0.660131,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "amount",
+              "bbox": [
+                0.660131,
+                0.063131,
+                0.80719,
+                0.098485
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic offset 121-X",
+              "bbox": [
+                0.055556,
+                0.098485,
+                0.545752,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "8",
+              "bbox": [
+                0.545752,
+                0.098485,
+                0.660131,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "800",
+              "bbox": [
+                0.660131,
+                0.098485,
+                0.80719,
+                0.133838
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic offset 121-Y",
+              "bbox": [
+                0.055556,
+                0.133838,
+                0.545752,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "9",
+              "bbox": [
+                0.545752,
+                0.133838,
+                0.660131,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "900",
+              "bbox": [
+                0.660131,
+                0.133838,
+                0.80719,
+                0.169192
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stitch_pair": {
+    "table_ids": [
+      "synthetic-geometry_mismatch-121-p1",
+      "synthetic-geometry_mismatch-121-p2"
+    ],
+    "should_stitch": false,
+    "reason": "similar headers but incompatible table width or column offsets"
+  },
+  "expected_stitched_rows": null
+}

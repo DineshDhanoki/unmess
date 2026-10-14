@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "generator_version": "phase3a-v2",
+  "document_id": "synthetic-unrelated_same_columns-115",
+  "split": "test",
+  "category": "unrelated_same_columns",
+  "source_file": "pdf/synthetic-unrelated_same_columns-115.pdf",
+  "file_sha256": "544de92bd47edee148b0bd702ea32a07db1287474b648a2d59f4de6a8702ee24",
+  "page_size": {
+    "width": 612.0,
+    "height": 792.0
+  },
+  "pages": [
+    {
+      "page": 1,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-unrelated_same_columns-115-p1",
+          "caption": "Purchases",
+          "section_path": [
+            "Purchases"
+          ],
+          "page": 1,
+          "bbox": [
+            0.088235,
+            0.815657,
+            0.888889,
+            0.921717
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "Item",
+              "Qty",
+              "Amount"
+            ],
+            [
+              "Synthetic item 115-A",
+              "1",
+              "125"
+            ],
+            [
+              "Synthetic item 115-B",
+              "2",
+              "250"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "Item",
+              "bbox": [
+                0.088235,
+                0.815657,
+                0.529412,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "Qty",
+              "bbox": [
+                0.529412,
+                0.815657,
+                0.676471,
+                0.85101
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Amount",
+              "bbox": [
+                0.676471,
+                0.815657,
+                0.888889,
+                0.85101
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic item 115-A",
+              "bbox": [
+                0.088235,
+                0.85101,
+                0.529412,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "1",
+              "bbox": [
+                0.529412,
+                0.85101,
+                0.676471,
+                0.886364
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "125",
+              "bbox": [
+                0.676471,
+                0.85101,
+                0.888889,
+                0.886364
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic item 115-B",
+              "bbox": [
+                0.088235,
+                0.886364,
+                0.529412,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "2",
+              "bbox": [
+                0.529412,
+                0.886364,
+                0.676471,
+                0.921717
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "250",
+              "bbox": [
+                0.676471,
+                0.886364,
+                0.888889,
+                0.921717
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "elements": [
+        {
+          "kind": "table",
+          "table_id": "synthetic-unrelated_same_columns-115-p2",
+          "caption": "Inventory",
+          "section_path": [
+            "Inventory"
+          ],
+          "page": 2,
+          "bbox": [
+            0.088235,
+            0.063131,
+            0.888889,
+            0.169192
+          ],
+          "column_count": 3,
+          "column_widths_normalized": [
+            0.441176,
+            0.147059,
+            0.212418
+          ],
+          "header_rows": [
+            0
+          ],
+          "rows": [
+            [
+              "ltem",
+              "QTY",
+              "Arnount"
+            ],
+            [
+              "Synthetic asset 115-X",
+              "8",
+              "800"
+            ],
+            [
+              "Synthetic asset 115-Y",
+              "9",
+              "900"
+            ]
+          ],
+          "cells": [
+            {
+              "row": 0,
+              "col": 0,
+              "text": "ltem",
+              "bbox": [
+                0.088235,
+                0.063131,
+                0.529412,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "text": "QTY",
+              "bbox": [
+                0.529412,
+                0.063131,
+                0.676471,
+                0.098485
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "text": "Arnount",
+              "bbox": [
+                0.676471,
+                0.063131,
+                0.888889,
+                0.098485
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "text": "Synthetic asset 115-X",
+              "bbox": [
+                0.088235,
+                0.098485,
+                0.529412,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "text": "8",
+              "bbox": [
+                0.529412,
+                0.098485,
+                0.676471,
+                0.133838
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "text": "800",
+              "bbox": [
+                0.676471,
+                0.098485,
+                0.888889,
+                0.133838
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "text": "Synthetic asset 115-Y",
+              "bbox": [
+                0.088235,
+                0.133838,
+                0.529412,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "text": "9",
+              "bbox": [
+                0.529412,
+                0.133838,
+                0.676471,
+                0.169192
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "text": "900",
+              "bbox": [
+                0.676471,
+                0.133838,
+                0.888889,
+                0.169192
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stitch_pair": {
+    "table_ids": [
+      "synthetic-unrelated_same_columns-115-p1",
+      "synthetic-unrelated_same_columns-115-p2"
+    ],
+    "should_stitch": false,
+    "reason": "unrelated sections with the same column count"
+  },
+  "expected_stitched_rows": null
+}
