@@ -1,4 +1,4 @@
-.PHONY: setup lint format-check typecheck test preflight eval eval-test run up down compose-check
+.PHONY: setup lint format-check typecheck test preflight eval eval-test eval-test-v1 run up down compose-check
 
 setup:
 	uv sync --dev
@@ -24,6 +24,9 @@ eval:
 
 eval-test:
 	uv run python -m eval.run_eval --split test
+
+eval-test-v1:
+	OLLAMA_KEEP_ALIVE=1h uv run python -m eval.run_test_v1
 
 run:
 	@test -f src/unmess/api/main.py || (echo "Application runtime arrives in Phase 4."; exit 1)

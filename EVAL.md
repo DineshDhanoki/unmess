@@ -194,6 +194,33 @@ any valid test-split evaluation. They may not be revised after test results are 
 5. Parser and backend failures remain in all applicable denominators and are listed. No failed
    page or document may be silently dropped.
 
+### Frozen v1 execution protocol
+
+The `freeze-v1` tag covers the runner, report generator, metrics, baselines, dataset manifest
+and files, dependency lock, thresholds, and parsing, routing, scoring, and review-gate code.
+The runner compares SHA-256 hashes for every file in the frozen set against the tag, requires a
+clean tree and a HEAD at or descended from the tag, and permits post-freeze commits only under
+the documented non-result-affecting documentation paths. The frozen configuration lists the
+complete set and fixes the system order as PyMuPDF, Docling default, forced multilingual
+Docling, Unmess, then VLM-only.
+
+Every system receives a separate newly created empty response-cache directory with cache reads
+disabled. Any nonzero cache-hit counter invalidates that system's cold timing. The vision model
+is preloaded and verified immediately before Unmess and again immediately before VLM-only;
+preload time is recorded separately and excluded from system timing. The run exports
+`OLLAMA_KEEP_ALIVE=1h`.
+
+Sleep, a process crash, Ollama becoming unavailable, and user interruption including Ctrl+C are
+logged with a fixed reason as infrastructure failures. Exactly one rerun is permitted after an
+infrastructure failure, using the identical tagged configuration; no evaluation outcome or
+other reason permits a rerun. A process left marked as running is classified as an unclean
+process-exit infrastructure failure on the next invocation. Raw per-page results are written
+atomically after each system completes so the report can be generated without rerunning.
+
+The Phase 2e cold total of about 41 minutes 13 seconds is a runtime floor for the 52-page test
+split, not a forecast ceiling. The test page mix can route differently; more VLM pages will make
+the run longer.
+
 ## Limits
 
 The documents deliberately use a small set of templates and fictional values. They are not a

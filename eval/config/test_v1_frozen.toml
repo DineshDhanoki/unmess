@@ -1,0 +1,106 @@
+# Frozen v1 evaluation contract. The freeze-v1 tag must contain this file and every path below.
+
+[freeze]
+tag = "freeze-v1"
+system_order = [
+  "pymupdf_fixed",
+  "docling_default",
+  "docling_only",
+  "unmess_parsing",
+  "vlm_every_page",
+]
+frozen_paths = [
+  "Makefile",
+  "EVAL.md",
+  "pyproject.toml",
+  "uv.lock",
+  "eval/__init__.py",
+  "eval/config/test_v1_frozen.toml",
+  "eval/datasets/MANIFEST.json",
+  "eval/datasets/pdf",
+  "eval/datasets/ground_truth",
+  "eval/preflight.py",
+  "eval/run_eval.py",
+  "eval/run_test_v1.py",
+  "eval/report_test_v1.py",
+  "eval/baselines",
+  "eval/metrics",
+  "src/unmess/config.py",
+  "src/unmess/models.py",
+  "src/unmess/parsing",
+  "src/unmess/quality",
+]
+allowed_docs = ["docs"]
+
+[evaluation]
+split = "test"
+bad_page_accuracy_cutoff = 0.90
+bootstrap_seed = 20261011
+bootstrap_samples = 2000
+reruns_after_infrastructure_failure = 1
+rerun_policy = "Only sleep, crash, Ollama unavailability, user interruption, or another runner infrastructure exception permits one identical rerun. No evaluation outcome permits rerun."
+cold_cache_reads = false
+ollama_keep_alive = "1h"
+runtime_floor_seconds = 2472.6618252088083
+runtime_note = "Floor from the 52-page Phase 2e cold run; a test mix with more VLM-routed pages will take longer."
+
+[models]
+vision_model = "qwen2.5vl"
+text_model = "qwen3"
+embedding_model = "bge-m3"
+prompt_version = "phase2e-v3"
+
+[settings]
+vision_model = "qwen2.5vl"
+text_model = "qwen3"
+embed_model = "bge-m3"
+docling_artifacts_path = "/Users/dineshdhanoki/.cache/docling/models"
+ollama_url = "http://localhost:11434"
+parser_text_density_threshold = 0.12
+parser_image_coverage_threshold = 0.70
+parser_table_likelihood_threshold = 0.55
+parser_scan_likelihood_threshold = 0.60
+parser_complex_layout_threshold = 0.90
+parser_uncovered_ink_threshold = 0.05
+parser_garbled_ratio_threshold = 0.10
+parser_max_skew_degrees = 3.0
+quality_review_threshold = 0.70
+quality_visual_noise_threshold = 0.85
+vision_timeout_s = 120.0
+vision_retries = 1
+vision_raster_dpi = 110
+vision_temperature = 0.1
+vision_repeat_penalty = 1.1
+vision_repeat_last_n = 64
+vision_num_predict = 2048
+
+[retry_timeout]
+timeout_seconds_per_attempt = 120.0
+retries_after_first_attempt = 1
+failure_policy = "Failed pages stay in every denominator; no page or document is dropped."
+response_contract = "Strict JSON object with Markdown transcription."
+
+[docling_default]
+profile = "Docling defaults"
+ocr_enabled = true
+ocr_engine = "RapidOCR auto/default"
+ocr_languages = []
+ocr_mode = "default"
+force_full_page_ocr = false
+table_structure_mode = "accurate"
+cell_matching = true
+artifacts = "local only; downloads disabled"
+
+[docling_forced_multilingual]
+profile = "forced multilingual full-page OCR"
+ocr_enabled = true
+ocr_engine = "EasyOCR"
+ocr_languages = ["en", "hi"]
+ocr_mode = "full_page"
+force_full_page_ocr = true
+ocr_scale = 3.0
+ocr_confidence_threshold = 0.5
+model_downloads = false
+table_structure_mode = "accurate"
+cell_matching = true
+artifacts = "local only; downloads disabled"
