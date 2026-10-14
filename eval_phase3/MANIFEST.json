@@ -1,0 +1,150 @@
+{
+  "generator_version": "phase3a-v1",
+  "synthetic_only": true,
+  "documents": [
+    {
+      "document_id": "synthetic-continuation_repeated_header-00",
+      "split": "dev",
+      "category": "continuation_repeated_header",
+      "pages": 2,
+      "pdf": "pdf/synthetic-continuation_repeated_header-00.pdf",
+      "ground_truth": "ground_truth/synthetic-continuation_repeated_header-00.json",
+      "pdf_sha256": "9a045c42c83875ac5623cafca8ace673ff2377485ca4cf2419c899862fdb8331",
+      "ground_truth_sha256": "e67abf9c084168dc7884e9492374d177b326556f6399c6eb7b9f6e79007ccb3e",
+      "positive_stitch_pairs": 1,
+      "negative_stitch_pairs": 0
+    },
+    {
+      "document_id": "synthetic-continuation_repeated_header-01",
+      "split": "test",
+      "category": "continuation_repeated_header",
+      "pages": 2,
+      "pdf": "pdf/synthetic-continuation_repeated_header-01.pdf",
+      "ground_truth": "ground_truth/synthetic-continuation_repeated_header-01.json",
+      "pdf_sha256": "cb8b764eebe04a9f1c8bdd867280d3c5d68bedfbfdc4d429b9c2d5edb0464ccc",
+      "ground_truth_sha256": "18bebdff80a25f987784286aa0d0e75f5fe2e462ed7682357ef257bb28eabe44",
+      "positive_stitch_pairs": 1,
+      "negative_stitch_pairs": 0
+    },
+    {
+      "document_id": "synthetic-continuation_without_header-02",
+      "split": "dev",
+      "category": "continuation_without_header",
+      "pages": 2,
+      "pdf": "pdf/synthetic-continuation_without_header-02.pdf",
+      "ground_truth": "ground_truth/synthetic-continuation_without_header-02.json",
+      "pdf_sha256": "afd7d9c128d08dd3bea7e6a6a3b2dfedb6796e8d20c719404831e162ec507554",
+      "ground_truth_sha256": "49634d9bd32767c6395a48b10abdc533f9ecc1e5de85363bb8614eecb7e40a64",
+      "positive_stitch_pairs": 1,
+      "negative_stitch_pairs": 0
+    },
+    {
+      "document_id": "synthetic-continuation_without_header-03",
+      "split": "test",
+      "category": "continuation_without_header",
+      "pages": 2,
+      "pdf": "pdf/synthetic-continuation_without_header-03.pdf",
+      "ground_truth": "ground_truth/synthetic-continuation_without_header-03.json",
+      "pdf_sha256": "b6523ba77e86772e5521d5d9d7712cdc00a64a18acddf142d0362e5876e7b5b1",
+      "ground_truth_sha256": "e0e6828f2b8e92ab885c2fa606e5f9410d6a8dd410d2c78d973c282cc6af4320",
+      "positive_stitch_pairs": 1,
+      "negative_stitch_pairs": 0
+    },
+    {
+      "document_id": "synthetic-unrelated_same_columns-04",
+      "split": "dev",
+      "category": "unrelated_same_columns",
+      "pages": 2,
+      "pdf": "pdf/synthetic-unrelated_same_columns-04.pdf",
+      "ground_truth": "ground_truth/synthetic-unrelated_same_columns-04.json",
+      "pdf_sha256": "303f8e7b2511073fd440dc7b1300dbe028f186098df8e5ffb2583671b48c3d08",
+      "ground_truth_sha256": "01f72dc6c82725d82702fe73d8669c5fc0a7377ab66e71ef3bee3cc69b2121a4",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-unrelated_same_columns-05",
+      "split": "test",
+      "category": "unrelated_same_columns",
+      "pages": 2,
+      "pdf": "pdf/synthetic-unrelated_same_columns-05.pdf",
+      "ground_truth": "ground_truth/synthetic-unrelated_same_columns-05.json",
+      "pdf_sha256": "c99af710fb2eeb6e17ac3aeee0ed246b46f35d1155410be0cd0b1736e0083b78",
+      "ground_truth_sha256": "a66a8bd1e49412482cedae267ffa7e3d392e61b94dde9bbc7377fd5ed9b6922b",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-midpage_then_different-06",
+      "split": "dev",
+      "category": "midpage_then_different",
+      "pages": 2,
+      "pdf": "pdf/synthetic-midpage_then_different-06.pdf",
+      "ground_truth": "ground_truth/synthetic-midpage_then_different-06.json",
+      "pdf_sha256": "d5a560e51ee6531c16a8a08b869cd50fa2979dbc31a148d0eedcec46a39114cd",
+      "ground_truth_sha256": "e41fc1f37c117a994a3be3dbe86761c146b9267642240d7c16ad5f723de6c5cf",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-midpage_then_different-07",
+      "split": "test",
+      "category": "midpage_then_different",
+      "pages": 2,
+      "pdf": "pdf/synthetic-midpage_then_different-07.pdf",
+      "ground_truth": "ground_truth/synthetic-midpage_then_different-07.json",
+      "pdf_sha256": "0053da0462f5b47568a7a18fd5455ef11ae9c73e0f95616ead6227c7094b06d8",
+      "ground_truth_sha256": "b02f9e1702985b6a0ce85732f13124a7f86b6a11dee2dfb05fcf5b69cd738470",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-continuation_after_figure-08",
+      "split": "dev",
+      "category": "continuation_after_figure",
+      "pages": 2,
+      "pdf": "pdf/synthetic-continuation_after_figure-08.pdf",
+      "ground_truth": "ground_truth/synthetic-continuation_after_figure-08.json",
+      "pdf_sha256": "e0c8eb0996bd12edf8ddc2dd7cb0e4687943b17f35da690285d194d96c02de3b",
+      "ground_truth_sha256": "fef4381240bc2a3d8b8c7ad58d0aa79afb98d8766f8331c6589a6e6b9d1351de",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-continuation_after_figure-09",
+      "split": "test",
+      "category": "continuation_after_figure",
+      "pages": 2,
+      "pdf": "pdf/synthetic-continuation_after_figure-09.pdf",
+      "ground_truth": "ground_truth/synthetic-continuation_after_figure-09.json",
+      "pdf_sha256": "940a6ded262882fbe62c7042d83962b9efa9089e78a8d1a3b3a9625cfa9e6c9d",
+      "ground_truth_sha256": "2c76078377fd95479cc24446f9d61eda2abd2b26aac34d002dc679d581e64874",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-misleading_repeated_header-10",
+      "split": "dev",
+      "category": "misleading_repeated_header",
+      "pages": 2,
+      "pdf": "pdf/synthetic-misleading_repeated_header-10.pdf",
+      "ground_truth": "ground_truth/synthetic-misleading_repeated_header-10.json",
+      "pdf_sha256": "25908148333f33f7421a3e38cc7a5075ad6f3e05ec4488a5eb48fe60bb89903c",
+      "ground_truth_sha256": "d100df780a0d9490b8497477fb8acaf65cd5250e7404e66e8f1f3b4b71e265cf",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    },
+    {
+      "document_id": "synthetic-misleading_repeated_header-11",
+      "split": "test",
+      "category": "misleading_repeated_header",
+      "pages": 2,
+      "pdf": "pdf/synthetic-misleading_repeated_header-11.pdf",
+      "ground_truth": "ground_truth/synthetic-misleading_repeated_header-11.json",
+      "pdf_sha256": "ff31c2dd37f1d061ce832d44ced33f34465265b7efb05c2c601ad597f7f7c835",
+      "ground_truth_sha256": "431a52af4bbef67a8454c18b024377a36dcc789096e8f12cacff44aa50302eb2",
+      "positive_stitch_pairs": 0,
+      "negative_stitch_pairs": 1
+    }
+  ]
+}
