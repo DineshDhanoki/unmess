@@ -1,5 +1,13 @@
 # Evaluation contract
 
+## Real-document validation
+
+All committed evaluation results currently use synthetic documents. Any future
+opt-in local validation with real documents must follow the
+[privacy-safe real-document validation protocol](docs/eval/real-document-validation-protocol.md).
+Its results are separate from the synthetic DEV corpus and must never include
+source documents, extracted text, or document-level identifiers in Git.
+
 ## Corpus and splits
 
 `scripts/make_synthetic_docs.py` originally generated 56 wholly fictional PDFs: eight each of clean

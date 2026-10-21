@@ -31,6 +31,10 @@ Do not install them merely to run the light CI suite. Start Phase 0 infrastructu
 - Make no non-localhost network calls from the ingestion pipeline.
 - Never commit secrets, `.env`, private documents, or real personal/financial data.
 - Use generated synthetic fixtures only.
+- If you run an opt-in local trial with real documents, follow the
+  [privacy-safe real-document validation protocol](docs/eval/real-document-validation-protocol.md).
+  Keep all inputs, derivatives, consent records, and document-level results out
+  of Git.
 - Add an ADR for architectural changes and update affected documentation.
 - Never state benchmark accuracy or speed without a reproducible evaluation report.
 
