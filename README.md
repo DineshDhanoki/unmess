@@ -1,91 +1,56 @@
 # Unmess
 
-Unmess (codename **DocuForge**) is a local-first ingestion layer that turns messy,
-real-world documents into structured, citable, retrieval-ready chunks—and measures how
-trustworthy that output is.
+[![CI](https://github.com/DineshDhanoki/unmess/actions/workflows/ci.yml/badge.svg)](https://github.com/DineshDhanoki/unmess/actions/workflows/ci.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-Unmess is not another PDF-to-Markdown parser. It wraps mature tools such as Docling and
-PyMuPDF, routes each page to the least expensive suitable parser, falls back to a local vision
-model for difficult pages, scores output quality, preserves provenance, and evaluates the
-whole pipeline against reproducible baselines.
+**A number on a scanned invoice is easy to extract. Knowing whether it is right—and where it came from—is the hard part.**
 
-The initial focus is messy, region-specific material: Indian invoices, GST-style filings,
-scanned receipts, and bilingual English/Hindi documents. An HTTP API, Streamlit review UI,
-and MCP server will expose ingestion and retrieval without sending documents outside the
-local environment.
+Imagine asking a document system for a total from a long invoice. The answer looks plausible, but a table continued on the next page. Was that page missed? Did the parser merge two unrelated tables? Can you point a reviewer to the exact source page without uploading the invoice to someone else's server?
 
-## Status
+Unmess is an open-source, local-first project exploring that problem. It uses existing parsers, keeps source locations attached to extracted chunks, and evaluates failures instead of hiding them behind a polished answer. The longer-term goal is private document search with citations and a review path for uncertain pages. **Search, an API, and a review UI are not available yet.**
 
-Phase 2 adds page routing, parser adapters, quality scoring, and parsing evaluation. Docling is
-optional and the complete Unmess retrieval pipeline arrives in later phases
-described in [ROADMAP.md](ROADMAP.md).
+## See what works today
 
-The Phase 1 synthetic corpus and baseline harness are available. Its measured baseline report
-is in [eval/results/baseline-phase1.md](eval/results/baseline-phase1.md). It contains no Unmess
-pipeline score; that pipeline is not implemented yet. Future performance claims must link to a
-dated harness report and identify the models used.
+This small demo uses a **fictional GST-style invoice already in the repo**. It runs the current PyMuPDF adapter, chunker, and citation code. No Docker, model download, account, or real document is needed.
 
-The [Phase 2b dev report](eval/results/phase2b-dev.md) records measured page-level
-results, including failed pages when optional backends are unavailable. Retrieval remains a
-later phase.
-
-The [Phase 2c DEV-only report](eval/results/phase2c-dev.md) expands the synthetic corpus,
-corrects a merged-table scoring artifact, and compares routed parsing with Docling-only and
-VLM-on-every-page. Its numbers are DEV measurements, not test-set claims; the expanded test
-split remains locked pending a new threshold freeze.
-
-The [Phase 2d DEV-only fairness report](eval/results/phase2d-dev.md) records audited baseline
-configurations, review-gate evaluation, uncertainty intervals, failures, and cache-state-aware
-timing. It remains a development-set report, not a test-set claim.
-
-The [Phase 2e DEV-only report](eval/results/phase2e-dev.md) evaluates generic mixed-content
-routing, the review gate, leave-one-category-out stress tests, and controlled cold-cache cost.
-The separate [cold timing report](eval/results/phase2e-cold.md) records the machine, model,
-system order, cache-hit counters, failures, and measured wall times. These are DEV-only
-synthetic-corpus results; the quality gate remains experimental pending the preregistered test run.
-
-## Known limitations
-
-- Spanning-table F1 is `0.625` on DEV; continuation structure across pages is not resolved.
-- High-difficulty scan CER is `0.091` and WER is `0.475` on the synthetic DEV corpus.
-- The review gate is experimental and statistically unstable because DEV contains only seven
-  bad pages.
-- Cold Unmess processing is slower than both PyMuPDF-only and Docling-only on the measured
-  machine, although it is faster than VLM-only for the recorded page mix.
-- The post-parse escalation fallback did not trigger in the final DEV run and remains untested
-  by this corpus.
-- Evaluation uses synthetic data only; behavior on real-world documents is not yet measured.
-
-See the [Phase 2e DEV report](eval/results/phase2e-dev.md) and
-[cold timing report](eval/results/phase2e-cold.md) for denominators, confidence intervals,
-hardware, model tag, and failures. These values are not test-set or production claims.
-
-Real-document validation: pending.
-
-The deferred v1 test will run from a separate worktree checked out at `freeze-v1`; Phase 3 changes
-on `main` do not alter that frozen evaluation.
-
-## Quick start
-
-Install Python 3.11 or 3.12, Docker, and
-[uv](https://docs.astral.sh/uv/), then run:
+From a fresh clone, install [uv](https://docs.astral.sh/uv/) and Python 3.11 or 3.12, then run:
 
 ```bash
-make setup
-make lint
-make typecheck
-make test
-make up
+uv sync --dev --locked
+uv run python -m scripts.demo
 ```
 
-`make up` currently starts only Qdrant and Redis. The API, worker, and UI are reserved behind
-the Compose `app` profile until their implementation phases. Heavy parser/model packages are
-not installed by default; later, use `uv sync --extra parsers` when those integrations are
-needed.
+You should see output like:
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the system design, [EVAL.md](EVAL.md) for the
-measurement contract, and [CONTRIBUTING.md](CONTRIBUTING.md) before contributing.
+```text
+Unmess local demo — fictional invoice; no upload or model required
+Input: eval/datasets/pdf/synthetic-gst_invoice-00.pdf
+Parser: pymupdf
+Extracted: Fictional seller: Demo Vendor 00; Total INR: 10,000
+Citable chunk: text-9f029e03df396fd9b1da (page 1)
+Current scope: extraction, chunking, and source provenance. Search and UI are planned.
+```
 
-## License
+The total and page reference come from the parsed PDF, not a hard-coded answer. Try opening the [sample invoice](eval/datasets/pdf/synthetic-gst_invoice-00.pdf) and comparing it with the output. The sample is synthetic; never commit a real invoice, receipt, ID, or customer document.
+
+## The project, honestly
+
+| Available in this repository | Still to build |
+| --- | --- |
+| PyMuPDF adapter, optional Docling and local vision adapters, page routing and quality signals | A complete ingestion service and background jobs |
+| Structure-aware chunks, conservative table stitching, source page and region records | Hybrid retrieval, answer citations, and local reranking |
+| Synthetic corpora, evaluation harnesses, and development reports | Review UI, MCP tools, and real-document validation results |
+
+The [roadmap](ROADMAP.md) describes the planned sequence; [architecture](ARCHITECTURE.md) explains the design. Current measurements use synthetic data and have [known limitations](EVAL.md). In particular, no production accuracy or speed claim follows from these development reports. Optional parsers and local models require extra setup; the demo above deliberately avoids them.
+
+## Build it with us
+
+You can help without owning the whole architecture. A useful first contribution might clarify a confusing step, add one synthetic edge case, improve a regression test, or make a citation easier to inspect. Browse the [open issues](https://github.com/DineshDhanoki/unmess/issues) and the [first contribution guide](CONTRIBUTING.md). Comment on an issue if you want to coordinate, or open a focused PR that references it. We review the code and the evidence together.
+
+The project especially needs people interested in document parsing, Python, evaluation, privacy, and bilingual or region-specific documents. You do **not** need to supply real documents. Every shared fixture must be synthetic.
+
+## Deeper setup
+
+The normal contribution checks are `make lint`, `make format-check`, `make typecheck`, and `make test`. The reproducibility tests need a pinned Noto Sans Devanagari font; run `bash scripts/pull_font.sh` first. Docker is only needed for infrastructure work: `make up` starts Qdrant and Redis, **not** a working Unmess app. See [CONTRIBUTING.md](CONTRIBUTING.md) for the exact path and [EVAL.md](EVAL.md) for evaluation rules.
 
 Apache License 2.0. See [LICENSE](LICENSE).

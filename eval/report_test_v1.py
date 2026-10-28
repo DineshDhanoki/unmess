@@ -115,9 +115,7 @@ def generate_report(attempt_root: Path, output: Path) -> None:
     criteria = _criteria(systems, expected_pages)
     gate = _calibration(systems["unmess_parsing"]["documents"])["review_gate"]
     routes = _route_shares({"documents": systems["unmess_parsing"]["documents"]})
-    stability = (
-        "unstable (fewer than 10 bad pages)" if gate["unstable"] else "not flagged unstable"
-    )
+    stability = "unstable (fewer than 10 bad pages)" if gate["unstable"] else "not flagged unstable"
     lines = [
         "# Frozen v1 test evaluation",
         "",

@@ -1,0 +1,34 @@
+name: Bug report
+description: Report reproducible behavior using synthetic data only
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for the report. Never attach a real invoice, ID, customer document, secret, or personal data."
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Describe the observed and expected behavior.
+      placeholder: "The synthetic sample produced ...; I expected ..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can we reproduce it?
+      description: Give commands and a synthetic fixture or a way to generate one.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and optional parser or model versions.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe output or traceback
+      description: Remove tokens, document text, local private paths, and personal data.
