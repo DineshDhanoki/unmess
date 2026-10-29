@@ -185,9 +185,7 @@ def _run_smoke(
     docling_documents: set[Path] = set()
 
     if not smoke_dir.is_dir():
-        _emit_summary(
-            files=0, pages=0, pages_per_parser=pages_per_parser, flagged=0, failed=0
-        )
+        _emit_summary(files=0, pages=0, pages_per_parser=pages_per_parser, flagged=0, failed=0)
         return 1
     inputs = sorted(
         path
@@ -196,9 +194,7 @@ def _run_smoke(
         and (path.suffix.casefold() == ".pdf" or path.suffix.casefold() in SUPPORTED_IMAGES)
     )
     if not inputs:
-        _emit_summary(
-            files=0, pages=0, pages_per_parser=pages_per_parser, flagged=0, failed=0
-        )
+        _emit_summary(files=0, pages=0, pages_per_parser=pages_per_parser, flagged=0, failed=0)
         return 1
     try:
         _ensure_dump_dir_safe(dump_dir)

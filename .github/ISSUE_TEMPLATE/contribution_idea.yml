@@ -1,0 +1,28 @@
+name: Contribution idea
+description: Propose a focused improvement or beginner task
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What is hard for a user or contributor today?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Smallest useful outcome
+      description: State a concrete change that could fit in one focused PR.
+    validations:
+      required: true
+  - type: textarea
+    id: verify
+    attributes:
+      label: How would we verify it?
+      description: Suggest a test, command, screenshot, or documentation check.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "Use only fictional or generated examples. Discuss architecture or evaluation changes before building them."

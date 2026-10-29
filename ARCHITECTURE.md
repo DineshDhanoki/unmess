@@ -7,7 +7,11 @@ page-level routing, measurable quality, durable provenance, hybrid retrieval, in
 processing, and agent access. Document bytes and model calls remain local by default, and no
 component may make non-localhost network calls during document processing.
 
-## Data flow
+## Target data flow
+
+This is the intended end-to-end design, not a description of a running service. The repository
+currently contains parsing, routing, quality, chunking, provenance, and evaluation components.
+The API, asynchronous ingestion service, retrieval pipeline, UI, and MCP surface remain planned.
 
 1. FastAPI validates an ingestion request, stores the source safely, enqueues an Arq job, and
    immediately returns a job identifier.

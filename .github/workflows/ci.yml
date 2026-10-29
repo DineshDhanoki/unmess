@@ -24,6 +24,8 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
       - name: Install light dependencies
         run: uv sync --dev --python ${{ matrix.python-version }} --locked
+      - name: Fetch deterministic test font
+        run: bash scripts/pull_font.sh
       - name: Ruff lint
         run: uv run --python ${{ matrix.python-version }} ruff check .
       - name: Ruff format
