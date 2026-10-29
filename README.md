@@ -13,7 +13,7 @@ Unmess is an open-source Python project building that evidence trail. It uses ex
 
 This is a real output of the local demo using a **fictional GST-style invoice included in the repository**:
 
-<img src="docs/images/synthetic-invoice-highlight.png" width="500" alt="Synthetic GST invoice page with an orange outline and yellow shading over the cited source chunk, including the fictional seller and Total INR 10,000." />
+<img src="docs/images/synthetic-invoice-highlight.png" width="680" alt="Synthetic GST invoice page with an orange outline and yellow shading over the cited source chunk, including the fictional seller and Total INR 10,000." />
 
 The demo extracts `Total INR: 10,000`, records page 1 as its source, and can render the cited **chunk** on that page. The highlighted area is deliberately broader than the total line; it shows the region represented by the current chunk, not a claim that Unmess identified the exact answer text. The invoice is synthetic. No document is uploaded, and this demo makes no model or network call.
 
