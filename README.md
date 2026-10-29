@@ -33,6 +33,13 @@ Current scope: extraction, chunking, and source provenance. Search and UI are pl
 
 The total and page reference come from the parsed PDF, not a hard-coded answer. Try opening the [sample invoice](eval/datasets/pdf/synthetic-gst_invoice-00.pdf) and comparing it with the output. The sample is synthetic; never commit a real invoice, receipt, ID, or customer document.
 
+The demo can also save a preview of the **synthetic** source page with the cited region highlighted. This optional command creates the output file locally; the default command above remains unchanged:
+
+```bash
+uv run python -m scripts.demo --highlight-output /tmp/unmess-source.png
+```
+
+
 ## The project, honestly
 
 | Available in this repository | Still to build |

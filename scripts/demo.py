@@ -6,13 +6,14 @@ This intentionally uses a bundled synthetic PDF; it makes no network calls.
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import pymupdf
 
 from unmess.chunking.structure_aware import chunk_pages
 from unmess.parsing.pymupdf_parser import PyMuPDFParser
-from unmess.provenance.citations import source_region
+from unmess.provenance.citations import render_highlight, source_region
 from unmess.store.dedupe import hash_file, hash_page
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +21,14 @@ SAMPLE = ROOT / "eval/datasets/pdf/synthetic-gst_invoice-00.pdf"
 
 
 def main() -> None:
+    argument_parser = argparse.ArgumentParser(description=__doc__)
+    argument_parser.add_argument(
+        "--highlight-output",
+        type=Path,
+        help="optionally save the cited synthetic source page as a highlighted PNG",
+    )
+    args = argument_parser.parse_args()
+
     parser = PyMuPDFParser()
     with pymupdf.open(SAMPLE) as document:
         page_count = len(document)
@@ -39,6 +48,12 @@ def main() -> None:
     print(f"Extracted: {seller}; {total}")
     print(f"Citable chunk: {invoice.chunk_id} (page {region.page_numbers[0]})")
     print("Current scope: extraction, chunking, and source provenance. Search and UI are planned.")
+    if args.highlight_output is not None:
+        page_number = region.page_numbers[0]
+        image = render_highlight(SAMPLE, region, page_number)
+        args.highlight_output.parent.mkdir(parents=True, exist_ok=True)
+        image.save(args.highlight_output, format="PNG")
+        print(f"Highlighted synthetic source page: {args.highlight_output}")
 
 
 if __name__ == "__main__":
