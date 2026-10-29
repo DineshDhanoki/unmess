@@ -27,7 +27,7 @@ The font fetch needs network access during setup. Document processing in Unmess 
 
 ## Find a useful task
 
-Look for a [good first issue](https://github.com/DineshDhanoki/unmess/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or browse all [open issues](https://github.com/DineshDhanoki/unmess/issues). An issue should have a clear outcome and a way to check it. Comment on the issue to coordinate if the scope is unclear. A small, focused PR is welcome; reference the issue in its description and explain how you tested the change.
+Look for a [good first issue](https://github.com/DineshDhanoki/unmess/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or browse all [open issues](https://github.com/DineshDhanoki/unmess/issues). An issue should have a clear outcome and a way to check it. Comment on the issue to coordinate if the scope is unclear. For open questions and ideas, use [Discussions](https://github.com/DineshDhanoki/unmess/discussions/20). A small, focused PR is welcome; reference the issue in its description and explain how you tested the change.
 
 For your first PR, a corrected setup step, a clearer explanation, or a synthetic regression case is valuable. You do not need to take on an entire roadmap phase. For a new architecture or a change to evaluation methodology, discuss the approach in an issue before implementing it.
 
