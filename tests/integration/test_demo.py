@@ -22,6 +22,7 @@ def test_synthetic_invoice_demo() -> None:
     assert "Search and UI are planned" in result.stdout
     assert result.stderr == ""
 
+
 def test_synthetic_invoice_demo_saves_highlight(tmp_path: Path) -> None:
     root = Path(__file__).resolve().parents[2]
     output = tmp_path / "preview" / "source.png"
@@ -36,4 +37,4 @@ def test_synthetic_invoice_demo_saves_highlight(tmp_path: Path) -> None:
     assert f"Highlighted synthetic source page: {output}" in result.stdout
     assert result.stderr == ""
     assert output.is_file()
-    assert output.read_bytes().startswith(b"\\x89PNG\\r\\n\\x1a\\n")
+    assert output.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
