@@ -6,11 +6,10 @@ This intentionally uses a bundled synthetic PDF; it makes no network calls.
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import pymupdf
-
-import argparse
 
 from unmess.chunking.structure_aware import chunk_pages
 from unmess.parsing.pymupdf_parser import PyMuPDFParser
