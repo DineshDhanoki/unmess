@@ -45,7 +45,9 @@ The [roadmap](ROADMAP.md) describes the planned sequence; [architecture](ARCHITE
 
 ## Build it with us
 
-You can help without owning the whole architecture. A useful first contribution might clarify a confusing step, add one synthetic edge case, improve a regression test, or make a citation easier to inspect. Browse the [open issues](https://github.com/DineshDhanoki/unmess/issues) and the [first contribution guide](CONTRIBUTING.md). Comment on an issue if you want to coordinate, or open a focused PR that references it. We review the code and the evidence together.
+You can help without owning the whole architecture. A useful first contribution might clarify a confusing step, add one synthetic edge case, improve a regression test, or make a citation easier to inspect. Browse the [good first issues](https://github.com/DineshDhanoki/unmess/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and the [first contribution guide](CONTRIBUTING.md). Comment on an issue if you want to coordinate, or open a focused PR that references it. We review the code and the evidence together.
+
+Have a question or a story about an answer you could not verify? Join the [welcome discussion](https://github.com/DineshDhanoki/unmess/discussions/20).
 
 The project especially needs people interested in document parsing, Python, evaluation, privacy, and bilingual or region-specific documents. You do **not** need to supply real documents. Every shared fixture must be synthetic.
 
