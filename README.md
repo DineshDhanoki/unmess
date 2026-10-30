@@ -17,6 +17,8 @@ This is a real output of the local demo using a **fictional GST-style invoice in
 
 The demo extracts `Total INR: 10,000`, records page 1 as its source, and can render the cited **chunk** on that page. The highlighted area is deliberately broader than the total line; it shows the region represented by the current chunk, not a claim that Unmess identified the exact answer text. The invoice is synthetic. No document is uploaded, and this demo makes no model or network call.
 
+Prefer a browser? The [synthetic live demo](docs/live-demo.md) lets you choose among three fictional invoices and runs this same Python parsing path when you press **Run**. It has no file upload. The guide explains how to run it locally and publish it.
+
 From a fresh clone, install [uv](https://docs.astral.sh/uv/) and Python 3.11 or 3.12, then run:
 
 ```bash
