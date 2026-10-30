@@ -3,6 +3,8 @@
 [![CI](https://github.com/DineshDhanoki/unmess/actions/workflows/ci.yml/badge.svg)](https://github.com/DineshDhanoki/unmess/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
+**[Try the live synthetic demo](https://unmess-demo.streamlit.app/)** · [Find a good first issue](https://github.com/DineshDhanoki/unmess/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+
 **Turn messy PDF pages into inspectable, citable chunks—locally.**
 
 An invoice says the total is **INR 10,000**. But what if a table continues onto the next page, a line was missed, or two tables were joined by mistake? A plausible number is not enough. Someone needs to see the source that produced it.
@@ -17,7 +19,7 @@ This is a real output of the local demo using a **fictional GST-style invoice in
 
 The demo extracts `Total INR: 10,000`, records page 1 as its source, and can render the cited **chunk** on that page. The highlighted area is deliberately broader than the total line; it shows the region represented by the current chunk, not a claim that Unmess identified the exact answer text. The invoice is synthetic. No document is uploaded, and this demo makes no model or network call.
 
-Prefer a browser? The [synthetic live demo](docs/live-demo.md) lets you choose among three fictional invoices and runs this same Python parsing path when you press **Run**. It has no file upload. The guide explains how to run it locally and publish it.
+Prefer a browser? [Try the public synthetic demo](https://unmess-demo.streamlit.app/) and choose among three fictional invoices. Press **Run the real pipeline** to use the same Python parsing path. It has no file upload. The [live demo guide](docs/live-demo.md) explains how to run it locally.
 
 From a fresh clone, install [uv](https://docs.astral.sh/uv/) and Python 3.11 or 3.12, then run:
 
