@@ -3,19 +3,25 @@
 [![CI](https://github.com/DineshDhanoki/unmess/actions/workflows/ci.yml/badge.svg)](https://github.com/DineshDhanoki/unmess/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-**A number on a scanned invoice is easy to extract. Knowing whether it is right—and where it came from—is the hard part.**
+**Turn messy PDF pages into inspectable, citable chunks—locally.**
 
-Imagine asking a document system for a total from a long invoice. The answer looks plausible, but a table continued on the next page. Was that page missed? Did the parser merge two unrelated tables? Can you point a reviewer to the exact source page without uploading the invoice to someone else's server?
+An invoice says the total is **INR 10,000**. But what if a table continues onto the next page, a line was missed, or two tables were joined by mistake? A plausible number is not enough. Someone needs to see the source that produced it.
 
-Unmess is an open-source, local-first project exploring that problem. It uses existing parsers, keeps source locations attached to extracted chunks, and evaluates failures instead of hiding them behind a polished answer. The longer-term goal is private document search with citations and a review path for uncertain pages. **Search, an API, and a review UI are not available yet.**
+Unmess is an open-source Python project building that evidence trail. It uses existing parsers, keeps page locations attached to extracted chunks, and tests where document processing fails. The mission is to make private document answers easier to **check**, not merely easier to generate. Today you can run extraction, chunking, provenance, and evaluation code. Private search, an API, and a review UI are future work.
 
-## See what works today
+## See the evidence, then try it
 
-This small demo uses a **fictional GST-style invoice already in the repo**. It runs the current PyMuPDF adapter, chunker, and citation code. No Docker, model download, account, or real document is needed.
+This is a real output of the local demo using a **fictional GST-style invoice included in the repository**:
+
+<img src="docs/images/synthetic-invoice-highlight.png" width="680" alt="Synthetic GST invoice page with an orange outline and yellow shading over the cited source chunk, including the fictional seller and Total INR 10,000." />
+
+The demo extracts `Total INR: 10,000`, records page 1 as its source, and can render the cited **chunk** on that page. The highlighted area is deliberately broader than the total line; it shows the region represented by the current chunk, not a claim that Unmess identified the exact answer text. The invoice is synthetic. No document is uploaded, and this demo makes no model or network call.
 
 From a fresh clone, install [uv](https://docs.astral.sh/uv/) and Python 3.11 or 3.12, then run:
 
 ```bash
+git clone https://github.com/DineshDhanoki/unmess.git
+cd unmess
 uv sync --dev --locked
 uv run python -m scripts.demo
 ```
@@ -31,14 +37,27 @@ Citable chunk: text-9f029e03df396fd9b1da (page 1)
 Current scope: extraction, chunking, and source provenance. Search and UI are planned.
 ```
 
-The total and page reference come from the parsed PDF, not a hard-coded answer. Try opening the [sample invoice](eval/datasets/pdf/synthetic-gst_invoice-00.pdf) and comparing it with the output. The sample is synthetic; never commit a real invoice, receipt, ID, or customer document.
-
-The demo can also save a preview of the **synthetic** source page with the cited region highlighted. This optional command creates the output file locally; the default command above remains unchanged:
+To save the highlighted preview yourself, run:
 
 ```bash
-uv run python -m scripts.demo --highlight-output /tmp/unmess-source.png
+uv run python -m scripts.demo --highlight-output unmess-source.png
 ```
 
+Open `unmess-source.png` and compare it with the [synthetic source PDF](eval/datasets/pdf/synthetic-gst_invoice-00.pdf). The output path is relative to your current directory and works on macOS, Linux, and Windows. Never commit a real invoice, receipt, ID, or customer document.
+
+## What happens to the document?
+
+```text
+Bundled fictional PDF
+       ↓  PyMuPDF adapter
+Page content with source locations
+       ↓  structure-aware chunking
+Chunk linked to its source page and region
+       ↓  local demo
+Extracted total + optional highlighted preview
+```
+
+That is the path exercised by the demo. Other adapters, page-quality signals, table stitching, and synthetic evaluation code are also in the repository; they are not all exercised by this one command. The [architecture](ARCHITECTURE.md) explains how the pieces fit together, and the [evaluation notes](EVAL.md) explain what the current experiments can and cannot show.
 
 ## The project, honestly
 
@@ -48,18 +67,24 @@ uv run python -m scripts.demo --highlight-output /tmp/unmess-source.png
 | Structure-aware chunks, conservative table stitching, source page and region records | Hybrid retrieval, answer citations, and local reranking |
 | Synthetic corpora, evaluation harnesses, and development reports | Review UI, MCP tools, and real-document validation results |
 
-The [roadmap](ROADMAP.md) describes the planned sequence; [architecture](ARCHITECTURE.md) explains the design. Current measurements use synthetic data and have [known limitations](EVAL.md). In particular, no production accuracy or speed claim follows from these development reports. Optional parsers and local models require extra setup; the demo above deliberately avoids them.
+The [roadmap](ROADMAP.md) describes the planned sequence. Measurements so far use synthetic data and have [known limitations](EVAL.md); they are not production accuracy or speed claims. Optional parsers and local models require extra setup. The demo above deliberately avoids them.
 
 ## Build it with us
 
-You can help without owning the whole architecture. A useful first contribution might clarify a confusing step, add one synthetic edge case, improve a regression test, or make a citation easier to inspect. Browse the [good first issues](https://github.com/DineshDhanoki/unmess/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and the [first contribution guide](CONTRIBUTING.md). Comment on an issue if you want to coordinate, or open a focused PR that references it. We review the code and the evidence together.
+You do not need to own the whole architecture to make Unmess better. Pick a problem that matches the kind of work you enjoy:
 
-Have a question or a story about an answer you could not verify? Join the [welcome discussion](https://github.com/DineshDhanoki/unmess/discussions/20).
+| If you enjoy… | Start here | What your contribution would add |
+| --- | --- | --- |
+| Explaining technical ideas in plain language | [Explain five Unmess terms beside the demo (#18)](https://github.com/DineshDhanoki/unmess/issues/18) | Help a newcomer understand chunks, provenance, and review without reading the architecture first. |
+| Designing tricky test cases | [Add synthetic table hard negatives (#3)](https://github.com/DineshDhanoki/unmess/issues/3) | Catch cases where unrelated tables could be joined by mistake. |
+| Evaluation and failure analysis | [Test the review gate on more bad pages (#9)](https://github.com/DineshDhanoki/unmess/issues/9) | Show which synthetic failure types the current gate catches or misses. |
 
-The project especially needs people interested in document parsing, Python, evaluation, privacy, and bilingual or region-specific documents. You do **not** need to supply real documents. Every shared fixture must be synthetic.
+Check the issue before starting in case someone has claimed it. Comment there to coordinate, then use the [first contribution guide](CONTRIBUTING.md) for setup and PR steps. We review code and evidence together. If you have a question or a story about an answer you could not verify, join the [welcome discussion](https://github.com/DineshDhanoki/unmess/discussions/20).
+
+The project especially welcomes people interested in document parsing, Python, evaluation, privacy, and bilingual or region-specific documents. You do **not** need to supply real documents. Every shared fixture must be synthetic.
 
 ## Deeper setup
 
-The normal contribution checks are `make lint`, `make format-check`, `make typecheck`, and `make test`. The reproducibility tests need a pinned Noto Sans Devanagari font; run `bash scripts/pull_font.sh` first. Docker is only needed for infrastructure work: `make up` starts Qdrant and Redis, **not** a working Unmess app. See [CONTRIBUTING.md](CONTRIBUTING.md) for the exact path and [EVAL.md](EVAL.md) for evaluation rules.
+The normal contribution checks are `make lint`, `make format-check`, `make typecheck`, and `make test`. The reproducibility tests need a pinned Noto Sans Devanagari font; run `bash scripts/pull_font.sh` first in a Bash environment. Docker is only needed for infrastructure work: `make up` starts Qdrant and Redis, **not** a working Unmess app. See [CONTRIBUTING.md](CONTRIBUTING.md) for the exact path and [EVAL.md](EVAL.md) for evaluation rules.
 
 Apache License 2.0. See [LICENSE](LICENSE).
