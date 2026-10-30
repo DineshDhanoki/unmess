@@ -34,3 +34,19 @@ jobs:
         run: uv run --python ${{ matrix.python-version }} mypy
       - name: Pytest
         run: uv run --python ${{ matrix.python-version }} pytest
+  live-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.11"
+          enable-cache: true
+      - name: Install Python
+        run: uv python install 3.12
+      - name: Install UI dependencies
+        run: uv sync --extra ui --dev --python 3.12 --locked
+      - name: Typecheck the live page
+        run: uv run --extra ui --python 3.12 mypy src/unmess/demo.py ui/live_demo.py
+      - name: Exercise the live page
+        run: uv run --extra ui --python 3.12 pytest ui/test_live_web.py
