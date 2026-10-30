@@ -49,4 +49,4 @@ jobs:
       - name: Typecheck the live page
         run: uv run --extra ui --python 3.12 mypy src/unmess/demo.py ui/live_demo.py
       - name: Exercise the live page
-        run: uv run --extra ui --python 3.12 pytest tests/integration/test_live_web.py
+        run: uv run --extra ui --python 3.12 pytest ui/test_live_web.py

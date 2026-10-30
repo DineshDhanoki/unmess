@@ -12,7 +12,7 @@ from streamlit.testing.v1 import AppTest
 
 
 def test_live_page_runs_selected_invoice() -> None:
-    entrypoint = Path(__file__).resolve().parents[2] / "ui/live_demo.py"
+    entrypoint = Path(__file__).resolve().parent / "live_demo.py"
     app = AppTest.from_file(entrypoint).run(timeout=15)
     assert not app.exception
 
