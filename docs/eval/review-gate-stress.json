@@ -1,0 +1,948 @@
+{
+  "fixture_version": 1,
+  "split": "dev",
+  "bootstrap_seed": 20261103,
+  "settings": {
+    "quality_review_threshold": 0.7,
+    "quality_visual_noise_threshold": 0.85,
+    "parser_table_likelihood_threshold": 0.55,
+    "parser_garbled_ratio_threshold": 0.1
+  },
+  "score_weights": {
+    "text_coverage": 0.25,
+    "character_integrity": 0.1,
+    "character_plausibility": 0.2,
+    "script_plausibility": 0.05,
+    "text_ink_alignment": 0.15,
+    "table_consistency": 0.15,
+    "parser_confidence": 0.05,
+    "parser_agreement": 0.05,
+    "visual_clarity": 0.3,
+    "cross_page_table_continuity": 0.4
+  },
+  "overall": {
+    "pages": 36,
+    "bad_pages": 18,
+    "good_pages": 18,
+    "true_positive": 6,
+    "false_positive": 0,
+    "false_negative": 12,
+    "true_negative": 18,
+    "precision": 1.0,
+    "recall": 0.3333333333333333,
+    "auroc": 0.7222222222222222,
+    "unstable": false,
+    "bad_page_cutoff": 0.9,
+    "ci95": {
+      "precision": {
+        "lower": 1.0,
+        "upper": 1.0,
+        "samples": 1999,
+        "seed": 20261103
+      },
+      "recall": {
+        "lower": 0.125,
+        "upper": 0.5625,
+        "samples": 2000,
+        "seed": 20261103
+      }
+    }
+  },
+  "categories": {
+    "ocr_corruption": {
+      "pages": 6,
+      "bad_pages": 3,
+      "good_pages": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "auroc": 1.0,
+      "unstable": true,
+      "bad_page_cutoff": 0.9,
+      "ci95": {
+        "precision": {
+          "lower": 1.0,
+          "upper": 1.0,
+          "samples": 1965,
+          "seed": 20261103
+        },
+        "recall": {
+          "lower": 1.0,
+          "upper": 1.0,
+          "samples": 1965,
+          "seed": 20261103
+        }
+      }
+    },
+    "wrong_table_cells": {
+      "pages": 6,
+      "bad_pages": 3,
+      "good_pages": 3,
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 3,
+      "true_negative": 3,
+      "precision": null,
+      "recall": 0.0,
+      "auroc": 0.5,
+      "unstable": true,
+      "bad_page_cutoff": 0.9,
+      "ci95": {
+        "precision": {
+          "lower": null,
+          "upper": null,
+          "samples": 0,
+          "seed": 20261103
+        },
+        "recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "samples": 1965,
+          "seed": 20261103
+        }
+      }
+    },
+    "missed_line_items": {
+      "pages": 6,
+      "bad_pages": 3,
+      "good_pages": 3,
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 3,
+      "true_negative": 3,
+      "precision": null,
+      "recall": 0.0,
+      "auroc": 0.8333333333333334,
+      "unstable": true,
+      "bad_page_cutoff": 0.9,
+      "ci95": {
+        "precision": {
+          "lower": null,
+          "upper": null,
+          "samples": 0,
+          "seed": 20261103
+        },
+        "recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "samples": 1965,
+          "seed": 20261103
+        }
+      }
+    },
+    "bilingual_field_errors": {
+      "pages": 6,
+      "bad_pages": 3,
+      "good_pages": 3,
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 3,
+      "true_negative": 3,
+      "precision": null,
+      "recall": 0.0,
+      "auroc": 0.5,
+      "unstable": true,
+      "bad_page_cutoff": 0.9,
+      "ci95": {
+        "precision": {
+          "lower": null,
+          "upper": null,
+          "samples": 0,
+          "seed": 20261103
+        },
+        "recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "samples": 1965,
+          "seed": 20261103
+        }
+      }
+    },
+    "empty_parse": {
+      "pages": 6,
+      "bad_pages": 3,
+      "good_pages": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "auroc": 1.0,
+      "unstable": true,
+      "bad_page_cutoff": 0.9,
+      "ci95": {
+        "precision": {
+          "lower": 1.0,
+          "upper": 1.0,
+          "samples": 1965,
+          "seed": 20261103
+        },
+        "recall": {
+          "lower": 1.0,
+          "upper": 1.0,
+          "samples": 1965,
+          "seed": 20261103
+        }
+      }
+    },
+    "misleading_confidence": {
+      "pages": 6,
+      "bad_pages": 3,
+      "good_pages": 3,
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 3,
+      "true_negative": 3,
+      "precision": null,
+      "recall": 0.0,
+      "auroc": 0.5,
+      "unstable": true,
+      "bad_page_cutoff": 0.9,
+      "ci95": {
+        "precision": {
+          "lower": null,
+          "upper": null,
+          "samples": 0,
+          "seed": 20261103
+        },
+        "recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "samples": 1965,
+          "seed": 20261103
+        }
+      }
+    }
+  },
+  "failures": [
+    "wrong_table_cells-3-fault",
+    "missed_line_items-3-fault",
+    "bilingual_field_errors-3-fault",
+    "misleading_confidence-3-fault",
+    "wrong_table_cells-5-fault",
+    "missed_line_items-5-fault",
+    "bilingual_field_errors-5-fault",
+    "misleading_confidence-5-fault",
+    "wrong_table_cells-8-fault",
+    "missed_line_items-8-fault",
+    "bilingual_field_errors-8-fault",
+    "misleading_confidence-8-fault"
+  ],
+  "cases": [
+    {
+      "case_id": "ocr_corruption-3-fault",
+      "category": "ocr_corruption",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.6607142857142857,
+      "bad": true,
+      "quality_score": 0.9595959595959597,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 0.6161616161616161,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": true,
+      "reasons": [
+        "garbled_text"
+      ]
+    },
+    {
+      "case_id": "ocr_corruption-3-control",
+      "category": "ocr_corruption",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "wrong_table_cells-3-fault",
+      "category": "wrong_table_cells",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.75,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "wrong_table_cells-3-control",
+      "category": "wrong_table_cells",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "missed_line_items-3-fault",
+      "category": "missed_line_items",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.5446428571428572,
+      "bad": true,
+      "quality_score": 0.9318181818181817,
+      "signals": {
+        "text_coverage": 0.7,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "missed_line_items-3-control",
+      "category": "missed_line_items",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "bilingual_field_errors-3-fault",
+      "category": "bilingual_field_errors",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.6461538461538461,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "bilingual_field_errors-3-control",
+      "category": "bilingual_field_errors",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "empty_parse-3-fault",
+      "category": "empty_parse",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.0,
+      "bad": true,
+      "quality_score": 0.6842105263157895,
+      "signals": {
+        "text_coverage": 0.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 0.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": true,
+      "reasons": [
+        "below_quality_threshold",
+        "empty_text"
+      ]
+    },
+    {
+      "case_id": "empty_parse-3-control",
+      "category": "empty_parse",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "misleading_confidence-3-fault",
+      "category": "misleading_confidence",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.0,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "misleading_confidence-3-control",
+      "category": "misleading_confidence",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "ocr_corruption-5-fault",
+      "category": "ocr_corruption",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.6645569620253164,
+      "bad": true,
+      "quality_score": 0.9595728451563693,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 0.6159420289855073,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": true,
+      "reasons": [
+        "garbled_text"
+      ]
+    },
+    {
+      "case_id": "ocr_corruption-5-control",
+      "category": "ocr_corruption",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "wrong_table_cells-5-fault",
+      "category": "wrong_table_cells",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.75,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "wrong_table_cells-5-control",
+      "category": "wrong_table_cells",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "missed_line_items-5-fault",
+      "category": "missed_line_items",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.5673598553345389,
+      "bad": true,
+      "quality_score": 0.9829545454545454,
+      "signals": {
+        "text_coverage": 0.925,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "missed_line_items-5-control",
+      "category": "missed_line_items",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "bilingual_field_errors-5-fault",
+      "category": "bilingual_field_errors",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.6153846153846154,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "bilingual_field_errors-5-control",
+      "category": "bilingual_field_errors",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "empty_parse-5-fault",
+      "category": "empty_parse",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.0,
+      "bad": true,
+      "quality_score": 0.6842105263157895,
+      "signals": {
+        "text_coverage": 0.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 0.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": true,
+      "reasons": [
+        "below_quality_threshold",
+        "empty_text"
+      ]
+    },
+    {
+      "case_id": "empty_parse-5-control",
+      "category": "empty_parse",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "misleading_confidence-5-fault",
+      "category": "misleading_confidence",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.0,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "misleading_confidence-5-control",
+      "category": "misleading_confidence",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "ocr_corruption-8-fault",
+      "category": "ocr_corruption",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.6651982378854626,
+      "bad": true,
+      "quality_score": 0.9593908629441624,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 0.6142131979695431,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": true,
+      "reasons": [
+        "garbled_text"
+      ]
+    },
+    {
+      "case_id": "ocr_corruption-8-control",
+      "category": "ocr_corruption",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "wrong_table_cells-8-fault",
+      "category": "wrong_table_cells",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.75,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "wrong_table_cells-8-control",
+      "category": "wrong_table_cells",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "missed_line_items-8-fault",
+      "category": "missed_line_items",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.6306901615271658,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "missed_line_items-8-control",
+      "category": "missed_line_items",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "table_consistency": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "bilingual_field_errors-8-fault",
+      "category": "bilingual_field_errors",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.5956043956043956,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "bilingual_field_errors-8-control",
+      "category": "bilingual_field_errors",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "empty_parse-8-fault",
+      "category": "empty_parse",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.0,
+      "bad": true,
+      "quality_score": 0.6842105263157895,
+      "signals": {
+        "text_coverage": 0.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 0.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": true,
+      "reasons": [
+        "below_quality_threshold",
+        "empty_text"
+      ]
+    },
+    {
+      "case_id": "empty_parse-8-control",
+      "category": "empty_parse",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "misleading_confidence-8-fault",
+      "category": "misleading_confidence",
+      "control": false,
+      "page_number": 1,
+      "accuracy": 0.0,
+      "bad": true,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    },
+    {
+      "case_id": "misleading_confidence-8-control",
+      "category": "misleading_confidence",
+      "control": true,
+      "page_number": 1,
+      "accuracy": 1.0,
+      "bad": false,
+      "quality_score": 1.0,
+      "signals": {
+        "text_coverage": 1.0,
+        "character_integrity": 1.0,
+        "character_plausibility": 1.0,
+        "script_plausibility": 1.0,
+        "visual_clarity": 1.0,
+        "parser_confidence": 1.0
+      },
+      "flagged": false,
+      "reasons": []
+    }
+  ]
+}
