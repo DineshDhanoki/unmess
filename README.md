@@ -41,6 +41,16 @@ Citable chunk: text-9f029e03df396fd9b1da (page 1)
 Current scope: extraction, chunking, and source provenance. Search and UI are planned.
 ```
 
+### Five terms used in the demo
+
+- **Chunk:** a manageable piece of extracted page content that stays together for inspection and, later, retrieval. In this demo, the chunk containing the fictional total is the unit linked back to the invoice page.
+- **Provenance:** the recorded trail from extracted content back to its source, such as the document, page, parser, and page region. The demo uses that trail to report page 1 and render the source highlight.
+- **Bounding box:** a rectangle that records where content appeared on a page. The orange outline shows the current chunk's box, which is intentionally broader than the exact total line.
+- **Routing:** the current routing component can inspect each page and choose a parser suited to clean text, complex layouts, or scans. This small demo calls PyMuPDF directly, so it does not demonstrate parser selection.
+- **Review gate:** current quality rules can flag a weak or failed page, with reasons, for later human checking. The flagging logic exists today; the full review interface is still planned.
+
+See the [architecture](ARCHITECTURE.md) for the implemented and planned data flow, and the [evaluation notes](EVAL.md) for how routing and review behavior are measured on synthetic documents.
+
 To save the highlighted preview yourself, run:
 
 ```bash
